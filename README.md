@@ -19,14 +19,20 @@ To start a multi-node local test network, the `docker-compose.yml` file can be u
 docker-compose up
 ```
 
-This starts a three-node local test network with:
+This starts 
 
+A three-node local test network with:
 - **Alice**, as voting-authority (cannot author blocks, but is the voting admin)
 - **Bob** and **Charlie**, as sealers and PoA-authorities (can author blocks)
 
-Also, starts a randomizer service for ballot re-encryption:
-
+A randomizer service for ballot re-encryption:
 - **Randomizer**
+
+A CLI sevice where you can make `client` CLI commands with "docker exec -it sumsumciy/cli-mixnet:latest [command]"
+- **CLI**
+
+A simple API which enable to make `client` CLI commands via HTTP requests.
+- **API**
 
 ### Interact
 

@@ -41,6 +41,28 @@ services:
 
   # Randomizer is a simple web service to re-encrypt the voter's ballots
   randomizer:
-    container_name: charlie
+    container_name: charliee
     image: ghcr.io/provotum/provotum-mixnet-randomizer:latest
     network_mode: host
+
+  cli-api:
+    container_name: api
+    image: sumsumcity/api_cli:latest
+    network_mode: host
+
+
+  # Cli to make the commands for blockchain. To make command use exec (with api) 
+  cli:
+    container_name: cli
+    image: sumsumcity/cli-mixnet:latest
+   # network_mode: host
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+
+  #api:
+  #  container_name: api
+  #  image: sumsumcity/api-mixnet:latest
+  #  ports:
+  #  - "4000:4000"
+
+
