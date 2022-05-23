@@ -6,6 +6,7 @@ The project is structured into four different packages:
 - `crypto`: A cryptographic library implementing all algorithms and proofs
 - `randomizer`: A service to randomizes the voters ballots'
 - `client`: A CLI to interact with the randomizer and the node
+- `api`: An API to interact with client which interacts with randomizer and the node
 
 For more information have a look at the individual packages.
 
