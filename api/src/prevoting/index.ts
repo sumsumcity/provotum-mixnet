@@ -22,7 +22,7 @@ prevotingRouter.post("/setup", (req, res) => {
         else if (stdout.search("successfully created vote") > 0) {
             res.json(req.body);
         }
-        else if (stdout.search("Connection refused")){
+        else if (stdout.search("Connection refused") > 0){
             res.status(404);
             res.send("WsHandshake failed. Connection refused")
         }
@@ -50,7 +50,7 @@ prevotingRouter.post("/keygen", (req, res) => {
             res.status(400);
             res.send("This vote does not exist");
         }
-        else if (stdout.search("Connection refused")){
+        else if (stdout.search("Connection refused") > 0){
             res.status(404);
             res.send("WsHandshake failed. Connection refused")
         }
@@ -71,16 +71,16 @@ prevotingRouter.post("/combineKeyShares", (req, res) => {
             console.error(`exec error: ${error}`);
             return;
         }
+        else if (stdout.search("PublicKeyCreated") > 0) {
+            res.json(req.body);
+        }
         else if (stdout.search("VoteDoesNotExist") > 0) {
             res.status(400);
             res.send("This vote does not exist");
         }
-        else if (stdout.search("Connection refused")){
+        else if (stdout.search("Connection refused") > 0){
             res.status(404);
             res.send("WsHandshake failed. Connection refused")
-        }
-        else if (stdout.search("PublicKeyCreated") > 0) {
-            res.json(req.body);
         }
         else {
             res.status(400);
