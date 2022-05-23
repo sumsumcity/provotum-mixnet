@@ -31,10 +31,10 @@ A randomizer service for ballot re-encryption:
 A CLI sevice where you can make `client` CLI commands with "docker exec -it sumsumciy/cli-mixnet:latest [command]"
 - **CLI**
 
-A simple API which enable to make `client` CLI commands via HTTP requests.
+A simple API which enable to make `client` CLI commands via HTTP requests. You can also find some predefined requests which you can test with Postman.
 - **API**
 
 ### Interact
 
-To interact with the test setup use the `client` CLI.
-Have a look at the **README** of the `client` package on how to build the CLI and use it.
+To interact with the test setup use the `client` CLI or the `api`.
+Have a look at the **README** of the `client` or `api` package on how to build the CLI and use it.
