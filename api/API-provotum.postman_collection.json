@@ -1,0 +1,345 @@
+{
+	"info": {
+		"_postman_id": "49f6a923-a003-465c-bba7-55f38acef600",
+		"name": "API-provotum",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14806559"
+	},
+	"item": [
+		{
+			"name": "Pre-Voting Phase",
+			"item": [
+				{
+					"name": "Create voting",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"vote\":\"Popular vote on the 01 August 2022\",\n    \"question\":\"Do you like pizza?\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/prevoting/setup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"prevoting",
+								"setup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create key (sealer 1)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"vote\": \"Popular vote on the 01 August 2022\",\n    \"sk\": \"E5EAF02AC60ACC93ED874422A52EC\",\n    \"sealer\": \"bob\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/prevoting/keygen",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"prevoting",
+								"keygen"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create key (sealer 2)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"vote\": \"Popular vote on the 01 August 2022\",\n    \"sk\": \"E5EAF02AC60ACC93ED874422A54EC\",\n    \"sealer\": \"charlie\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/prevoting/keygen",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"prevoting",
+								"keygen"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Combine key shares",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"vote\":\"Popular vote on the 01 August 2022\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/prevoting/combineKeyShares",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"prevoting",
+								"combineKeyShares"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change Phase",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"vote\":\"Popular vote on the 01 August 2022\",\n    \"phase\":\"Voting\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/phase",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"phase"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Voting Phase",
+			"item": [
+				{
+					"name": "Vote",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"vote\":\"Popular vote on the 01 August 2022\",\n    \"question\":\"Do you like pizza?\",\n    \"nr_of_votes\":\"1\",\n    \"votes\":\"1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/voting/vote",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"voting",
+								"vote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change Phase",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"vote\":\"Popular vote on the 01 August 2022\",\n    \"phase\":\"Tallying\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/phase",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"phase"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Post-Voting Phase",
+			"item": [
+				{
+					"name": "Make decryption (sealer 2)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"vote\": \"Popular vote on the 01 August 2022\",\n    \"question\": \"Do you like pizza?\",\n    \"sk\": \"E5EAF02AC60ACC93ED874422A54EC\",\n    \"sealer\": \"charlie\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/postvoting/decrypt",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"postvoting",
+								"decrypt"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Make decryption (sealer 1)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"vote\": \"Popular vote on the 01 August 2022\",\n    \"question\": \"Do you like pizza?\",\n    \"sk\": \"E5EAF02AC60ACC93ED874422A52EC\",\n    \"sealer\": \"bob\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/postvoting/decrypt",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"postvoting",
+								"decrypt"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Combine decryoted share key",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"vote\":\"Popular vote on the 01 August 2022\",\n    \"question\":\"Do you like pizza?\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/postvoting/combine",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"postvoting",
+								"combine"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Result",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"question\":\"Do you like pizza?\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/postvoting/result",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"postvoting",
+								"result"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

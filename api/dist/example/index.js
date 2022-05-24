@@ -10,7 +10,7 @@ exports.exampleRouter = exampleRouter;
 exampleRouter.get("/", (req, res) => {
     res.json({ "greeting": "Hello world!" });
     const { exec } = require('child_process');
-    exec('docker exec cli cargo +nightly run --release -- va setup --vote TestVote --question TestQuestion', (error, stdout, stderr) => {
+    exec('cd .. && cd client && cargo +nightly run --release -- va setup --vote TestVote --question TestQuestion', (error, stdout, stderr) => {
         if (error) {
             console.error(`exec error: ${error}`);
             return;
@@ -24,4 +24,15 @@ const bodyParser = require("body-parser");
 exampleRouter.post("/", (req, res) => {
     console.log("Got body", req.body);
     res.json(req.body);
+    const { exec } = require('child_process');
+    exec('cd .. && cd client && cargo +nightly run --release -- va setup --vote "' + req.body.vote + '" --question "' + req.body.question + '"', (error, stdout, stderr) => {
+        if (error) {
+            res.status(400);
+            console.error(`exec error: ${error}`);
+            return;
+        }
+        console.log('Here is stdout and stderr:');
+        console.log(`stdout: ${stdout}`);
+        console.error(`stderr: ${stderr}`);
+    });
 });
