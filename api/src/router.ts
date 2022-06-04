@@ -4,6 +4,7 @@ import { exampleRouter } from './example';
 import { postvotingRouter } from './postvoting';
 import { prevotingRouter } from './prevoting';
 import { votingRouter } from './voting';
+import {connect} from "./mongodb/initDB" //CAN BE REMOVED --> ONLY PUT THERE WHERE IS NEEDED AFTER REQUEST!
 
 const createRoutes = (): express.Router => {
     const router: express.Router = express.Router();
@@ -17,6 +18,10 @@ const createRoutes = (): express.Router => {
     router.get('/', (req, res) => {
         console.log("Request to '/'");
         res.send('Hello Typescript!');
+
+        //CAN BE REMOVED!
+        connect("testitest");
+
     });
 
     // Update the phase: reqParam: vote, phase (ONLY KeyGeneration, Voting or Tallying)
