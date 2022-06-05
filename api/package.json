@@ -22,8 +22,7 @@
   "homepage": "https://github.com/sumsumcity/api-mixnet#readme",
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.18.1",
-    "mongoose": "^6.3.5"
+    "express": "^4.18.1"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",

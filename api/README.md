@@ -32,7 +32,7 @@ This image builds a container where the cli (defined in the client) and the api 
 ```bash
 npm run build
 cd ..
-docker build -t sumsumcity/api_cli:latest -f api/Dockerfile .
+docker build -t sumsumcity/api-cli:latest -f api/Dockerfile .
 ```
 
 ## Run
