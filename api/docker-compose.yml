@@ -44,3 +44,8 @@ services:
     container_name: charliee_apitest
     image: ghcr.io/provotum/provotum-mixnet-randomizer:latest
     network_mode: host
+
+  mongo_apitest:
+    image: mongo
+    ports:
+      - "27017:27017"

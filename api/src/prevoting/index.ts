@@ -21,6 +21,12 @@ prevotingRouter.post("/setup", (req, res) => {
         }
         else if (stdout.search("successfully created vote") > 0) {
             res.json(req.body);
+            const Vote = require("../mongodb/Vote")
+
+            // Save Vote in db
+            const vote = new Vote({vote: req.body.vote, question: req.body.question})
+            vote.save().then(() => console.log("New vote is saved in mongoDB"))
+            
         }
         else if (stdout.search("Connection refused") > 0){
             res.status(404);

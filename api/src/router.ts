@@ -1,18 +1,24 @@
 import express, { Express } from 'express';
 import { serialize } from 'v8';
 import { exampleRouter } from './example';
+import { helpersRouter } from './helpers';
 import { postvotingRouter } from './postvoting';
 import { prevotingRouter } from './prevoting';
 import { votingRouter } from './voting';
+import { connect } from "./mongodb/initDB";
 
 const createRoutes = (): express.Router => {
     const router: express.Router = express.Router();
+
+    // Connect to provotum dbs
+    connect("provotum"); 
 
     //Add all routs here
     router.use("/example", exampleRouter);
     router.use("/prevoting", prevotingRouter);
     router.use("/voting", votingRouter);
     router.use("/postvoting", postvotingRouter);
+    router.use("/helpers", helpersRouter); // That client can get some informations which are saved in mongDB
 
     router.get('/', (req, res) => {
         console.log("Request to '/'");
