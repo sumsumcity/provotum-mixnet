@@ -6,5 +6,7 @@ services:
     image: sumsumcity/gui_sealer:latest
     ports:
       - "3000:3000"
+    environment:
+      - SEALER=bob
     stdin_open: true
     tty: true

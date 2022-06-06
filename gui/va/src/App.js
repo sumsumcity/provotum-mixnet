@@ -15,7 +15,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React today test
+          Learn React today test {window._env_.SEALER}
         </a>
       </header>
     </div>
