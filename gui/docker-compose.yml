@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  va:
+    container_name: va_gui_container
+    image: sumsumcity/gui_sealer:latest
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true

@@ -6,16 +6,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.loadRoutes = void 0;
 const express_1 = __importDefault(require("express"));
 const example_1 = require("./example");
+const helpers_1 = require("./helpers");
 const postvoting_1 = require("./postvoting");
 const prevoting_1 = require("./prevoting");
 const voting_1 = require("./voting");
+const initDB_1 = require("./mongodb/initDB");
 const createRoutes = () => {
     const router = express_1.default.Router();
+    // Connect to provotum dbs
+    (0, initDB_1.connect)("provotum");
     //Add all routs here
     router.use("/example", example_1.exampleRouter);
     router.use("/prevoting", prevoting_1.prevotingRouter);
     router.use("/voting", voting_1.votingRouter);
     router.use("/postvoting", postvoting_1.postvotingRouter);
+    router.use("/helpers", helpers_1.helpersRouter); // That client can get some informations which are saved in mongDB
     router.get('/', (req, res) => {
         console.log("Request to '/'");
         res.send('Hello Typescript!');

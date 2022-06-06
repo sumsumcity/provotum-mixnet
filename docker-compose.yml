@@ -50,6 +50,10 @@ services:
     image: sumsumcity/api_cli:latest
     network_mode: host
 
+  mongoDB:
+    image: mongo
+    ports:
+      - "27017:27017"
 
 
 
