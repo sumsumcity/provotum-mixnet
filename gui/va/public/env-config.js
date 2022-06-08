@@ -1,3 +1,4 @@
 window._env_ = {
-  SEALER: "charlie",
+  VA: "alice",
+  PORT: "3000",
 }
