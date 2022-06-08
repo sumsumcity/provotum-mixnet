@@ -49,11 +49,14 @@ services:
     container_name: api
     image: sumsumcity/api_cli:latest
     network_mode: host
+    # ports:
+    #   - 4000:4000
 
   mongoDB:
     image: mongo
-    ports:
-      - "27017:27017"
+    network_mode: host
+    # ports:
+    #  - "27017:27017"
 
 
 
