@@ -1,8 +1,11 @@
+import AppRouter from "./components/routing/AppRouter"
 
-function App() {
+const App = () => {
   return (
-    <p>Learn React today test {window._env_.VA}</p>
-  );
+    <div>
+      <AppRouter/>
+    </div>
+  )
 }
 
 export default App;
