@@ -3,7 +3,7 @@
 const CreateVote = () => {
 
     return (
-        <p>This is CreateVote</p>
+        <h1 className="text-3xl font-bold underline">TEST</h1>
     );
 }
 
