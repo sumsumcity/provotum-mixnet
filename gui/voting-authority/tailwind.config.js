@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       colors: {
         "logobrown": {
+          1000: "#342723",
           900: "#684e46",
           800: "#7a5b51",
           700: "#8b685d",

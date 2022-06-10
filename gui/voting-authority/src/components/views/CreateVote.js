@@ -1,110 +1,81 @@
-
+import Header from "../../helpers/Header"
+import {RiNumber1, RiNumber2, RiNumber3, RiNumber4, RiNumber5} from "react-icons/ri"
+import {FaCheck} from "react-icons/fa"
 
 const CreateVote = () => {
 
     return (
-        <section class="text-gray-600 body-font">
+        <section>
 
-            <header class="text-gray-600 body-font">
-            <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-                <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-logobrown-500 rounded-full" viewBox="0 0 24 24">
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-                </svg>
-                <span class="ml-3 text-xl">Tailblocks</span>
-                </a>
-                <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
-                <a class="mr-5 hover:text-gray-900">First Link</a>
-                <a class="mr-5 hover:text-gray-900">Second Link</a>
-                <a class="mr-5 hover:text-gray-900">Third Link</a>
-                <a class="mr-5 hover:text-gray-900">Fourth Link</a>
-                </nav>
-                <button class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">Button
-                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
-                    <path d="M5 12h14M12 5l7 7-7 7"></path>
-                </svg>
-                </button>
-            </div>
-            </header>
+            <Header />
 
-            
+            <div class="container px-5 py-10 mx-auto flex">
+                <div class="flex w-full">
+                <div class="w-3/10 pr-10 py-6 border-r-2 border-logobrown-300">
 
-            <div class="container px-5 py-24 mx-auto flex flex-wrap">
-                <div class="flex flex-wrap w-full">
-                <div class="lg:w-2/5 md:w-1/2 md:pr-10 md:py-6">
                     <div class="flex relative pb-12">
-                    <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
-                        <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
+                        <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
+                            <div class="h-full w-1 bg-logored-500"></div>
+                        </div>
+                        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-white inline-flex items-center justify-center text-logored-500 relative z-10 border-2 border-logored-500">
+                            <FaCheck size={20}/>
+                        </div>
+                        <div class="flex pl-4 items-center">
+                            <h3 class="font-medium title-font text-lg text-logobrown-1000 tracking-wider">VOTE CREATION</h3>
+                        </div>
                     </div>
-                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500 inline-flex items-center justify-center text-white relative z-10">
-                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                        </svg>
-                    </div>
-                    <div class="flex-grow pl-4">
-                        <h2 class="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">STEP 1</h2>
-                        <p class="leading-relaxed">VHS cornhole pop-up, try-hard 8-bit iceland helvetica. Kinfolk bespoke try-hard cliche palo santo offal.</p>
-                    </div>
-                    </div>
+
                     <div class="flex relative pb-12">
-                    <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
-                        <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
+                        <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
+                            <div class="h-full w-1 bg-logobrown-300"></div>
+                        </div>
+                        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-logored-500 inline-flex items-center justify-center text-white relative z-10">
+                            <RiNumber2 size={20}/>
+                        </div>
+                        <div class="flex pl-4 items-center">
+                            <h3 class="font-medium title-font text-lg text-logobrown-1000 tracking-wider">KEY GENERATION</h3>
+                        </div>
                     </div>
-                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500 inline-flex items-center justify-center text-white relative z-10">
-                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-                        </svg>
-                    </div>
-                    <div class="flex-grow pl-4">
-                        <h2 class="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">STEP 2</h2>
-                        <p class="leading-relaxed">Vice migas literally kitsch +1 pok pok. Truffaut hot chicken slow-carb health goth, vape typewriter.</p>
-                    </div>
-                    </div>
+
                     <div class="flex relative pb-12">
-                    <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
-                        <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
+                        <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
+                            <div class="h-full w-1 bg-logobrown-300"></div>
+                        </div>
+                        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-white inline-flex items-center justify-center text-logobrown-300 relative z-10 border-2 border-logobrown-300">
+                            <RiNumber3 size={20}/>
+                        </div>
+                        <div class="flex pl-4 items-center">
+                            <h3 class="font-medium title-font text-lg text-logobrown-300 tracking-wider">VOTING</h3>
+                        </div>
                     </div>
-                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500 inline-flex items-center justify-center text-white relative z-10">
-                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-                        <circle cx="12" cy="5" r="3"></circle>
-                        <path d="M12 22V8M5 12H2a10 10 0 0020 0h-3"></path>
-                        </svg>
-                    </div>
-                    <div class="flex-grow pl-4">
-                        <h2 class="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">STEP 3</h2>
-                        <p class="leading-relaxed">Coloring book nar whal glossier master cleanse umami. Salvia +1 master cleanse blog taiyaki.</p>
-                    </div>
-                    </div>
+
                     <div class="flex relative pb-12">
-                    <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
-                        <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
+                        <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
+                            <div class="h-full w-1 bg-logobrown-300"></div>
+                        </div>
+                        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-white inline-flex items-center justify-center text-logobrown-300 relative z-10 border-2 border-logobrown-300">
+                            <RiNumber4 size={20}/>
+                        </div>
+                        <div class="flex pl-4 items-center">
+                            <h3 class="font-medium title-font text-lg text-logobrown-300 tracking-wider">TALLYING</h3>
+                        </div>
                     </div>
-                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500 inline-flex items-center justify-center text-white relative z-10">
-                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
-                        <circle cx="12" cy="7" r="4"></circle>
-                        </svg>
-                    </div>
-                    <div class="flex-grow pl-4">
-                        <h2 class="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">STEP 4</h2>
-                        <p class="leading-relaxed">VHS cornhole pop-up, try-hard 8-bit iceland helvetica. Kinfolk bespoke try-hard cliche palo santo offal.</p>
-                    </div>
-                    </div>
+
                     <div class="flex relative">
-                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500 inline-flex items-center justify-center text-white relative z-10">
-                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-                        <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
-                        <path d="M22 4L12 14.01l-3-3"></path>
-                        </svg>
-                    </div>
-                    <div class="flex-grow pl-4">
-                        <h2 class="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">FINISH</h2>
-                        <p class="leading-relaxed">Pitchfork ugh tattooed scenester echo park gastropub whatever cold-pressed retro.</p>
-                    </div>
+                        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-white inline-flex items-center justify-center text-logobrown-300 relative z-10 border-2 border-logobrown-300">
+                            <RiNumber5 size={20} />
+                        </div>
+                        <div class="flex pl-4 items-center">
+                            <h3 class="font-medium title-font text-lg text-logobrown-300 tracking-wider">RESULT</h3>
+                        </div>
                     </div>
 
                 </div>
+
+                <div class="w-7/10 p-10 py-6">
                     <p>Test</p>
+                </div>
+
                 </div>
             </div>
             </section>
