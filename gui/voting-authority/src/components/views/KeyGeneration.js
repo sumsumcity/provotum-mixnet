@@ -1,22 +1,16 @@
 import Header from "../../helpers/Header"
 import Footer from "../../helpers/Footer"
-import {useNavigate} from "react-router-dom"
 import {RiNumber1, RiNumber2, RiNumber3, RiNumber4, RiNumber5} from "react-icons/ri"
 import {FaCheck} from "react-icons/fa"
 import { useSelector, useDispatch } from 'react-redux'
 import { advance } from "../../redux/StepSlice"
 
 
-const CreateVote = () => {
+const KeyGeneration = () => {
 
-    const navigate = useNavigate();
     const step = useSelector(state => state.step.value)
     const dispatch = useDispatch()
 
-    const nextStep = () => {
-        dispatch(advance())
-        navigate("/keyGen")
-    }
 
     return (
         <section>
@@ -87,7 +81,7 @@ const CreateVote = () => {
                     </div>
 
                     <div class="w-7/10 p-10 py-6">
-                        <h1 class="text-5xl font-medium title-font text-logobrown-1000 tracking-wider">Vote Creation</h1>
+                        <h1 class="text-5xl font-medium title-font text-logobrown-1000 tracking-wider">Key Generation</h1>
                         <p class="text-base py-7 text-logobrown-1000">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
                         <div class="flex justify-center ">
                             <div class="w-2/3 bg-logobrown-300 rounded-lg p-8 flex flex-col">
@@ -107,7 +101,7 @@ const CreateVote = () => {
 
 
                         <div class="float-right py-20 w-1/8">
-                            <button onClick={() => nextStep()} disabled={false} class="w-full text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">Next Step</button>
+                            <button onClick={() => dispatch(advance())} disabled={false} class="w-full text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">Next Step</button>
                         </div>
                     </div>
                 </div>
@@ -123,4 +117,4 @@ const CreateVote = () => {
     );
 }
 
-export default CreateVote;
+export default KeyGeneration;
