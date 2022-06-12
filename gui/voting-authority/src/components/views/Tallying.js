@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { advance } from "../../redux/StepSlice"
 
 
-const KeyGeneration = () => {
+const Tallying = () => {
 
     const navigate = useNavigate();
     const step = useSelector(state => state.step.value)
@@ -15,8 +15,9 @@ const KeyGeneration = () => {
 
     const nextStep = () => {
         dispatch(advance())
-        navigate("/voting")
+        navigate("/result")
     }
+
 
     return (
         <section>
@@ -87,7 +88,7 @@ const KeyGeneration = () => {
                     </div>
 
                     <div class="w-7/10 p-10 py-6">
-                        <h1 class="text-5xl font-medium title-font text-logobrown-1000 tracking-wider">Key Generation</h1>
+                        <h1 class="text-5xl font-medium title-font text-logobrown-1000 tracking-wider">Tallying</h1>
                         <p class="text-base py-7 text-logobrown-1000">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
                         <div class="flex justify-center ">
                             <div class="w-2/3 bg-logobrown-300 rounded-lg p-8 flex flex-col">
@@ -123,4 +124,4 @@ const KeyGeneration = () => {
     );
 }
 
-export default KeyGeneration;
+export default Tallying;
