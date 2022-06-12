@@ -16,7 +16,9 @@ const Header = () => {
                 <h2 class="text-logobrown-1000 font-medium text-2xl">Voting Authority</h2>
             </div>
             <div class="w-1/3">
-                <img src={github_logo} width="35" alt="github logo" class="float-right" />
+                <a href="https://github.com/provotum">
+                    <img src={github_logo} width="35" alt="github logo" class="float-right hover:scale-150 duration-150" />
+                </a>
             </div>
         </div>
         </header>
