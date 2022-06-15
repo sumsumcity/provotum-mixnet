@@ -11,11 +11,25 @@ const CreateVote = () => {
     const navigate = useNavigate();
     const step = useSelector(state => state.step.value)
     const dispatch = useDispatch()
+    const axios = require('axios')
 
     const nextStep = () => {
         dispatch(advance())
         navigate("/keyGen")
     }
+
+    const getRequest = () => {
+        try {
+          return axios.get('http://localhost:4000/')
+        } catch (error) {
+          console.error(error)
+        }
+      }
+      
+      const makeRequest = async () => {
+        const breeds = getRequest()
+        console.log(breeds)
+      }
 
     return (
         <section>
@@ -41,7 +55,7 @@ const CreateVote = () => {
                                     <input type="text" id="question" name="question" class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                                 </div>
                                 <div class="flex justify-center">
-                                    <button disabled={false} class="w-1/3 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">Submit</button>
+                                    <button disabled={false} onClick={() => makeRequest()} class="w-1/3 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">Submit</button>
                                 </div>
                             </div>
                         </div>
