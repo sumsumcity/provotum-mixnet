@@ -58,5 +58,13 @@ services:
     # ports:
     #  - "27017:27017"
 
-
+  #va:
+  #  container_name: va_gui_container
+  #  image: sumsumcity/gui_va:latest
+  #  ports:
+  #    - "3000:3000"
+  #  environment:
+  #    - SEALER=alice
+  #  stdin_open: true
+  #  tty: true
 
