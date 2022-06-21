@@ -4,14 +4,14 @@ export const VoteSlice = createSlice({
   name: 'vote',
   initialState: {
     name: "",
-    questions: ["testQuestion 1?", "TestQuestion 2?"]
+    questions: []
   },
   reducers: {
     setVoteName: (state, action) => {
         state.name = action.payload;
     },
     setVoteQuestion: (state, action) => {
-        state.questions.push(action.payload);
+        state.questions = action.payload;
     }
   }
 })

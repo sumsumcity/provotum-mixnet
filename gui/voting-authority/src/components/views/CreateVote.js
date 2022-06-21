@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { advance } from "../../redux/StepSlice"
 import { setVoteName, setVoteQuestion } from "../../redux/VoteSlice"
 import StepsCreateVote from "../../helpers/StepsCreateVote"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 const CreateVote = () => {
 
@@ -17,20 +17,35 @@ const CreateVote = () => {
     const axios = require('axios')
 
     const [voteNameForm, setVoteNameForm] = useState("")
-    const [voteQuestionForm, setVoteQuestionForm] = useState("")
-    const [edit, setEdit] = useState(false)
+    const [voteQuestionForm, setVoteQuestionForm] = useState([])
+    const [numberOfQuestions, setNumberOfQuestions] = useState(1)
 
     // For List in HTML
     const questionsInList = [];
+    const questionsInForm = [];
+
 
     const nextStep = () => {
         dispatch(advance())
         navigate("/keyGen")
     }
 
+    const addToQuestionList = (value, index) => {
+        voteQuestionForm[index] = value;
+        setVoteQuestionForm(voteQuestionForm)
+
+    }
+
     const submitVoteToRedux = () => {
         dispatch(setVoteName(voteNameForm))
         dispatch(setVoteQuestion(voteQuestionForm))
+    }
+
+    const deleteVoteFromRedux = () => {
+        dispatch(setVoteName(""))
+        dispatch(setVoteQuestion([]))
+        setNumberOfQuestions(1)
+        setVoteQuestionForm([])
     }
 
     const getRequest = () => {
@@ -46,9 +61,19 @@ const CreateVote = () => {
         console.log(breeds)
       }
 
-      // Make list in HTML
+      // Make list in HTML and questions is from redux
       for (const [index, value] of questions.entries()) {
         questionsInList.push(<li key={index}><hr class="border-logored-500 border-1"/><p class="text-lg font-medium text-logobrown-1000 tracking-wider">{value}</p></li>)
+    }
+
+    // Make list in HTML
+    for (let i = 0; i < numberOfQuestions; i++){
+        questionsInForm.push(
+        <>
+        <label for="question" class="leading-7 text-md text-logobrown-1000">Question {i+1}</label>                                    
+        <input onChange={(e) => addToQuestionList(e.target.value, i)} type="voteQuestionForm" id="question" name="question" class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+        </>
+        )
     }
 
 
@@ -68,32 +93,30 @@ const CreateVote = () => {
                         <div class="flex justify-center ">
                             {vote!=="" ? (
                             <div class="w-2/3 bg-logobrown-300 rounded-lg p-8 flex flex-col">
-                                {}
-                                <div class="pb-1">
+                                <div class="pb-1 text-center">
                                     <p class="text-3xl font-bold text-logobrown-1000 tracking-wider">{vote}</p>                                    
                                 </div>
-                                <hr class="border-logored-500 border-2" />
+                                <hr className="border-logored-500 border-2" />
 
-                                <ul>
+                                <ul className="text-center">
                                     {questionsInList}
                                 </ul>
-                                <div class="flex justify-between pt-2">
-                                    <button onClick={() => submitVoteToRedux()} class="w-1/4 flex justify-around text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">Edit</button>
-                                    <button onClick={() => submitVoteToRedux()} class="w-1/4 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">Add Question</button>
+                                <div class="flex justify-center pt-2">
+                                    <button onClick={() => deleteVoteFromRedux()} class="w-1/4 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">Delete Vote</button>
                                 </div>
                             </div>
                             ) : 
                             (<div class="w-2/3 bg-logobrown-300 rounded-lg p-8 flex flex-col">
                                 <div class="relative mb-4">
                                     <label for="vote" class="leading-7 text-md text-logobrown-1000">Vote</label>
-                                    <input onChange={(e) => setVoteNameForm(e.target.value)} value = {voteNameForm} type="voteNameForm" id="vote" name="vote" class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                                    <input onChange={(e) => setVoteNameForm(e.target.value)} type="voteNameForm" id="vote" name="vote" class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                                 </div>
                                 <div class="relative mb-4">
-                                    <label for="question" class="leading-7 text-md text-logobrown-1000">Question</label>
-                                    <input onChange={(e) => setVoteQuestionForm(e.target.value)} value = {voteQuestionForm} type="voteQuestionForm" id="question" name="question" class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                                    {questionsInForm}
                                 </div>
-                                <div class="flex justify-center">
-                                    <button onClick={() => submitVoteToRedux()} disabled={voteNameForm==="" || voteQuestionForm===""} class="w-1/3 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">Submit</button>
+                                <div class="flex justify-between">
+                                    <button onClick={() => setNumberOfQuestions(numberOfQuestions+1)} class="w-1/3 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">Add Question</button>
+                                    <button onClick={() => submitVoteToRedux()} disabled={voteNameForm===""} class="w-1/3 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">Submit</button>
                                 </div>
                             </div>
                             )}
