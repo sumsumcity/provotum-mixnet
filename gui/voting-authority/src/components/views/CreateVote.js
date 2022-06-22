@@ -6,6 +6,7 @@ import { advance } from "../../redux/StepSlice"
 import { setVoteName, setVoteQuestion } from "../../redux/VoteSlice"
 import StepsCreateVote from "../../helpers/StepsCreateVote"
 import { useState } from "react"
+import { FaPlus, FaMinus} from "react-icons/fa"
 
 const CreateVote = () => {
 
@@ -48,6 +49,7 @@ const CreateVote = () => {
         dispatch(setVoteQuestion([]))
         setNumberOfQuestions(1)
         setVoteQuestionForm([])
+        setVoteNameForm("")
     }
 
     const requestVoteCreation = () => {
@@ -96,12 +98,17 @@ const CreateVote = () => {
             return
         }
         for (let i=1;i<questions.length;i++){
-            const requestQue = await requestQuestionAddition(i)
-            console.log(requestQue)
-            if (requestQue.status!==200){
-                setClickedNextStep(false)
-                alert("Something went wrong while adding a question! See the console for details. Please restart all docker-containers to start over.")
-                return
+            if (questions[i]==="" || questions[i]===undefined || !questions[i].replace(/\s/g, '').length) {
+                console.log("This question is not valid")
+            }
+            else {
+                const requestQue = await requestQuestionAddition(i)
+                console.log(requestQue)
+                if (requestQue.status!==200){
+                    setClickedNextStep(false)
+                    alert("Something went wrong while adding a question! See the console for details. Please restart all docker-containers to start over.")
+                    return
+                }
             }
         }
         nextStep();
@@ -161,13 +168,15 @@ const CreateVote = () => {
                                     {questionsInForm}
                                 </div>
                                 <div class="flex justify-between">
-                                    <button onClick={() => setNumberOfQuestions(numberOfQuestions+1)} class="w-1/3 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">Add Question</button>
-                                    <button onClick={() => submitVoteToRedux()} disabled={voteNameForm===""} class="w-1/3 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">Submit</button>
+                                    <div className="flex justify-start w-1/3">
+                                        <button onClick={() => setNumberOfQuestions(numberOfQuestions+1)} class="px-4 mr-3 text-white bg-logored-500 enabled:hover:bg-logored-700 rounded-full text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"><FaPlus /></button>
+                                        <button onClick={() => setNumberOfQuestions(numberOfQuestions-1)} class="px-4 text-white bg-logored-500 enabled:hover:bg-logored-700 rounded-full text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"><FaMinus /></button>
+                                    </div>
+                                    <button onClick={() => submitVoteToRedux()} disabled={voteNameForm==="" || !voteNameForm[0].replace(/\s/g, '').length} class="w-1/3 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">Submit</button>
                                 </div>
                             </div>
                             )}
                         </div>
-
 
                         <div class="float-right py-20 w-1/8">
                             {clickedNextStep ? (
@@ -179,7 +188,7 @@ const CreateVote = () => {
                                     Loading...
                                 </button>
                             ) : 
-                            (<button onClick={() => setOpenModal(true)} disabled={vote==="" || questions.length===0 || questions[0]===""} class="w-full text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">Next Step</button>
+                            (<button onClick={() => setOpenModal(true)} disabled={vote==="" || questions.length===0 || questions[0]==="" || questions[0]===undefined || !questions[0].replace(/\s/g, '').length} class="w-full text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">Next Step</button>
                             )}
                         </div>
                     </div>
