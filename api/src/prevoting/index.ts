@@ -24,7 +24,7 @@ prevotingRouter.post("/setup", (req, res) => {
             const Vote = require("../mongodb/Vote")
 
             // Save Vote in db
-            const vote = new Vote({vote: req.body.vote, questions: [req.body.question]})
+            const vote = new Vote({vote: req.body.vote, questions: [req.body.question], phase: "KeyGeneration"})
             vote.save().then(() => console.log("New vote is saved in mongoDB"))
             
         }

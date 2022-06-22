@@ -16,11 +16,33 @@ exports.helpersRouter = void 0;
 const express_1 = __importDefault(require("express"));
 const helpersRouter = express_1.default.Router();
 exports.helpersRouter = helpersRouter;
-helpersRouter.get("/vote", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+helpersRouter.get("/allVote", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     //connect("provotum");
     const Vote = require("../mongodb/Vote");
     try {
         const vote = yield Vote.find(); // takes first vote that is in the mongoDB
+        res.json(vote);
+    }
+    catch (e) {
+        console.log(e);
+    }
+}));
+helpersRouter.get("/questions", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    //connect("provotum");
+    const Vote = require("../mongodb/Vote");
+    try {
+        const vote = yield Vote.find({ vote: req.body.vote }).select("questions -_id"); // takes first vote that is in the mongoDB
+        res.json(vote);
+    }
+    catch (e) {
+        console.log(e);
+    }
+}));
+helpersRouter.get("/phase", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    //connect("provotum");
+    const Vote = require("../mongodb/Vote");
+    try {
+        const vote = yield Vote.find({ vote: req.body.vote }).select("phase -_id"); // takes first vote that is in the mongoDB
         res.json(vote);
     }
     catch (e) {

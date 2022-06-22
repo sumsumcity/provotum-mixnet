@@ -1,4 +1,13 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -33,7 +42,7 @@ const createRoutes = () => {
             res.send("Phase does not exist");
             return;
         }
-        exec('cd .. && cd client && cargo +nightly run --release -- va set_phase --vote "' + req.body.vote + '" --phase "' + req.body.phase + '"', (error, stdout, stderr) => {
+        exec('cd .. && cd client && cargo +nightly run --release -- va set_phase --vote "' + req.body.vote + '" --phase "' + req.body.phase + '"', (error, stdout, stderr) => __awaiter(void 0, void 0, void 0, function* () {
             console.log(stdout);
             if (error) {
                 res.status(400);
@@ -42,6 +51,9 @@ const createRoutes = () => {
             }
             else if (stdout.search("VotePhaseChanged") > 0) {
                 res.json(req.body);
+                const Vote = require("./mongodb/Vote");
+                // Save Question to the Vote
+                yield Vote.findOneAndUpdate({ vote: req.body.vote }, { phase: req.body.phase }, { new: true });
             }
             else if (stdout.search("Connection refused") > 0) {
                 res.status(404);
@@ -55,7 +67,7 @@ const createRoutes = () => {
                 res.status(400);
                 res.send("Something went wrong!");
             }
-        });
+        }));
     });
     return router;
 };

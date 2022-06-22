@@ -35,7 +35,7 @@ const createRoutes = (): express.Router => {
             return
         }
 
-        exec('cd .. && cd client && cargo +nightly run --release -- va set_phase --vote "' + req.body.vote + '" --phase "' + req.body.phase + '"', (error: any, stdout: String, stderr: any) => {
+        exec('cd .. && cd client && cargo +nightly run --release -- va set_phase --vote "' + req.body.vote + '" --phase "' + req.body.phase + '"', async (error: any, stdout: String, stderr: any) => {
             console.log(stdout)
             if (error) {
                 res.status(400);
@@ -44,6 +44,10 @@ const createRoutes = (): express.Router => {
             }
             else if (stdout.search("VotePhaseChanged") > 0) {
                 res.json(req.body);
+                const Vote = require("./mongodb/Vote")
+
+                // Save Question to the Vote
+                await Vote.findOneAndUpdate({vote: req.body.vote},{phase: req.body.phase}, {new: true})
             }
             else if (stdout.search("Connection refused") > 0) {
                 res.status(404);

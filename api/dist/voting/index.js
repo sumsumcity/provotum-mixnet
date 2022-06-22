@@ -25,6 +25,10 @@ votingRouter.post("/vote", (req, res) => {
             res.status(404);
             res.send("WsHandshake failed. Connection refused");
         }
+        else if (stdout.search("failed to fetch public key!") > 0) {
+            res.status(404);
+            res.send("There are no public keys");
+        }
         else if (stdout.search("failed to create vote") > 0) {
             res.status(400);
             res.send("This vote does not exist");
