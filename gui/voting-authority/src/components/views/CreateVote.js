@@ -132,10 +132,10 @@ const CreateVote = () => {
 
     return (
         <section>
-
+            <div className="flex flex-col h-screen">
             <Header />
 
-            <div class="container px-5 py-10 mx-auto flex">
+            <div class="container px-5 py-10 mx-auto flex overflow-y-auto">
                 <div class="flex w-full">
 
                     <StepsCreateVote />
@@ -220,7 +220,7 @@ const CreateVote = () => {
 
 
             <Footer />
-            
+            </div>
             </section>
 
     );
