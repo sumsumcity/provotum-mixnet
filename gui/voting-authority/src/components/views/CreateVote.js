@@ -50,42 +50,57 @@ const CreateVote = () => {
     }
 
     const requestVoteCreation = () => {
-        try {
-          return axios({
-            method: "post",
-            url: "http://localhost:4000/prevoting/setup",
-            data: {
-                vote:vote,
-                question:questions[0]
-            }
+        return axios.post('http://localhost:4000/prevoting/setup', {
+            vote: vote,
+            question: questions[0]
+          })
+          .then(function (response) {
+            console.log(response);
+            return response;
+          })
+          .catch(function (error) {
+            console.log(error);
+            return error.response;
           });
-        } catch (error) {
-          console.error(error)
-        }
       }
 
       const requestQuestionAddition = (i) => {
-        try {
-          return axios({
-            method: "post",
-            url: "http://localhost:4000/prevoting/storequestion",
-            data: {
-                vote:vote,
-                question:questions[i]
-            }
+        return axios.post('http://localhost:4000/prevoting/storequestion', {
+            vote: vote,
+            question: questions[i]
+          })
+          .then(function (response) {
+            console.log(response);
+            return response;
+          })
+          .catch(function (error) {
+            console.log(error);
+            return error.response;
           });
-        } catch (error) {
-          console.error(error)
-        }
       }
       
       const makeRequest = async () => {
         setClickedNextStep(true)
         const requestVot = await requestVoteCreation()
-        console.log(requestVot)
+        // Error handling
+        if(requestVot.status===0){
+            setClickedNextStep(false);
+            alert("There is no connection to the API or Blockchain. Please start the docker containers")
+            return
+        }
+        else if (requestVot.status!==200){
+            setClickedNextStep(false);
+            alert("Something went wrong while creating the vote! See the console for details.")
+            return
+        }
         for (let i=1;i<questions.length;i++){
             const requestQue = await requestQuestionAddition(i)
             console.log(requestQue)
+            if (requestQue.status!==200){
+                setClickedNextStep(false)
+                alert("Something went wrong while adding a question! See the console for details. Please restart all docker-containers to start over.")
+                return
+            }
         }
         nextStep();
       }
@@ -131,7 +146,7 @@ const CreateVote = () => {
                                     {questionsInList}
                                 </ul>
                                 <div class="flex justify-center pt-2">
-                                    <button onClick={() => deleteVoteFromRedux()} class="w-1/4 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">Delete Vote</button>
+                                    <button onClick={() => deleteVoteFromRedux()} disabled={clickedNextStep} class="w-1/4 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">Delete Vote</button>
                                 </div>
                             </div>
                             ) : 
