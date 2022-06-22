@@ -7,7 +7,7 @@ helpersRouter.get("/vote", async(req, res) => {
     //connect("provotum");
     const Vote = require("../mongodb/Vote")
     try{
-        const vote = await Vote.find({ __v: 0}) // takes first vote that is in the mongoDB
+        const vote = await Vote.find() // takes first vote that is in the mongoDB
         res.json(vote)
     } catch (e) {
         console.log(e)

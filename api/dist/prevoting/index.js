@@ -1,4 +1,13 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -26,7 +35,7 @@ prevotingRouter.post("/setup", (req, res) => {
             res.json(req.body);
             const Vote = require("../mongodb/Vote");
             // Save Vote in db
-            const vote = new Vote({ vote: req.body.vote, question: req.body.question });
+            const vote = new Vote({ vote: req.body.vote, questions: [req.body.question] });
             vote.save().then(() => console.log("New vote is saved in mongoDB"));
         }
         else if (stdout.search("Connection refused") > 0) {
@@ -38,6 +47,37 @@ prevotingRouter.post("/setup", (req, res) => {
             res.send("Something went wrong!");
         }
     });
+});
+// Create Question: reqParam: vote, question
+prevotingRouter.post("/storequestion", (req, res) => {
+    const { exec } = require('child_process');
+    exec('cd .. && cd client && cargo +nightly run --release -- va store_question --vote "' + req.body.vote + '" --question "' + req.body.question + '"', (error, stdout, stderr) => __awaiter(void 0, void 0, void 0, function* () {
+        console.log(stdout);
+        if (error) {
+            res.status(400);
+            console.error(`exec error: ${error}`);
+            return;
+        }
+        else if (stdout.search("VoteDoesNotExist") > 0) {
+            res.status(400);
+            res.send("This vote does not exists");
+            return;
+        }
+        else if (stdout.search("successfully setup question!") > 0) {
+            res.json(req.body);
+            const Vote = require("../mongodb/Vote");
+            // Save Vote in db
+            yield Vote.findOneAndUpdate({ vote: req.body.vote }, { $push: { questions: req.body.question } });
+        }
+        else if (stdout.search("Connection refused") > 0) {
+            res.status(404);
+            res.send("WsHandshake failed. Connection refused");
+        }
+        else {
+            res.status(400);
+            res.send("Something went wrong!");
+        }
+    }));
 });
 // Create Keys: reqParam: vote, sk, sealer
 prevotingRouter.post("/keygen", (req, res) => {

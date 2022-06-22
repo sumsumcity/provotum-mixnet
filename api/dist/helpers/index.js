@@ -20,7 +20,7 @@ helpersRouter.get("/vote", (req, res) => __awaiter(void 0, void 0, void 0, funct
     //connect("provotum");
     const Vote = require("../mongodb/Vote");
     try {
-        const vote = yield Vote.find({ __v: 0 }); // takes first vote that is in the mongoDB
+        const vote = yield Vote.find(); // takes first vote that is in the mongoDB
         res.json(vote);
     }
     catch (e) {
