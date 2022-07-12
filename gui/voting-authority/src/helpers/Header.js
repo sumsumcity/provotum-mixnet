@@ -30,8 +30,15 @@ const Header = () => {
             }
             else if (vote.data.length !== 0){
                 dispatch(setChainStatus("ON CHAIN"))
-                // TODO: Control every step with phase + decrypt + vote closed in db: KeyGeneration phase --> Key Generation step; Voting phase --> Voting step; Tallying + no decryption or only 1 in db --> tallying step; Tallying + all decryption + vote closed in db --> Result
-                console.log("Here muss step gemacht werden")
+                // TODO: Control every step with phase + decrypt + vote closed in db: Tallying + no decryption or only 1 in db --> tallying step; Tallying + all decryption + vote closed in db --> Result
+                //console.log(vote.data[0].phase)
+                //console.log(step)
+                if (vote.data[0].phase === "KeyGeneration" && step !== "Key Generation"){
+                    dispatch(setStep("Key Generation"));
+                }
+                else if (vote.data[0].phase === "Voting" && step !== "Voting"){
+                    dispatch(setStep("Voting"));
+                }
             }
             else {
                 dispatch(setChainStatus("ON CHAIN"))
@@ -45,11 +52,9 @@ const Header = () => {
         const getAllVotesRequest = () => {
             return axios.get('http://localhost:4000/helpers/allVote')
             .then(function (response) {
-              console.log(response);
               return response;
             })
             .catch(function (error) {
-              console.log(error);
               return error;
             });
         }
