@@ -24,7 +24,7 @@ prevotingRouter.post("/setup", (req, res) => {
             const Vote = require("../mongodb/Vote")
 
             // Save Vote in db
-            const vote = new Vote({vote: req.body.vote, questions: [req.body.question], phase: "KeyGeneration"})
+            const vote = new Vote({vote: req.body.vote, questions: [req.body.question], phase: "KeyGeneration", status: "open", number_of_sealers: 2, sealers: []})
             vote.save().then(() => console.log("New vote is saved in mongoDB"))
             
         }
@@ -78,7 +78,7 @@ prevotingRouter.post("/storequestion", (req, res) => {
 prevotingRouter.post("/keygen", (req, res) => {
     const { exec } = require('child_process');
 
-    exec('cd .. && cd client && cargo +nightly run --release -- sealer keygen --vote "' + req.body.vote + '" --sk "' + req.body.sk + '" --who "' + req.body.sealer + '"', (error: any, stdout: String, stderr: any) => {
+    exec('cd .. && cd client && cargo +nightly run --release -- sealer keygen --vote "' + req.body.vote + '" --sk "' + req.body.sk + '" --who "' + req.body.sealer + '"', async (error: any, stdout: String, stderr: any) => {
         if (error) {
             res.status(400);
             console.error(`exec error: ${error}`);
@@ -86,6 +86,10 @@ prevotingRouter.post("/keygen", (req, res) => {
         }
         else if (stdout.search("successfully submitted public key share!") > 0) {
             res.json(req.body);
+            const Vote = require("../mongodb/Vote")
+
+            // Save Question to the Vote
+            await Vote.findOneAndUpdate({vote: req.body.vote},{$push: {sealers: req.body.sealer}})
         }
         else if (stdout.search("VoteDoesNotExist") > 0) {
             res.status(400);
