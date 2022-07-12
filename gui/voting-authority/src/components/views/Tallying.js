@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { advance } from "../../redux/StepSlice"
 import StepsTallying from "../../helpers/StepsTallying"
 
-
+// TODO: When next step to result, then it should change the vode to closed in db
 const Tallying = () => {
 
     const navigate = useNavigate();

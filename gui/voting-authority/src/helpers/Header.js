@@ -30,6 +30,7 @@ const Header = () => {
             }
             else if (vote.data.length !== 0){
                 dispatch(setChainStatus("ON CHAIN"))
+                // TODO: Control every step with phase + decrypt + vote closed in db: KeyGeneration phase --> Key Generation step; Voting phase --> Voting step; Tallying + no decryption or only 1 in db --> tallying step; Tallying + all decryption + vote closed in db --> Result
                 console.log("Here muss step gemacht werden")
             }
             else {
