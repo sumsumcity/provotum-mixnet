@@ -35,7 +35,7 @@ prevotingRouter.post("/setup", (req, res) => {
             res.json(req.body);
             const Vote = require("../mongodb/Vote");
             // Save Vote in db
-            const vote = new Vote({ vote: req.body.vote, questions: [req.body.question], phase: "KeyGeneration", status: "open", number_of_sealers: 2, sealers: [] });
+            const vote = new Vote({ vote: req.body.vote, questions: [{ questionName: req.body.question, decrypted_sealers: [], combined_decrypted_shares: false, yes_votes: 0, no_votes: 0 }], phase: "KeyGeneration", status: "open", number_of_sealers: 2, sealers: [] });
             vote.save().then(() => console.log("New vote is saved in mongoDB"));
         }
         else if (stdout.search("Connection refused") > 0) {
@@ -67,7 +67,7 @@ prevotingRouter.post("/storequestion", (req, res) => {
             res.json(req.body);
             const Vote = require("../mongodb/Vote");
             // Save Question to the Vote
-            yield Vote.findOneAndUpdate({ vote: req.body.vote }, { $push: { questions: req.body.question } });
+            yield Vote.findOneAndUpdate({ vote: req.body.vote }, { $push: { questions: { questionName: req.body.question, decrypted_sealers: [], combined_decrypted_shares: false, yes_votes: 0, no_votes: 0 } } });
         }
         else if (stdout.search("Connection refused") > 0) {
             res.status(404);

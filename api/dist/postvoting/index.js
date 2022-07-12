@@ -1,4 +1,13 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -11,7 +20,7 @@ const bodyParser = require("body-parser");
 // Make decryption: reqParam: vote, question, sk, sealer
 postvotingRouter.post("/decrypt", (req, res) => {
     const { exec } = require('child_process');
-    exec('cd .. && cd client && cargo +nightly run --release -- sealer decrypt --vote "' + req.body.vote + '" --question "' + req.body.question + '" --sk "' + req.body.sk + '" --who "' + req.body.sealer + '"', (error, stdout, stderr) => {
+    exec('cd .. && cd client && cargo +nightly run --release -- sealer decrypt --vote "' + req.body.vote + '" --question "' + req.body.question + '" --sk "' + req.body.sk + '" --who "' + req.body.sealer + '"', (error, stdout, stderr) => __awaiter(void 0, void 0, void 0, function* () {
         if (error) {
             res.status(400);
             console.error(`exec error: ${error}`);
@@ -19,6 +28,9 @@ postvotingRouter.post("/decrypt", (req, res) => {
         }
         else if (stdout.search("successfully submitted partial decryption!") > 0) {
             res.json(req.body);
+            const Vote = require("../mongodb/Vote");
+            // Save decrypted_sealer to the Vote
+            yield Vote.findOneAndUpdate({ vote: req.body.vote }, { $push: { "questions.$[el].decrypted_sealers": req.body.sealer }, }, { arrayFilters: [{ "el.questionName": req.body.question }] });
         }
         else if (stdout.search("VoteDoesNotExist") > 0) {
             res.status(400);
@@ -33,15 +45,16 @@ postvotingRouter.post("/decrypt", (req, res) => {
             res.send("Decyroted share proof error: The sk might be wrong");
         }
         else {
+            console.log(stdout);
             res.status(400);
             res.send("Something went wrong!");
         }
-    });
+    }));
 });
 // Make decryption: reqParam: vote, question
 postvotingRouter.post("/combine", (req, res) => {
     const { exec } = require('child_process');
-    exec('cd .. && cd client && cargo +nightly run --release -- va tally_question --vote "' + req.body.vote + '" --question "' + req.body.question + '"', (error, stdout, stderr) => {
+    exec('cd .. && cd client && cargo +nightly run --release -- va tally_question --vote "' + req.body.vote + '" --question "' + req.body.question + '"', (error, stdout, stderr) => __awaiter(void 0, void 0, void 0, function* () {
         if (error) {
             res.status(400);
             console.error(`exec error: ${error}`);
@@ -49,6 +62,9 @@ postvotingRouter.post("/combine", (req, res) => {
         }
         else if (stdout.search("successfully tallied question") > 0) {
             res.json(req.body);
+            const Vote = require("../mongodb/Vote");
+            // Save decrypted_sealer to the Vote
+            yield Vote.findOneAndUpdate({ vote: "Popular Vote on the 01. August 2022" }, { "questions.$[el].combined_decrypted_shares": true }, { arrayFilters: [{ "el.questionName": "Do you like pizza?" }] });
         }
         else if (stdout.search("Connection refused") > 0) {
             res.status(404);
@@ -62,7 +78,7 @@ postvotingRouter.post("/combine", (req, res) => {
             res.status(400);
             res.send("Something went wrong!");
         }
-    });
+    }));
 });
 // Get result: reqParam: question
 postvotingRouter.get("/result", (req, res) => {

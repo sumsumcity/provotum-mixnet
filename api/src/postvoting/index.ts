@@ -8,7 +8,7 @@ const bodyParser = require("body-parser");
 postvotingRouter.post("/decrypt", (req, res) => {
     const { exec } = require('child_process');
 
-    exec('cd .. && cd client && cargo +nightly run --release -- sealer decrypt --vote "' + req.body.vote + '" --question "' + req.body.question +  '" --sk "' + req.body.sk + '" --who "' + req.body.sealer + '"', (error: any, stdout: String, stderr: any) => {
+    exec('cd .. && cd client && cargo +nightly run --release -- sealer decrypt --vote "' + req.body.vote + '" --question "' + req.body.question +  '" --sk "' + req.body.sk + '" --who "' + req.body.sealer + '"', async (error: any, stdout: String, stderr: any) => {
         if (error) {
             res.status(400);
             console.error(`exec error: ${error}`);
@@ -16,6 +16,10 @@ postvotingRouter.post("/decrypt", (req, res) => {
         }
         else if (stdout.search("successfully submitted partial decryption!") > 0) {
             res.json(req.body);
+            const Vote = require("../mongodb/Vote")
+
+            // Save decrypted_sealer to the Vote
+            await Vote.findOneAndUpdate({vote: req.body.vote}, {$push: {"questions.$[el].decrypted_sealers": req.body.sealer},},{arrayFilters:[{"el.questionName":req.body.question}]})
         }
         else if (stdout.search("VoteDoesNotExist") > 0) {
             res.status(400);
@@ -30,6 +34,7 @@ postvotingRouter.post("/decrypt", (req, res) => {
             res.send("Decyroted share proof error: The sk might be wrong")
         }
         else {
+            console.log(stdout)
             res.status(400);
             res.send("Something went wrong!")
         }
@@ -40,7 +45,7 @@ postvotingRouter.post("/decrypt", (req, res) => {
 postvotingRouter.post("/combine", (req, res) => {
     const { exec } = require('child_process');
 
-    exec('cd .. && cd client && cargo +nightly run --release -- va tally_question --vote "' + req.body.vote + '" --question "' + req.body.question + '"', (error: any, stdout: String, stderr: any) => {
+    exec('cd .. && cd client && cargo +nightly run --release -- va tally_question --vote "' + req.body.vote + '" --question "' + req.body.question + '"', async (error: any, stdout: String, stderr: any) => {
         if (error) {
             res.status(400);
             console.error(`exec error: ${error}`);
@@ -48,7 +53,10 @@ postvotingRouter.post("/combine", (req, res) => {
         }
         else if (stdout.search("successfully tallied question") > 0) {
             res.json(req.body);
-        }
+
+            const Vote = require("../mongodb/Vote")
+            // Save decrypted_sealer to the Vote
+            await Vote.findOneAndUpdate({vote: "Popular Vote on the 01. August 2022"}, {"questions.$[el].combined_decrypted_shares": true},{arrayFilters:[{"el.questionName":"Do you like pizza?"}]})        }
         else if (stdout.search("Connection refused") > 0){
             res.status(404);
             res.send("WsHandshake failed. Connection refused")

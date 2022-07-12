@@ -1,9 +1,13 @@
 "use strict";
 const mongoose = require("mongoose");
-// TODO: Separate db to every question with (question, decrypted_sealers, combined_decyrpted_share, yes_votes, no_votes)
+const questionSchema = new mongoose.Schema({
+    questionName: String,
+    decrypted_sealers: [String],
+    combined_decrypted_shares: Boolean
+});
 const voteSchema = new mongoose.Schema({
     vote: String,
-    questions: [String],
+    questions: [questionSchema],
     phase: String,
     number_of_sealers: Number,
     sealers: [String],
