@@ -22,11 +22,14 @@ export const StepSlice = createSlice({
       else if (state.value === "Result"){
         state.value = "Vote Creation"
       }
-    }
+    },
+    setStep: (state, action) => {
+      state.value = action.payload;
+  }
   }
 })
 
 // Action creators are generated for each case reducer function
-export const { advance } = StepSlice.actions
+export const { advance, setStep } = StepSlice.actions
 
 export default StepSlice.reducer
