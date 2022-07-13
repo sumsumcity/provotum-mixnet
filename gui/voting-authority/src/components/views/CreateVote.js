@@ -51,38 +51,8 @@ const CreateVote = () => {
         setVoteQuestionForm([])
         setVoteNameForm("")
     }
-
-    const requestVoteCreation = () => {
-        return axios.post('http://localhost:4000/prevoting/setup', {
-            vote: vote,
-            question: questions[0]
-          })
-          .then(function (response) {
-            console.log(response);
-            return response;
-          })
-          .catch(function (error) {
-            console.log(error);
-            return error.response;
-          });
-      }
-
-      const requestQuestionAddition = (i) => {
-        return axios.post('http://localhost:4000/prevoting/storequestion', {
-            vote: vote,
-            question: questions[i]
-          })
-          .then(function (response) {
-            console.log(response);
-            return response;
-          })
-          .catch(function (error) {
-            console.log(error);
-            return error.response;
-          });
-      }
       
-      const makeRequest = async () => {
+    const makeRequest = async () => {
         setOpenModal(false)
         setClickedNextStep(true)
         const requestVot = await requestVoteCreation()
@@ -113,6 +83,36 @@ const CreateVote = () => {
         }
         nextStep();
       }
+
+    const requestVoteCreation = () => {
+        return axios.post('http://localhost:4000/prevoting/setup', {
+            vote: vote,
+            question: questions[0]
+          })
+          .then(function (response) {
+            console.log(response);
+            return response;
+          })
+          .catch(function (error) {
+            console.log(error);
+            return error.response;
+          });
+    }
+
+    const requestQuestionAddition = (i) => {
+        return axios.post('http://localhost:4000/prevoting/storequestion', {
+            vote: vote,
+            question: questions[i]
+          })
+          .then(function (response) {
+            console.log(response);
+            return response;
+          })
+          .catch(function (error) {
+            console.log(error);
+            return error.response;
+          });
+    }
 
       // Make list in HTML and questions is from redux
       for (const [index, value] of questions.entries()) {
