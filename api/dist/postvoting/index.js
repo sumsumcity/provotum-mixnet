@@ -63,7 +63,7 @@ postvotingRouter.post("/combine", (req, res) => {
             res.json(req.body);
             const Vote = require("../mongodb/Vote");
             // Save decrypted_sealer to the Vote
-            yield Vote.findOneAndUpdate({ vote: "Popular Vote on the 01. August 2022" }, { "questions.$[el].combined_decrypted_shares": true }, { arrayFilters: [{ "el.questionName": "Do you like pizza?" }] });
+            yield Vote.findOneAndUpdate({ vote: req.body.vote }, { "questions.$[el].combined_decrypted_shares": true }, { arrayFilters: [{ "el.questionName": req.body.question }] });
         }
         else if (stdout.search("Connection refused") > 0) {
             res.status(404);

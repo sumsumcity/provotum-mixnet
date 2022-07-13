@@ -11,6 +11,7 @@ const voteSchema = new mongoose.Schema({
     questions: [questionSchema],
     phase: String,
     number_of_sealers: Number,
+    combined_key_shares: Boolean,
     sealers: [String],
 })
 
