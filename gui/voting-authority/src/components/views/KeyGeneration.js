@@ -1,5 +1,6 @@
 import Header from "../../helpers/Header"
 import Footer from "../../helpers/Footer"
+import { useState, useEffect } from "react"
 import {useNavigate} from "react-router-dom"
 import { useSelector, useDispatch } from 'react-redux'
 import { advance } from "../../redux/StepSlice"
@@ -9,9 +10,53 @@ import { FaKey } from "react-icons/fa"
 
 const KeyGeneration = () => {
 
+    const axios = require('axios')
     const navigate = useNavigate();
-    const step = useSelector(state => state.step.value)
     const dispatch = useDispatch()
+
+    const [currentNumberOfSealers, setCurrentNumberOfSealers] = useState(0)
+    const [maxNumberOfSealers, setmaxNumberOfSealers] = useState(2)
+
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+          checkNumberOfSealers()
+        }, 2000);
+        return () => clearInterval(interval);
+      }, [currentNumberOfSealers, maxNumberOfSealers]);
+
+    // 
+    const checkNumberOfSealers = async () => {
+        const vote = await getAllVotesRequest()
+        if (vote.status === 200){
+
+            // If there are more sealers then two it will be changed here
+            if (vote.data[0].number_of_sealers !== maxNumberOfSealers){
+                setmaxNumberOfSealers(vote.data[0].number_of_sealers)
+            }
+
+            // If a sealer create a key then in increases the number
+            if (vote.data[0].sealers.length !== currentNumberOfSealers){
+                setCurrentNumberOfSealers(vote.data[0].sealers.length)
+            }
+
+            console.log(vote.data[0])
+        }
+        else {
+            console.log("Error: Problem to make request to database")
+            console.log(vote)
+        }
+    }
+
+    const getAllVotesRequest = () => {
+        return axios.get('http://localhost:4000/helpers/allVote')
+        .then(function (response) {
+          return response;
+        })
+        .catch(function (error) {
+          return error;
+        });
+    }
 
     const nextStep = () => {
         dispatch(advance())
@@ -36,7 +81,7 @@ const KeyGeneration = () => {
                             <div class="w-1/2 mx-auto text-center">
                                 <div className="flex justify-center items-center">
                                     <FaKey className="text-logobrown-1000 mx-2"/>
-                                    <p className=" text-xl text-logobrown-1000 mx-2">0/2 public keys have been created</p>
+                                    <p className=" text-xl text-logobrown-1000 mx-2">{currentNumberOfSealers}/{maxNumberOfSealers} public keys have been created</p>
                                 </div>
                                 <div className="flex justify-center items-center">
                                     <svg role="status" class="inline w-4 h-4 mr-3 text-logobrown-1000/50 animate-spin" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -47,7 +92,7 @@ const KeyGeneration = () => {
                                 </div>
                                 <span class="inline-block h-1 w-1/2 rounded bg-logobrown-300 mb-6"></span>
                                 <div class="flex justify-center">
-                                    <button disabled={false} class="w-1/3 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">Combine Keys</button>
+                                    <button disabled={maxNumberOfSealers!==currentNumberOfSealers} class="w-1/3 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">Combine Keys</button>
                                 </div>
                             </div>
                         </div>
