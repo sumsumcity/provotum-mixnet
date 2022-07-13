@@ -35,7 +35,7 @@ const createRoutes = (): express.Router => {
             return
         }
 
-        exec('cd .. && cd client && cargo +nightly run --release -- va set_phase --vote "' + req.body.vote + '" --phase "' + req.body.phase + '"', async (error: any, stdout: String, stderr: any) => {
+        exec('cd .. && cd client && rustup run nightly-2022-05-20 cargo run --release -- va set_phase --vote "' + req.body.vote + '" --phase "' + req.body.phase + '"', async (error: any, stdout: String, stderr: any) => {
             console.log(stdout)
             if (error) {
                 res.status(400);

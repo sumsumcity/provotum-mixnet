@@ -8,7 +8,7 @@ const bodyParser = require("body-parser");
 prevotingRouter.post("/setup", (req, res) => {
     const { exec } = require('child_process');
 
-    exec('cd .. && cd client && cargo +nightly run --release -- va setup --vote "' + req.body.vote + '" --question "' + req.body.question + '"', (error: any, stdout: String, stderr: any) => {
+    exec('cd .. && cd client && rustup run nightly-2022-05-20 cargo run --release -- va setup --vote "' + req.body.vote + '" --question "' + req.body.question + '"', (error: any, stdout: String, stderr: any) => {
         if (error) {
             res.status(400);
             console.error(`exec error: ${error}`);
@@ -43,7 +43,7 @@ prevotingRouter.post("/setup", (req, res) => {
 prevotingRouter.post("/storequestion", (req, res) => {
     const { exec } = require('child_process');
 
-    exec('cd .. && cd client && cargo +nightly run --release -- va store_question --vote "' + req.body.vote + '" --question "' + req.body.question + '"', async (error: any, stdout: String, stderr: any) => {
+    exec('cd .. && cd client && rustup run nightly-2022-05-20 cargo run --release -- va store_question --vote "' + req.body.vote + '" --question "' + req.body.question + '"', async (error: any, stdout: String, stderr: any) => {
         console.log(stdout)
         if (error) {
             res.status(400);
@@ -78,7 +78,7 @@ prevotingRouter.post("/storequestion", (req, res) => {
 prevotingRouter.post("/keygen", (req, res) => {
     const { exec } = require('child_process');
 
-    exec('cd .. && cd client && cargo +nightly run --release -- sealer keygen --vote "' + req.body.vote + '" --sk "' + req.body.sk + '" --who "' + req.body.sealer + '"', async (error: any, stdout: String, stderr: any) => {
+    exec('cd .. && cd client && rustup run nightly-2022-05-20 cargo run --release -- sealer keygen --vote "' + req.body.vote + '" --sk "' + req.body.sk + '" --who "' + req.body.sealer + '"', async (error: any, stdout: String, stderr: any) => {
         if (error) {
             res.status(400);
             console.error(`exec error: ${error}`);
@@ -110,7 +110,7 @@ prevotingRouter.post("/keygen", (req, res) => {
 prevotingRouter.post("/combineKeyShares", (req, res) => {
     const { exec } = require('child_process');
 
-    exec('cd .. && cd client && cargo +nightly run --release -- va combine_pk_shares --vote "' + req.body.vote + '"', (error: any, stdout: String, stderr: any) => {
+    exec('cd .. && cd client && rustup run nightly-2022-05-20 cargo run --release -- va combine_pk_shares --vote "' + req.body.vote + '"', (error: any, stdout: String, stderr: any) => {
         if (error) {
             res.status(400);
             console.error(`exec error: ${error}`);

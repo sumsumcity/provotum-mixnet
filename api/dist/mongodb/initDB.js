@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.connect = void 0;
 const mongoose = require('mongoose');
 function connect(database) {
     console.log(database);

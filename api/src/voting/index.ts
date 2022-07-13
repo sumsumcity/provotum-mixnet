@@ -8,7 +8,7 @@ const bodyParser = require("body-parser");
 votingRouter.post("/vote", (req, res) => {
     const { exec } = require('child_process');
 
-    exec('cd .. && cd client && cargo +nightly run --release -- voter --vote "' + req.body.vote + '" --question "' + req.body.question + '" --nr-of-votes "' + req.body.nr_of_votes + '" --votes "' + req.body.votes + '"', (error: any, stdout: String, stderr: any) => {
+    exec('cd .. && cd client && rustup run nightly-2022-05-20 cargo run --release -- voter --vote "' + req.body.vote + '" --question "' + req.body.question + '" --nr-of-votes "' + req.body.nr_of_votes + '" --votes "' + req.body.votes + '"', (error: any, stdout: String, stderr: any) => {
         console.log(stdout)
         if (error) {
             res.status(400);

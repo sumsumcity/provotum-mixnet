@@ -7,7 +7,7 @@ exampleRouter.get("/", (req, res) => {
 
     const { exec } = require('child_process');
 
-    exec('cd .. && cd client && cargo +nightly run --release -- va setup --vote TestVote --question TestQuestion', (error: any, stdout: any, stderr: any) => {
+    exec('cd .. && cd client && rustup run nightly-2022-05-20 cargo run --release -- va setup --vote TestVote --question TestQuestion', (error: any, stdout: any, stderr: any) => {
       if (error) {
         console.error(`exec error: ${error}`);
         return;
@@ -26,7 +26,7 @@ exampleRouter.post("/", (req, res) => {
 
   const { exec } = require('child_process');
 
-  exec('cd .. && cd client && cargo +nightly run --release -- va setup --vote "' + req.body.vote + '" --question "' + req.body.question +'"', (error: any, stdout: any, stderr: any) => {
+  exec('cd .. && cd client && rustup run nightly-2022-05-20 cargo run --release -- va setup --vote "' + req.body.vote + '" --question "' + req.body.question +'"', (error: any, stdout: any, stderr: any) => {
     if (error) {
       res.status(400);
       console.error(`exec error: ${error}`);

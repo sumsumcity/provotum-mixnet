@@ -8,7 +8,7 @@ const bodyParser = require("body-parser");
 postvotingRouter.post("/decrypt", (req, res) => {
     const { exec } = require('child_process');
 
-    exec('cd .. && cd client && cargo +nightly run --release -- sealer decrypt --vote "' + req.body.vote + '" --question "' + req.body.question +  '" --sk "' + req.body.sk + '" --who "' + req.body.sealer + '"', async (error: any, stdout: String, stderr: any) => {
+    exec('cd .. && cd client && rustup run nightly-2022-05-20 cargo run --release -- sealer decrypt --vote "' + req.body.vote + '" --question "' + req.body.question +  '" --sk "' + req.body.sk + '" --who "' + req.body.sealer + '"', async (error: any, stdout: String, stderr: any) => {
         if (error) {
             res.status(400);
             console.error(`exec error: ${error}`);
@@ -45,7 +45,7 @@ postvotingRouter.post("/decrypt", (req, res) => {
 postvotingRouter.post("/combine", (req, res) => {
     const { exec } = require('child_process');
 
-    exec('cd .. && cd client && cargo +nightly run --release -- va tally_question --vote "' + req.body.vote + '" --question "' + req.body.question + '"', async (error: any, stdout: String, stderr: any) => {
+    exec('cd .. && cd client && rustup run nightly-2022-05-20 cargo run --release -- va tally_question --vote "' + req.body.vote + '" --question "' + req.body.question + '"', async (error: any, stdout: String, stderr: any) => {
         if (error) {
             res.status(400);
             console.error(`exec error: ${error}`);
@@ -76,7 +76,7 @@ postvotingRouter.post("/combine", (req, res) => {
 postvotingRouter.get("/result", (req, res) => {
     const { exec } = require('child_process');
 
-    exec('cd .. && cd client && cargo +nightly run --release -- va result --question "' + req.body.question + '"', (error: any, stdout: String, stderr: any) => {
+    exec('cd .. && cd client && rustup run nightly-2022-05-20 cargo run --release -- va result --question "' + req.body.question + '"', (error: any, stdout: String, stderr: any) => {
         console.log(stdout)
         if (error) {
             res.status(400);

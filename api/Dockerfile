@@ -27,7 +27,7 @@ ENV CARGO_TERM_COLOR=always
 
 # setup rust nightly channel
 RUN rustup update
-RUN rustup toolchain install nightly
+RUN rustup toolchain install nightly-2022-05-20
 
 COPY client/src /usr/src/client/src
 COPY client/Cargo.toml /usr/src/client/
@@ -40,7 +40,7 @@ WORKDIR /usr/src/client
 
 # Build node.
 RUN cargo build --release 
-RUN cargo +nightly run --release -- va help
+RUN rustup run nightly-2022-05-20 cargo run --release -- va help
 
 WORKDIR /usr/src/app
 

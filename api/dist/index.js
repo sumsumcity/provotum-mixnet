@@ -24,7 +24,7 @@ function startServer() {
     });
 }
 const loader = (app) => __awaiter(void 0, void 0, void 0, function* () {
-    (0, router_1.loadRoutes)(app);
+    router_1.loadRoutes(app);
     console.log("Routes loaded");
 });
 startServer().catch((error) => {

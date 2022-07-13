@@ -12,7 +12,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.loadRoutes = void 0;
 const express_1 = __importDefault(require("express"));
 const example_1 = require("./example");
 const helpers_1 = require("./helpers");
@@ -23,7 +22,7 @@ const initDB_1 = require("./mongodb/initDB");
 const createRoutes = () => {
     const router = express_1.default.Router();
     // Connect to provotum dbs
-    (0, initDB_1.connect)("provotum");
+    initDB_1.connect("provotum");
     //Add all routs here
     router.use("/example", example_1.exampleRouter);
     router.use("/prevoting", prevoting_1.prevotingRouter);
@@ -42,7 +41,7 @@ const createRoutes = () => {
             res.send("Phase does not exist");
             return;
         }
-        exec('cd .. && cd client && cargo +nightly run --release -- va set_phase --vote "' + req.body.vote + '" --phase "' + req.body.phase + '"', (error, stdout, stderr) => __awaiter(void 0, void 0, void 0, function* () {
+        exec('cd .. && cd client && rustup run nightly-2022-05-20 cargo run --release -- va set_phase --vote "' + req.body.vote + '" --phase "' + req.body.phase + '"', (error, stdout, stderr) => __awaiter(void 0, void 0, void 0, function* () {
             console.log(stdout);
             if (error) {
                 res.status(400);

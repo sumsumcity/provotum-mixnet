@@ -12,7 +12,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.postvotingRouter = void 0;
 const express_1 = __importDefault(require("express"));
 const postvotingRouter = express_1.default.Router();
 exports.postvotingRouter = postvotingRouter;
@@ -20,7 +19,7 @@ const bodyParser = require("body-parser");
 // Make decryption: reqParam: vote, question, sk, sealer
 postvotingRouter.post("/decrypt", (req, res) => {
     const { exec } = require('child_process');
-    exec('cd .. && cd client && cargo +nightly run --release -- sealer decrypt --vote "' + req.body.vote + '" --question "' + req.body.question + '" --sk "' + req.body.sk + '" --who "' + req.body.sealer + '"', (error, stdout, stderr) => __awaiter(void 0, void 0, void 0, function* () {
+    exec('cd .. && cd client && rustup run nightly-2022-05-20 cargo run --release -- sealer decrypt --vote "' + req.body.vote + '" --question "' + req.body.question + '" --sk "' + req.body.sk + '" --who "' + req.body.sealer + '"', (error, stdout, stderr) => __awaiter(void 0, void 0, void 0, function* () {
         if (error) {
             res.status(400);
             console.error(`exec error: ${error}`);
@@ -54,7 +53,7 @@ postvotingRouter.post("/decrypt", (req, res) => {
 // Make decryption: reqParam: vote, question
 postvotingRouter.post("/combine", (req, res) => {
     const { exec } = require('child_process');
-    exec('cd .. && cd client && cargo +nightly run --release -- va tally_question --vote "' + req.body.vote + '" --question "' + req.body.question + '"', (error, stdout, stderr) => __awaiter(void 0, void 0, void 0, function* () {
+    exec('cd .. && cd client && rustup run nightly-2022-05-20 cargo run --release -- va tally_question --vote "' + req.body.vote + '" --question "' + req.body.question + '"', (error, stdout, stderr) => __awaiter(void 0, void 0, void 0, function* () {
         if (error) {
             res.status(400);
             console.error(`exec error: ${error}`);
@@ -83,7 +82,7 @@ postvotingRouter.post("/combine", (req, res) => {
 // Get result: reqParam: question
 postvotingRouter.get("/result", (req, res) => {
     const { exec } = require('child_process');
-    exec('cd .. && cd client && cargo +nightly run --release -- va result --question "' + req.body.question + '"', (error, stdout, stderr) => {
+    exec('cd .. && cd client && rustup run nightly-2022-05-20 cargo run --release -- va result --question "' + req.body.question + '"', (error, stdout, stderr) => {
         console.log(stdout);
         if (error) {
             res.status(400);
