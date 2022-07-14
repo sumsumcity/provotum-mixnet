@@ -80,7 +80,7 @@ postvotingRouter.post("/combine", (req, res) => {
     }));
 });
 // Get result: reqParam: question
-postvotingRouter.get("/result", (req, res) => {
+postvotingRouter.post("/result", (req, res) => {
     const { exec } = require('child_process');
     exec('cd .. && cd client && rustup run nightly-2022-05-20 cargo run --release -- va result --question "' + req.body.question + '"', (error, stdout, stderr) => {
         console.log(stdout);
