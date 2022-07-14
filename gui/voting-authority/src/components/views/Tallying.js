@@ -79,7 +79,9 @@ const Tallying = () => {
             if(!product.combined_decrypted_shares){
                 return true
             }
-            return false
+            if(i===apiQuestions.length-1){
+                return false
+            }
         }
     }
 
