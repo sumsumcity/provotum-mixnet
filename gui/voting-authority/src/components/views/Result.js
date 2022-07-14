@@ -27,6 +27,7 @@ const Result = () => {
         for(const [i, value] of questions.entries()){
             const response = await requestResult(value)
             console.log(response)
+            // NOW DATA TRANSFORM THAT YOU CAN SEE YES(1) AND NO(3) VOTES
         }
       }
 
@@ -41,17 +42,6 @@ const Result = () => {
           return error;
         });
       }
-
-      const getAllVotesRequest = () => {
-        return axios.get('http://localhost:4000/helpers/allVote')
-        .then(function (response) {
-          return response;
-        })
-        .catch(function (error) {
-          return error;
-        });
-    }
-
 
           // Make list in HTML and questions is from redux
           for (const [index, value] of questions.entries()) {
