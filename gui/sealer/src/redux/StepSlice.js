@@ -6,23 +6,6 @@ export const StepSlice = createSlice({
     value: "Vote Creation"
   },
   reducers: {
-    advance: state => {
-      if (state.value === "Vote Creation"){
-        state.value = "Key Generation"
-      }
-      else if (state.value === "Key Generation"){
-        state.value = "Voting"
-      }
-      else if (state.value === "Voting"){
-        state.value = "Tallying"
-      }
-      else if (state.value === "Tallying"){
-        state.value = "Result"
-      }
-      else if (state.value === "Result"){
-        state.value = "Vote Creation"
-      }
-    },
     setStep: (state, action) => {
       state.value = action.payload;
   }

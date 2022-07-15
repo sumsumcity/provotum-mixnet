@@ -17,7 +17,7 @@ const Header = () => {
         // Checks in db if it has a vote and if it has which step. It also recognize if the frontend is ON CHAIN or OFF CHAIN
         useEffect(() => {
             const interval = setInterval(() => {
-              //getVoteStatus() // TODO: integrate this again
+              getVoteStatus() 
             }, 2000);
             return () => clearInterval(interval);
           }, []);
@@ -30,7 +30,7 @@ const Header = () => {
             }
             else if (vote.data.length !== 0){
                 dispatch(setChainStatus("ON CHAIN"))
-                if (vote.data[0].phase === "KeyGeneration" && (step !== "KeyGeneration" && step !== "Vote Creation")){
+                if (vote.data[0].phase === "KeyGeneration" && step !== "KeyGeneration"){
                     dispatch(setStep("Key Generation"));
                 }
                 else if (vote.data[0].phase === "Voting" && step !== "Voting"){
@@ -60,7 +60,7 @@ const Header = () => {
         }
     
     return (
-        <header class="bg-logobrown-300">
+        <header class="bg-logolblue-200">
         <div class="container mx-auto p-3 flex flex-wrap justify-between items-center">
             <div class="w-1/3">
                 <a class="flex items-center text-logobrown-1000">
@@ -69,13 +69,13 @@ const Header = () => {
                 </a>
             </div>
             <div class="w-1/3 text-center">
-                <h2 class="text-logobrown-1000 font-medium text-2xl">Voting Authority</h2>
+                <h2 class="text-logobrown-1000 font-medium text-2xl">Sealer {window._env_.SEALER}</h2>
             </div>
             <div class="w-1/3 flex justify-end">
                 {chainStatus==="ON CHAIN" ? (
-                    <h3 className=" text-green-800 font-medium text-xl pr-4">ON CHAIN</h3>
+                    <h3 className=" text-green-700 font-medium text-xl pr-4">ON CHAIN</h3>
                 ) : (
-                    <h3 className="text-red-800 font-medium text-xl pr-4">OFF CHAIN</h3>
+                    <h3 className="text-red-700 font-medium text-xl pr-4">OFF CHAIN</h3>
                 )}
                 <a href="https://github.com/provotum">
                     <img src={github_logo} width="35" alt="github logo" class="float-right hover:scale-150 duration-150" />
