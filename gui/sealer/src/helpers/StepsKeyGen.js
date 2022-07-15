@@ -4,13 +4,13 @@ import {FaCheck} from "react-icons/fa"
 const StepsKeyGen = () => {
     
     return (
-        <div class="w-3/10 pr-10 py-6 border-r-2 border-logobrown-300">
+        <div class="w-3/10 pr-10 py-6 border-r-2 border-logolblue-200">
 
         <div class="flex relative pb-12">
             <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
-                <div class="h-full w-1 bg-logored-500"></div>
+                <div class="h-full w-1 bg-logolblue-500"></div>
             </div>
-            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-white inline-flex items-center justify-center text-logored-500 relative z-10 border-2 border-logored-500">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-white inline-flex items-center justify-center text-logolblue-500 relative z-10 border-2 border-logolblue-500">
                 <FaCheck size={20}/>
             </div>
             <div class="flex pl-4 items-center">
@@ -20,9 +20,9 @@ const StepsKeyGen = () => {
 
         <div class="flex relative pb-12">
             <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
-                <div class="h-full w-1 bg-logobrown-300"></div>
+                <div class="h-full w-1 bg-logolblue-200"></div>
             </div>
-            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-logored-500 inline-flex items-center justify-center text-white relative z-10">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-logolblue-500 inline-flex items-center justify-center text-white relative z-10">
                 <RiNumber2 size={20}/>
             </div>
             <div class="flex pl-4 items-center">
@@ -32,34 +32,34 @@ const StepsKeyGen = () => {
 
         <div class="flex relative pb-12">
             <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
-                <div class="h-full w-1 bg-logobrown-300"></div>
+                <div class="h-full w-1 bg-logolblue-200"></div>
             </div>
-            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-white inline-flex items-center justify-center text-logobrown-300 relative z-10 border-2 border-logobrown-300">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-white inline-flex items-center justify-center text-logolblue-200 relative z-10 border-2 border-logolblue-200">
                 <RiNumber3 size={20}/>
             </div>
             <div class="flex pl-4 items-center">
-                <h3 class="font-medium title-font text-lg text-logobrown-300 tracking-wider">VOTING</h3>
+                <h3 class="font-medium title-font text-lg text-logolblue-200 tracking-wider">VOTING</h3>
             </div>
         </div>
 
         <div class="flex relative pb-12">
             <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
-                <div class="h-full w-1 bg-logobrown-300"></div>
+                <div class="h-full w-1 bg-logolblue-200"></div>
             </div>
-            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-white inline-flex items-center justify-center text-logobrown-300 relative z-10 border-2 border-logobrown-300">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-white inline-flex items-center justify-center text-logolblue-200 relative z-10 border-2 border-logolblue-200">
                 <RiNumber4 size={20}/>
             </div>
             <div class="flex pl-4 items-center">
-                <h3 class="font-medium title-font text-lg text-logobrown-300 tracking-wider">TALLYING</h3>
+                <h3 class="font-medium title-font text-lg text-logolblue-200 tracking-wider">TALLYING</h3>
             </div>
         </div>
 
         <div class="flex relative">
-            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-white inline-flex items-center justify-center text-logobrown-300 relative z-10 border-2 border-logobrown-300">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-white inline-flex items-center justify-center text-logolblue-200 relative z-10 border-2 border-logolblue-200">
                 <RiNumber5 size={20} />
             </div>
             <div class="flex pl-4 items-center">
-                <h3 class="font-medium title-font text-lg text-logobrown-300 tracking-wider">RESULT</h3>
+                <h3 class="font-medium title-font text-lg text-logolblue-200 tracking-wider">RESULT</h3>
             </div>
         </div>
 

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { setStep } from "../redux/StepSlice"
 import { setChainStatus } from "../redux/ChainSlice"
+import { setVoteObj} from "../redux/VoteSlice"
 
 // Makes Header and also checks if the step of redux is the same like the step in the db
 const Header = () => {
@@ -30,6 +31,7 @@ const Header = () => {
             }
             else if (vote.data.length !== 0){
                 dispatch(setChainStatus("ON CHAIN"))
+                dispatch(setVoteObj(vote.data[0]))
                 if (vote.data[0].phase === "KeyGeneration" && step !== "KeyGeneration"){
                     dispatch(setStep("Key Generation"));
                 }
