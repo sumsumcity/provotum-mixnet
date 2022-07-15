@@ -3,7 +3,6 @@ import Footer from "../../helpers/Footer"
 import { useState } from "react"
 import {useNavigate} from "react-router-dom"
 import { useSelector, useDispatch } from 'react-redux'
-import { advance } from "../../redux/StepSlice"
 import StepsCreateVote from "../../helpers/StepsCreateVote"
 
 

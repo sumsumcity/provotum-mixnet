@@ -14,9 +14,10 @@ const KeyGeneration = () => {
     const dispatch = useDispatch()
     const vote = useSelector(state => state.vote.obj)
 
-    const [currentNumberOfSealers, setCurrentNumberOfSealers] = useState(0)
-    const [maxNumberOfSealers, setmaxNumberOfSealers] = useState(2)
     const [clickedCreateKey, setClickedCreateKey] = useState(false)
+
+    const questionsInList = [];
+
 
     const createKey = async() => {
         setClickedCreateKey(true)
