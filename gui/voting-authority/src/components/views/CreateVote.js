@@ -73,7 +73,6 @@ const CreateVote = () => {
             }
             else {
                 const requestQue = await requestQuestionAddition(i)
-                console.log(requestQue)
                 if (requestQue.status!==200){
                     setClickedNextStep(false)
                     alert("Something went wrong while adding a question! See the console for details. Please restart all docker-containers to start over.")
