@@ -5,7 +5,7 @@ import {useNavigate} from "react-router-dom"
 import { useSelector, useDispatch } from 'react-redux'
 import { advance } from "../../redux/StepSlice"
 import StepsResult from "../../helpers/StepsResult"
-import {FaCheck } from "react-icons/fa"
+import {FaCheck, FaRegTimesCircle } from "react-icons/fa"
 
 
 const Result = () => {
@@ -16,6 +16,9 @@ const Result = () => {
     const vote = useSelector(state => state.vote.name)
     const questions = useSelector(state => state.vote.questions)
     const dispatch = useDispatch()
+    const [yesVotes, setYesVotes] = useState([])
+    const [noVotes, setNoVotes] = useState([])
+
 
     const questionsInList = [];
     
@@ -24,10 +27,15 @@ const Result = () => {
       },[]);
 
       const getAllResults = async() => {
+        console.log("HOW MANY")
         for(const [i, value] of questions.entries()){
+            console.log(value)
             const response = await requestResult(value)
             console.log(response)
-            // NOW DATA TRANSFORM THAT YOU CAN SEE YES(1) AND NO(3) VOTES
+            let posYes = response.data.search("1], Count:")
+            let posNo = response.data.search("3], Count:")
+            setYesVotes(oldArray => [...oldArray, response.data.charAt(posYes+12)])
+            setNoVotes(oldArray => [...oldArray, response.data.charAt(posNo+12)])
         }
       }
 
@@ -49,13 +57,16 @@ const Result = () => {
             <li key={index}>
                 <hr class="border-logored-500 border-1"/>
                 <p class="text-lg text-center p-2 font-medium text-logobrown-1000 tracking-wider">{value}</p>
-                <div className="flex justify-between">
+                <div className="flex justify-between ">
                     <div className="flex justify-start">
                         <FaCheck className=" text-green-800 mr-3 w-5 h-5" />
-                        Test
+                        <p>Yes-Votes: {yesVotes[index*2]}</p>
                     </div>
-                    <div>
-                        Test
+                    <div className="flex justify-end">
+                        <FaRegTimesCircle className="text-red-700 mr-3 w-5 h-5"/>
+                        {console.log({yesVotes})}
+                        {console.log({noVotes})}
+                        <p>No-Votes: {noVotes[index*2]}</p>
                     </div>
                 </div>
             </li>)

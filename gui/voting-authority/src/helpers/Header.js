@@ -39,6 +39,9 @@ const Header = () => {
                 else if (vote.data[0].phase === "Voting" && step !== "Voting"){
                     dispatch(setStep("Voting"));
                 }
+                else if (vote.data[0].phase === "Tallying" && (step !== "Tallying" && step !== "Result")){
+                    dispatch(setStep("Tallying"));
+                }
             }
             else {
                 dispatch(setChainStatus("ON CHAIN"))
