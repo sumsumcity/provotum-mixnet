@@ -8,7 +8,7 @@ const bodyParser = require("body-parser");
 votingRouter.post("/vote", (req, res) => {
     const { exec } = require('child_process');
 
-    exec('cd .. && cd client && rustup run nightly-2022-05-20 cargo run --release -- voter --vote "' + req.body.vote + '" --question "' + req.body.question + '" --nr-of-votes "' + req.body.nr_of_votes + '" --votes "' + req.body.votes + '"', (error: any, stdout: String, stderr: any) => {
+    exec('cd .. && cd client && rustup run nightly-2022-05-20 cargo run --release -- voter --vote "' + req.body.vote + '" --question "' + req.body.question + '" --nr-of-votes "' + req.body.nr_of_votes + '" --votes "' + req.body.votes + '"', async (error: any, stdout: String, stderr: any) => {
         console.log(stdout)
         if (error) {
             res.status(400);
@@ -17,6 +17,10 @@ votingRouter.post("/vote", (req, res) => {
         }
         else if (stdout.search("successfully created") > 0) {
             res.json(req.body);
+
+            // TODO: If identity management is implemented then erase the code below
+            const User = require("../mongodb/User")
+            await User.findOneAndUpdate({vote: req.body.username}, {voted: true})        
         }
         else if (stdout.search("Connection refused") > 0){
             res.status(404);

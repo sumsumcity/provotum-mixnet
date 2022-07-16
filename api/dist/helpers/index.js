@@ -48,3 +48,27 @@ helpersRouter.get("/phase", (req, res) => __awaiter(void 0, void 0, void 0, func
         console.log(e);
     }
 }));
+// TODO: If identity management is implemented then erase the code below
+helpersRouter.get("/allUsers", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    //connect("provotum");
+    const User = require("../mongodb/User");
+    try {
+        const users = yield User.find(); // takes first vote that is in the mongoDB
+        res.json(users);
+    }
+    catch (e) {
+        console.log(e);
+    }
+}));
+// TODO: If identity management is implemented then erase the code below
+helpersRouter.post("/userWithUsername", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    //connect("provotum");
+    const User = require("../mongodb/User");
+    try {
+        const user = yield User.find({ name: req.body.name });
+        res.json(user);
+    }
+    catch (e) {
+        console.log(e);
+    }
+}));
