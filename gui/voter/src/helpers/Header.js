@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { setStep } from "../redux/StepSlice"
 import { setChainStatus } from "../redux/ChainSlice"
+import { setVoteObj} from "../redux/VoteSlice"
 
 // Makes Header and also checks if the step of redux is the same like the step in the db
 const Header = () => {
@@ -17,7 +18,7 @@ const Header = () => {
         // Checks in db if it has a vote and if it has which step. It also recognize if the frontend is ON CHAIN or OFF CHAIN
         useEffect(() => {
             const interval = setInterval(() => {
-              //getVoteStatus() // TODO: integrate this again
+              getVoteStatus() 
             }, 2000);
             return () => clearInterval(interval);
           }, []);
@@ -30,13 +31,14 @@ const Header = () => {
             }
             else if (vote.data.length !== 0){
                 dispatch(setChainStatus("ON CHAIN"))
-                if (vote.data[0].phase === "KeyGeneration" && (step !== "KeyGeneration" && step !== "Vote Creation")){
+                dispatch(setVoteObj(vote.data[0]))
+                if (vote.data[0].phase === "KeyGeneration" && step !== "KeyGeneration"){
                     dispatch(setStep("Key Generation"));
                 }
                 else if (vote.data[0].phase === "Voting" && step !== "Voting"){
                     dispatch(setStep("Voting"));
                 }
-                else if (vote.data[0].phase === "Tallying" && (step !== "Tallying" && step !== "Result")){
+                else if (vote.data[0].phase === "Tallying" && (step !== "Tallying")){
                     dispatch(setStep("Tallying"));
                 }
             }
@@ -60,7 +62,7 @@ const Header = () => {
         }
     
     return (
-        <header class="bg-logobrown-300">
+        <header class="bg-logored-100">
         <div class="container mx-auto p-3 flex flex-wrap justify-between items-center">
             <div class="w-1/3">
                 <a class="flex items-center text-logobrown-1000">
@@ -69,7 +71,7 @@ const Header = () => {
                 </a>
             </div>
             <div class="w-1/3 text-center">
-                <h2 class="text-logobrown-1000 font-medium text-2xl">Voting Authority</h2>
+                <h2 class="text-logobrown-1000 font-medium text-2xl">Voter</h2>
             </div>
             <div class="w-1/3 flex justify-end">
                 {chainStatus==="ON CHAIN" ? (
