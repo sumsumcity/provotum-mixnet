@@ -119,7 +119,7 @@ const KeyGeneration = () => {
                                     ) 
                                     : 
                                     (
-                                    <button onClick={() => createKey()} disabled={!vote.sealers.indexOf(window._env_.SEALER)} class="w-1/3 text-white bg-logolblue-500 py-2 px-8 enabled:hover:bg-logolblue-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">Create Key</button>
+                                    <button onClick={() => createKey()} disabled={vote.sealers.indexOf(window._env_.SEALER) > -1} class="w-1/3 text-white bg-logolblue-500 py-2 px-8 enabled:hover:bg-logolblue-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">Create Key</button>
                                     )}
                                 </div>
                             </div>

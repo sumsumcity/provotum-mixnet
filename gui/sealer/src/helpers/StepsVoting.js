@@ -43,9 +43,6 @@ const StepsVoting = () => {
         </div>
 
         <div class="flex relative pb-12">
-            <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
-                <div class="h-full w-1 bg-logolblue-200"></div>
-            </div>
             <div class="flex-shrink-0 w-10 h-10 rounded-full bg-white inline-flex items-center justify-center text-logolblue-200 relative z-10 border-2 border-logolblue-200">
                 <RiNumber4 size={20}/>
             </div>
@@ -54,14 +51,6 @@ const StepsVoting = () => {
             </div>
         </div>
 
-        <div class="flex relative">
-            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-white inline-flex items-center justify-center text-logolblue-200 relative z-10 border-2 border-logolblue-200">
-                <RiNumber5 size={20} />
-            </div>
-            <div class="flex pl-4 items-center">
-                <h3 class="font-medium title-font text-lg text-logolblue-200 tracking-wider">RESULT</h3>
-            </div>
-        </div>
 
     </div>
     );

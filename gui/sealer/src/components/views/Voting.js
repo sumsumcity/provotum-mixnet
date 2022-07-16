@@ -38,7 +38,7 @@ const Voting = () => {
                                     </svg>                                  
                                 </div>
                                 <p className="text-center text-logolblue-500 text-base mt-3">
-                                    Waiting for the voting authority to create the vote...
+                                    Waiting for the voting authority to close the vote...
                                 </p>
                             </div>
                         </div>

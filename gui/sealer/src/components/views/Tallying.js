@@ -20,7 +20,7 @@ const Tallying = () => {
 
     const decryptKey = async(index) => {
         setClickedCreateKey(true)
-        //TODO: set timeout mache!
+        await new Promise(resolve => setTimeout(resolve, 8000));
         console.log("now it starts")
         const response = await requestCreateKey(index)
         if(response.status===0){
@@ -30,7 +30,7 @@ const Tallying = () => {
         }
         else if (response.status!==200){
             setClickedCreateKey(false);
-            alert("Something went wrong while decrypting key! See the console for details.")
+            alert("Something went wrong while decrypting key! Please try again!")
             return
         }
         else {
