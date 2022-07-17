@@ -3,6 +3,7 @@ import stepReducer from "../redux/StepSlice"
 import chainReducer from "../redux/ChainSlice"
 import voteReducer from "../redux/VoteSlice"
 import userReducer from "../redux/UserSlice"
+import ballotSlice from "../redux/BallotSlice"
 import storage from 'redux-persist/lib/storage';
 import { combineReducers } from 'redux';
 import {persistReducer,FLUSH,REHYDRATE,PAUSE,PERSIST,PURGE,REGISTER,} from 'redux-persist';
@@ -15,7 +16,7 @@ const persistConfig = {
 };
 
 //All reducers which are created
-const reducers = combineReducers({ step: stepReducer, vote: voteReducer, chain: chainReducer, user: userReducer});
+const reducers = combineReducers({ step: stepReducer, vote: voteReducer, chain: chainReducer, user: userReducer, ballot: ballotSlice});
 
 //Add all reducers to persist object which will be stored
 const persistedReducer = persistReducer(persistConfig, reducers);

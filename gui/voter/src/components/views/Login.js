@@ -32,7 +32,7 @@ const Login = () => {
         else {
             if(response.data.message==="login successfull"){
                 const user = await requestUsername()
-                console.log(user)
+                dispatch(setUserObj(user))
                 setClickedLogin(false)
             }
             setClickedLogin(false)
