@@ -49,6 +49,18 @@ helpersRouter.get("/allUsers", async(req, res) => {
 })
 
 // TODO: If identity management is implemented then erase the code below
+helpersRouter.post("/userWithUsername", async(req, res) => {
+    //connect("provotum");
+    const User = require("../mongodb/User")
+    try{
+        const user = await User.find({name: req.body.name})
+        res.json(user)
+    } catch (e) {
+        console.log(e)
+    }
+})
+
+// TODO: If identity management is implemented then erase the code below
 helpersRouter.post("/login", async(req, res) => {
     //connect("provotum");
     const User = require("../mongodb/User")
