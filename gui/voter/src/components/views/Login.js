@@ -7,12 +7,34 @@ import { BsEye, BsEyeSlash } from "react-icons/bs"
 
 
 const Login = () => {
+
+    const axios = require('axios')
     
     const [passwordShown, setPasswordShown] = useState(false);
+    const [usernameForm, setUsernameForm] = useState("")
+    const [passwordForm, setPasswordForm] = useState("")
 
     const togglePassword = () => {
         setPasswordShown(!passwordShown);
       };
+    
+    const login = async() => {
+        const response = await requestUsername()
+        console.log(response)
+    }
+
+    const requestUsername = () => {
+        return axios.post('http://localhost:4000/helpers/userWithUsername', {
+            user: usernameForm,
+          })
+          .then(function (response) {
+            return response;
+          })
+          .catch(function (error) {
+            console.log(error);
+            return error.response;
+          });
+      }
 
     return (
         <section>
@@ -43,12 +65,12 @@ const Login = () => {
                             (<div class="w-1/2 bg-logored-100 rounded-lg p-8 flex flex-col">
                                 <div class="relative mb-4">
                                     <label for="vote" class="leading-7 text-md text-logobrown-1000">Username</label>
-                                    <input type="voteNameForm" id="vote" name="vote" class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                                    <input onChange={(e) => setUsernameForm(e.target.value)} type="voteNameForm" id="vote" name="vote" class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                                 </div>
                                 <div class="relative mb-4">
                                     <label for="vote" class="leading-7 text-md text-logobrown-1000">Password</label>
                                     <div className="relative">
-                                        <input type={passwordShown ? "text" : "password"} id="vote" name="vote" class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                                        <input onChange={(e) => setPasswordForm(e.target.value)} type={passwordShown ? "text" : "password"} id="vote" name="vote" class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                                         {passwordShown ? 
                                         (
                                             <button className="absolute right-0 h-full p-2" onClick={togglePassword}><BsEyeSlash class="h-7 w-7" /></button>
@@ -70,7 +92,7 @@ const Login = () => {
                                             Loading...
                                         </button>
                                     ) : 
-                                    (<button class="w-1/3 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">Login</button>
+                                    (<button onClick={() => login()} class="w-1/3 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">Login</button>
                                     )}
                                 </div>
                             </div>

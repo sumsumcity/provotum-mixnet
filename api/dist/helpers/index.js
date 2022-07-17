@@ -61,12 +61,23 @@ helpersRouter.get("/allUsers", (req, res) => __awaiter(void 0, void 0, void 0, f
     }
 }));
 // TODO: If identity management is implemented then erase the code below
-helpersRouter.post("/userWithUsername", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+helpersRouter.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     //connect("provotum");
     const User = require("../mongodb/User");
     try {
-        const user = yield User.find({ name: req.body.name });
-        res.json(user);
+        const password = yield User.find({ name: req.body.name }).select("password -_id");
+        if (password.length === 0) {
+            res.status(404);
+            res.json({ message: "username was not found" });
+        }
+        else if (password[0].password !== req.body.password) {
+            res.status(404);
+            res.json({ message: "wrong password" });
+        }
+        else {
+            res.json({ message: "login successfull" });
+        }
+        console.log(password);
     }
     catch (e) {
         console.log(e);
