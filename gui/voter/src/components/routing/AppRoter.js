@@ -5,19 +5,22 @@ import Vote from "../views/Vote";
 import Confirmation from "../views/Confirmation";
 import ControlSubmition from "../views/ControlSubmition";
 import { VoteGuard } from "./routeProtectors/VoteGuard";
+import { UserGuard } from "./routeProtectors/UserGuard";
+import { LoginGuard } from "./routeProtectors/LoginGuard";
+
 
 
 const AppRouter = () => {
     return (
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<Login/>} />
-          <Route path="/home" element={<VoteGuard><Login/></VoteGuard>} />
-          <Route path="/vote" element={<VoteGuard><Vote/></VoteGuard>} />
-          <Route path="/confirm" element={<VoteGuard><Confirmation/></VoteGuard>} />
-          <Route path="/controlSubmit" element={<VoteGuard><ControlSubmition/></VoteGuard>} />
-          <Route path="/" element={<Login/>} />
-          <Route path="*" element={<Navigate to="/" />}/>
+          <Route path="/login" element={<LoginGuard><Login/></LoginGuard>} />
+          <Route path="/home" element={<UserGuard><Home/></UserGuard>} />
+          <Route path="/vote" element={<VoteGuard><UserGuard><Vote/></UserGuard></VoteGuard>} />
+          <Route path="/confirm" element={<VoteGuard><UserGuard><Confirmation/></UserGuard></VoteGuard>} />
+          <Route path="/controlSubmit" element={<VoteGuard><UserGuard><ControlSubmition/></UserGuard></VoteGuard>} />
+          <Route path="/" element={<Navigate to="/login" />} />
+          <Route path="*" element={<Navigate to="/login" />}/>
         </Routes>
       </BrowserRouter>
     );
