@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux'
 
 const Home = () => {
 
+    const axios = require('axios')
     const navigate = useNavigate();
     const vote = useSelector(state => state.vote.obj)
     const user = useSelector(state => state.user.obj)
@@ -13,10 +14,31 @@ const Home = () => {
         navigate("/vote")
     }
 
-    const logout = () => {
-        localStorage.clear();  
-        window.location.reload(false); 
+
+    const logout = async() => {
+        const response = await requestLogout()
+        console.log(response)
+        if (response.data===user.data[0].name + " is logged out"){
+            localStorage.clear();  
+            window.location.reload(false); 
+        }
+        else {
+            alert("Something went wrong while logging out")
+        }
     }
+
+    const requestLogout = async() => {
+        return axios.post('http://localhost:4000/helpers/logout', {
+            name: user.data[0].name
+          })
+          .then(function (response) {
+            return response;
+          })
+          .catch(function (error) {
+            console.log(error);
+            return error.response;
+          });
+      }
 
 
     return (
@@ -42,7 +64,7 @@ const Home = () => {
                                                 <p className="text-lg text-logobrown-1000">Number of Questions: {vote.questions.length}</p>
                                             </div>
                                             <div className="flex justify-center basis-1/3 ">
-                                                <button onClick={() => fillOutBallot()} disabled={vote.phase!=="Voting" || user.data[0].voted} class="w-3/4 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">Fill out ballot</button>
+                                                <button onClick={() => fillOutBallot()} disabled={vote.phase!=="Voting" || user.data[0].votedQuestions.length!==0} class="w-3/4 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">Fill out ballot</button>
                                             </div>
                                                 <div className="flex justify-center basis-1/3">
                                                 {vote.phase==="Voting" ? 

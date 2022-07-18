@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { setStep } from "../redux/StepSlice"
 import { setChainStatus } from "../redux/ChainSlice"
 import { setVoteObj} from "../redux/VoteSlice"
+import { setUserObj } from "../redux/UserSlice"
 
 // Makes Header and also checks if the step of redux is the same like the step in the db
 const Header = () => {
@@ -12,6 +13,7 @@ const Header = () => {
     const axios = require('axios')
     const step = useSelector(state => state.step.value)
     const chainStatus = useSelector(state => state.chain.status)
+    const user = useSelector(state => state.user.obj)
     const dispatch = useDispatch()
 
 
@@ -19,6 +21,7 @@ const Header = () => {
         useEffect(() => {
             const interval = setInterval(() => {
               getVoteStatus() 
+              userUpdate()
             }, 2000);
             return () => clearInterval(interval);
           }, []);
@@ -50,6 +53,24 @@ const Header = () => {
                 }
             }
         }
+
+        const userUpdate = async() => {
+            const response = await requestUser()
+            dispatch(setUserObj(response))
+        }
+
+        const requestUser = async() => {
+            return axios.post('http://localhost:4000/helpers/userWithUsername', {
+                name: user.data[0].name
+              })
+              .then(function (response) {
+                return response;
+              })
+              .catch(function (error) {
+                console.log(error);
+                return error.response;
+              });
+          }
     
         const getAllVotesRequest = () => {
             return axios.get('http://localhost:4000/helpers/allVote')
