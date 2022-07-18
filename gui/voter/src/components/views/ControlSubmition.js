@@ -1,7 +1,7 @@
 import Header from "../../helpers/Header"
 import Footer from "../../helpers/Footer"
 import {useNavigate} from "react-router-dom"
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import StepsSubmition from "../../helpers/StepsSubmition"
 import { useState } from "react"
 
@@ -11,7 +11,6 @@ const ControlSubmition = () => {
     const vote = useSelector(state => state.vote.obj)
     const ballot = useSelector(state => state.ballot.votes)
     const user = useSelector(state => state.user.obj)
-    const dispatch = useDispatch()
 
     const [clickedSubmit, setClickedSubmit] = useState(false)
 
@@ -40,6 +39,7 @@ const ControlSubmition = () => {
     }
 
     const requestVote = (question, yesNo) => {
+        console.log(user)
         return axios.post('http://localhost:4000/voting/vote', {
             vote: vote.vote,
             question: question,

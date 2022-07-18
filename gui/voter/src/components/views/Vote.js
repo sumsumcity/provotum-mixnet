@@ -8,11 +8,9 @@ import { setVotes } from "../../redux/BallotSlice"
 
 const Vote = () => {
 
-    const axios = require('axios')
     const navigate = useNavigate();
     const vote = useSelector(state => state.vote.obj)
     const ballot = useSelector(state => state.ballot.votes)
-    const user = useSelector(state => state.user.obj)
     const dispatch = useDispatch()
 
     const questionsInList = [];
@@ -49,12 +47,12 @@ const Vote = () => {
                         <p className="text-lg text-logobrown-1000 px-3 py-5">{value.questionName}</p>
                     </div>
                     <div className="w-1/3">
-                        <div class="flex justify-center py-1">
-                            <input onChange={() => handleChange(index, 1)} disabled={ballot[index]===3} checked={ballot[index]===1} type="checkbox" className="w-4 h-4 accent-green-700 my-auto"/>
+                        <div class="flex pl-10 py-1">
+                            <input onChange={() => handleChange(index, 1)} checked={ballot[index]===1} type="checkbox" className="w-4 h-4 accent-green-700 my-auto"/>
                             <label className="pl-1">Yes</label>
                         </div>
-                        <div class="flex justify-center py-1">
-                            <input onChange={() => handleChange(index, 3)} disabled={ballot[index]===1} checked={ballot[index]===3} type="checkbox" className="w-4 h-4 accent-red-700 my-auto"/>
+                        <div class="flex pl-10 py-1">
+                            <input onChange={() => handleChange(index, 3)} checked={ballot[index]===3} type="checkbox" className="w-4 h-4 accent-red-700 my-auto"/>
                             <label className="pl-1">No</label>
                         </div>
                     </div>
@@ -74,7 +72,7 @@ const Vote = () => {
                     <StepsVoting />
 
                     <div class="w-7/10 p-10 py-6">
-                        <h1 class="text-5xl font-medium title-font text-logobrown-1000 tracking-wider">Voting</h1>
+                        <h1 class="text-5xl font-medium title-font text-logobrown-1000 tracking-wider">Vote</h1>
                         <p class="text-base py-7 text-logobrown-1000">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
 
                         <div class="flex justify-center w-full">

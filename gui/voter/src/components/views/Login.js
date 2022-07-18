@@ -1,8 +1,8 @@
 import Header from "../../helpers/Header";
 import Footer from "../../helpers/Footer";
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { setUserObj } from "../../redux/UserSlice"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { BsEye, BsEyeSlash } from "react-icons/bs"
 
 
