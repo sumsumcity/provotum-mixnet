@@ -7,6 +7,7 @@ The project is structured into four different packages:
 - `randomizer`: A service to randomizes the voters ballots'
 - `client`: A CLI to interact with the randomizer and the node
 - `api`: An API to interact with client which interacts with randomizer and the node
+- `gui`: A GUI which enables monotoring, management and visualization of the voting system from a voting-authority, sealer or voter perspective. It is communicating with the api. 
 
 For more information have a look at the individual packages.
 
@@ -29,13 +30,19 @@ A three-node local test network with:
 A randomizer service for ballot re-encryption:
 - **Randomizer**
 
-A CLI sevice where you can make `client` CLI commands with "docker exec -it sumsumciy/cli-mixnet:latest [command]"
-- **CLI**
+A CLI sevice where you can make `client` CLI commands with "docker exec -it sumsumciy/cli-mixnet:latest [command]". A simple API which enable to make `client` CLI commands via HTTP requests. (You can also find some predefined requests which you can test with Postman)
+- **API-CLI**
 
-A simple API which enable to make `client` CLI commands via HTTP requests. You can also find some predefined requests which you can test with Postman.
-- **API**
+A MongoDB, which is necessary to store some data that is needed in the Guis but cannot be taken out of the blockchain. 
+- **MongoDB**
 
-### Interact
+The three graphical user interfaces with which you can interact with the `api-cli` 
+- **VA**, as a voting authority on port 3000, which you can use to administarte votes
+- **Sealer1**, as sealer `bob` on port 3001, which you can use to generate/decrypt keys
+- **Sealer2**, as sealer `charlie` on port 3002, which you can use to generate/decrypt keys
+- **Voter**, as voter on port 8000, which you can use to fill out the ballots. To log-in you have to read the chapter `Identity Provider Mock` below.
 
-To interact with the test setup use the `client` CLI or the `api`.
-Have a look at the **README** of the `client` or `api` package on how to build the CLI and use it.
+
+### Identity Provider Mock
+
+When the API is launched for the first time, it directly creates twenty users who are allowed to vote on the voter gui. The `username` and `password` is always "user" with a number between 1 and twenty (for example `user1`).

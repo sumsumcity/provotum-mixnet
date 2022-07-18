@@ -45,7 +45,7 @@ services:
     image: ghcr.io/provotum/provotum-mixnet-randomizer:latest
     network_mode: host
 
-  cli-api:
+  api_cli:
     container_name: api
     image: sumsumcity/api_cli:latest
     network_mode: host
@@ -58,13 +58,43 @@ services:
     # ports:
     #  - "27017:27017"
 
-  #va:
-  #  container_name: va_gui_container
-  #  image: sumsumcity/gui_va:latest
-  #  ports:
-  #    - "3000:3000"
-  #  environment:
-  #    - SEALER=alice
-  #  stdin_open: true
-  #  tty: true
+  va:
+    container_name: va_gui
+    image: sumsumcity/gui_va:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - SEALER=alice
+    stdin_open: true
+    tty: true
+
+  sealer1:
+    container_name: sealer_gui_bob
+    image: sumsumcity/gui_sealer:latest
+    ports:
+      - "3001:3001"
+    environment:
+      - SEALER=bob
+      - PORT=3001
+    stdin_open: true
+    tty: true
+
+  sealer2:
+    container_name: sealer_gui_charlie
+    image: sumsumcity/gui_sealer:latest
+    ports:
+      - "3002:3002"
+    environment:
+      - SEALER=charlie
+      - PORT=3002
+    stdin_open: true
+    tty: true
+
+  voter:
+    container_name: voter_gui
+    image: sumsumcity/gui_voter
+    ports:
+      - "8000:8000"
+    stdin_open: true
+    tty: true
 

@@ -9,10 +9,14 @@ In the project directory, you can run:
 ### `npm start`
 
 Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Open [http://localhost:8000](http://localhost:8000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
+
+### `npm install`
+
+Installs all project dependencies that are important for running the project. It is important that you run this command in the same folder as package.json.  
 
 ### `npm test`
 
@@ -68,3 +72,8 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+## Identity Provider Mock
+
+When the API is launched for the first time, it directly creates twenty users who are allowed to vote on the voter gui. The `username` and `password` is always "user" with a number between 1 and twenty (for example `user1`).
