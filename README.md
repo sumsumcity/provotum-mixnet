@@ -30,13 +30,13 @@ A three-node local test network with:
 A randomizer service for ballot re-encryption:
 - **Randomizer**
 
-A CLI sevice where you can make `client` CLI commands with "docker exec -it sumsumciy/cli-mixnet:latest [command]". A simple API which enable to make `client` CLI commands via HTTP requests. (You can also find some predefined requests which you can test with Postman)
+A CLI sevice where you can make `client` CLI commands with "docker exec -it sumsumciy/cli-mixnet:latest [command]". A simple API which enable to make `client` CLI commands via HTTP requests. (You can also find some predefined requests which you can test with Postman):
 - **API-CLI**
 
-A MongoDB, which is necessary to store some data that is needed in the Guis but cannot be taken out of the blockchain. 
+A MongoDB, which is necessary to store some data that is needed in the Guis but cannot be taken out of the blockchain:
 - **MongoDB**
 
-The three graphical user interfaces with which you can interact with the `api-cli` 
+The three graphical user interfaces with which you can interact with the `api-cli`:
 - **VA**, as a voting authority on port 3000, which you can use to administarte votes
 - **Sealer1**, as sealer `bob` on port 3001, which you can use to generate/decrypt keys
 - **Sealer2**, as sealer `charlie` on port 3002, which you can use to generate/decrypt keys
