@@ -78,6 +78,8 @@ helpersRouter.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, fun
     const User = require("../mongodb/User");
     try {
         const password = yield User.find({ name: req.body.name }).select("password -_id");
+        const status = yield User.find({ name: req.body.name }).select("logged_in -_id");
+        console.log(status[0].logged_in === true);
         if (password.length === 0) {
             res.status(404);
             res.json({ message: "username was not found" });
@@ -86,10 +88,33 @@ helpersRouter.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, fun
             res.status(404);
             res.json({ message: "wrong password" });
         }
+        else if (status[0].logged_in === true) {
+            res.status(404);
+            res.json({ message: "this user is already logged in" });
+        }
         else {
+            yield User.findOneAndUpdate({ vote: req.body.name }, { logged_in: true });
             res.json({ message: "login successfull" });
         }
-        console.log(password);
+    }
+    catch (e) {
+        console.log(e);
+    }
+}));
+// TODO: If identity management is implemented then erase the code below
+helpersRouter.post("/logout", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    //connect("provotum");
+    const User = require("../mongodb/User");
+    try {
+        const user = yield User.findOneAndUpdate({ name: req.body.name }, { logged_in: false });
+        if (user === null) {
+            res.status(404);
+            res.send("This user was not found");
+        }
+        else {
+            res.status(200);
+            res.send(req.body.name + " is logged out");
+        }
     }
     catch (e) {
         console.log(e);
