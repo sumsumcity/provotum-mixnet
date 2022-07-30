@@ -16,7 +16,7 @@ const KeyGeneration = () => {
     const vote = useSelector(state => state.vote.name)
 
     const [currentNumberOfSealers, setCurrentNumberOfSealers] = useState(0)
-    const [maxNumberOfSealers, setmaxNumberOfSealers] = useState(2)
+    const [maxNumberOfSealers, setmaxNumberOfSealers] = useState(2) //number of sealers
     const [currentKeyShareStatus, setCurrentKeyShareStatus] = useState(false)
     const [clickedCombineKeys, setClickedCombineKeys] = useState(false)
     const [clickedNextStep, setClickedNextStep] = useState(false)

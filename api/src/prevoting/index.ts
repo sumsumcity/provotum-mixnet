@@ -88,7 +88,7 @@ prevotingRouter.post("/keygen", (req, res) => {
             res.json(req.body);
             const Vote = require("../mongodb/Vote")
 
-            // Save Question to the Vote
+            // Save Sealer to the Vote
             await Vote.findOneAndUpdate({vote: req.body.vote},{$push: {sealers: req.body.sealer}})
         }
         else if (stdout.search("VoteDoesNotExist") > 0) {

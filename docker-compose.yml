@@ -46,7 +46,7 @@ services:
     network_mode: host
 
   api_cli:
-    container_name: api
+    container_name: api_cli
     image: sumsumcity/api_cli:latest
     network_mode: host
     # ports:

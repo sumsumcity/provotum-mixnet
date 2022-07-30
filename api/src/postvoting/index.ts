@@ -41,7 +41,7 @@ postvotingRouter.post("/decrypt", (req, res) => {
     });
 })
 
-// Make decryption: reqParam: vote, question
+// Combine decryption: reqParam: vote, question
 postvotingRouter.post("/combine", (req, res) => {
     const { exec } = require('child_process');
 
