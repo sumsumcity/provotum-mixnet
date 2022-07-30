@@ -14,7 +14,7 @@ const StepsVoting = () => {
                 <FaCheck size={20}/>
             </div>
             <div class="flex pl-4 items-center">
-                <h3 class="font-medium title-font text-lg text-logobrown-1000 tracking-wider">VOTE CREATION</h3>
+                <h3 class="font-medium title-font text-lg text-logobrown-1000 tracking-wider">CREATION</h3>
             </div>
         </div>
 

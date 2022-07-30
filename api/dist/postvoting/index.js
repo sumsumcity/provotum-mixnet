@@ -50,7 +50,7 @@ postvotingRouter.post("/decrypt", (req, res) => {
         }
     }));
 });
-// Make decryption: reqParam: vote, question
+// Combine decryption: reqParam: vote, question
 postvotingRouter.post("/combine", (req, res) => {
     const { exec } = require('child_process');
     exec('cd .. && cd client && rustup run nightly-2022-05-20 cargo run --release -- va tally_question --vote "' + req.body.vote + '" --question "' + req.body.question + '"', (error, stdout, stderr) => __awaiter(void 0, void 0, void 0, function* () {

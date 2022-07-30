@@ -90,7 +90,7 @@ prevotingRouter.post("/keygen", (req, res) => {
         else if (stdout.search("successfully submitted public key share!") > 0) {
             res.json(req.body);
             const Vote = require("../mongodb/Vote");
-            // Save Question to the Vote
+            // Save Sealer to the Vote
             yield Vote.findOneAndUpdate({ vote: req.body.vote }, { $push: { sealers: req.body.sealer } });
         }
         else if (stdout.search("VoteDoesNotExist") > 0) {

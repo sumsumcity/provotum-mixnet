@@ -120,3 +120,36 @@ helpersRouter.post("/logout", (req, res) => __awaiter(void 0, void 0, void 0, fu
         console.log(e);
     }
 }));
+// For Election - Add election_list_members to question (Party)
+helpersRouter.post("/addListToParty", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    //connect("provotum");
+    const Vote = require("../mongodb/Vote");
+    try {
+        // Save election_list_members to the Question
+        yield Vote.findOneAndUpdate({ vote: req.body.vote }, { "questions.$[el].election_list_members": req.body.election_list_members }, { arrayFilters: [{ "el.questionName": req.body.question }] });
+        const vote = yield Vote.findOneAndUpdate({ vote: req.body.vote }, { "number_of_seats": req.body.number_of_seats });
+        res.json(vote);
+    }
+    catch (e) {
+        res.send(e);
+        console.log(e);
+    }
+}));
+helpersRouter.put("/electionParticipation", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    //connect("provotum");
+    const User = require("../mongodb/User");
+    try {
+        const user = yield User.findOneAndUpdate({ name: req.body.name }, { participated_in_election: true });
+        if (user === null) {
+            res.status(404);
+            res.send("This user was not found");
+        }
+        else {
+            res.status(200);
+            res.send(req.body.name + " participated in election");
+        }
+    }
+    catch (e) {
+        console.log(e);
+    }
+}));
