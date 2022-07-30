@@ -12,6 +12,7 @@ const userSchema = new mongoose.Schema({
     password: String,
     votedQuestions: [votedSchema],
     logged_in: Boolean,
+    participated_in_election: Boolean
 })
 
 module.exports = mongoose.model("User", userSchema)

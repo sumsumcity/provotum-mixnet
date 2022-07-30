@@ -11,9 +11,11 @@ votingRouter.post("/vote", async(req, res) => {
 
     // TODO: If identity management is implemented then erase the code below
     const User = require("../mongodb/User")
+    const Vote = require("../mongodb/Vote")
     const userquestion = await User.where("name").equals(req.body.username).where("votedQuestions.questionName").equals(req.body.question)
     const username = await User.where("name").equals(req.body.username)
-    if (userquestion.length!==0){
+    const votes = await Vote.where("vote").equals(req.body.vote).where("questions.questionName").equals(req.body.question)
+    if (userquestion.length!==0 && votes[0].questions[0].election_list_members.length===0){
         res.status(401)
         res.send("This user has already voted for this question")
         return
@@ -23,8 +25,12 @@ votingRouter.post("/vote", async(req, res) => {
         res.send("This username does not exist")
         return
     }
+    else if (username[0].participated_in_election){
+        res.status(401)
+        res.send("This user has already participated in the election")
+        return
+    }
 
-    const Vote = require("../mongodb/Vote")
     const votequestion = await Vote.where("vote").equals(req.body.vote).where("questions.questionName").equals(req.body.question)
     if (votequestion.length===0){
         res.status(404)
@@ -44,6 +50,11 @@ votingRouter.post("/vote", async(req, res) => {
 
             // TODO: If identity management is implemented then erase the code below
             await User.findOneAndUpdate({name: req.body.username},{$push: {votedQuestions: {questionName: req.body.question, voted: true}}})
+
+            // Change to true in participated election if the number of seats are the same number as the number of votes submitted per user
+            if (username[0].votedQuestions.length+1>=votes[0].number_of_seats){
+                await User.findOneAndUpdate({name: req.body.username}, {participated_in_election: true})  
+            }
         }
         else if (stdout.search("Connection refused") > 0){
             res.status(404);
