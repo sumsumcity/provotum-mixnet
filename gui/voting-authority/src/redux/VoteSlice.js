@@ -4,7 +4,8 @@ export const VoteSlice = createSlice({
   name: 'vote',
   initialState: {
     name: "",
-    questions: []
+    questions: [],
+    type: ""
   },
   reducers: {
     setVoteName: (state, action) => {
@@ -12,11 +13,14 @@ export const VoteSlice = createSlice({
     },
     setVoteQuestion: (state, action) => {
         state.questions = action.payload;
-    }
+    },
+    setType: (state, action) => {
+      state.type = action.payload;
+  }
   }
 })
 
 // Action creators are generated for each case reducer function
-export const { setVoteName, setVoteQuestion } = VoteSlice.actions
+export const { setVoteName, setVoteQuestion, setType } = VoteSlice.actions
 
 export default VoteSlice.reducer
