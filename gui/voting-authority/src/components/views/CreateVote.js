@@ -53,6 +53,7 @@ const CreateVote = () => {
     const addToElectionMemberInList = (value, index) => {
         electionMemberInList[index] = value;
         setElectionMemberInList(electionMemberInList)
+        console.log(electionMemberInList)
     }
 
     const submitVoteToRedux = () => {
@@ -63,7 +64,10 @@ const CreateVote = () => {
     const submitListToRedux = () => {
         let newList = [...globalList]
         newList[currentListPos]=electionMemberInList
+        console.log(electionMemberInList)
+        console.log(newList)
         dispatch(setListOfAllElectionListMembers(newList))
+        setElectionMemberInList([])
     }
 
     const deleteVoteFromRedux = () => {
@@ -181,6 +185,8 @@ const CreateVote = () => {
     }
 
     const requestAddElectionListToParty = (i) => {
+        console.log(globalList)
+        console.log(i)
         return axios.post("http://localhost:4000/helpers/addListToParty", {
             vote:vote,
             question:questions[i],
@@ -249,8 +255,8 @@ const CreateVote = () => {
         for (let i = 0; i < numberOfSeats; i++){
                 electionMemberInListHtml.push(
                     <div className="py-2">
-                    <label for="question" class="leading-7 text-md text-logobrown-1000">Person {i+1}</label>                                    
-                    <input onChange={(e) => addToElectionMemberInList(e.target.value, i)} class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                    <label class="leading-7 text-md text-logobrown-1000">Person {i+1}</label>                                    
+                    <input onChange={(e) => addToElectionMemberInList(e.target.value, i)} class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-1 focus:ring-logored-400 text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                     </div>
                     )
         }
