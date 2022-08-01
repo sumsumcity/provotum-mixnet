@@ -60,9 +60,17 @@ const Home = () => {
                                     <div className="">
                                         <h2 className="text-3xl font-medium title-font text-logobrown-1000 text-center mb-10">{vote.vote}</h2>
                                         <div className="flex justify-between px-20">
-                                            <div className="flex justify-center basis-1/3 m-auto">
-                                                <p className="text-lg text-logobrown-1000">Number of Questions: {vote.questions.length}</p>
-                                            </div>
+                                            {vote.questions[0].election_list_members.length!==0 ? (
+                                                <div className="flex justify-center basis-1/3 m-auto">
+                                                    <p className="text-lg text-logobrown-1000">Number of Lists: {vote.questions.length}</p>
+                                                </div>
+                                            ) 
+                                            : 
+                                            (
+                                                <div className="flex justify-center basis-1/3 m-auto">
+                                                    <p className="text-lg text-logobrown-1000">Number of Questions: {vote.questions.length}</p>
+                                                </div>
+                                            )}
                                             <div className="flex justify-center basis-1/3 ">
                                                 <button onClick={() => fillOutBallot()} disabled={vote.phase!=="Voting" || user.data[0].votedQuestions.length!==0} class="w-3/4 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">Fill out ballot</button>
                                             </div>
@@ -98,7 +106,7 @@ const Home = () => {
                                         </svg>                                  
                                     </div>
                                     <p className="text-center text-logored-100 text-base mt-3">
-                                        No votes are open...
+                                        No votes or elections are open...
                                     </p>
                                 </div>
                             </div>

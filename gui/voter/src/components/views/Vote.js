@@ -3,7 +3,10 @@ import Footer from "../../helpers/Footer"
 import {useNavigate} from "react-router-dom"
 import { useSelector, useDispatch } from 'react-redux'
 import StepsVoting from "../../helpers/StepsVoting"
+import { useState } from "react"
 import { setVotes } from "../../redux/BallotSlice"
+import { setElectedPeopleRedux, setListNumberRedux } from "../../redux/ElectionSlice"
+
 
 
 const Vote = () => {
@@ -13,7 +16,14 @@ const Vote = () => {
     const ballot = useSelector(state => state.ballot.votes)
     const dispatch = useDispatch()
 
+    // Maybe change this to REDUX 
+    const [listNumber, setListNumber] = useState(231)
+    const [electedPeople, setElectedPeople] = useState([])
+
     const questionsInList = [];
+    const selectOptionsLists = [];
+    const peopleInListHTML = [];
+    const selectOptionsAllCandidates = [];
 
 
     const back = () => {
@@ -21,6 +31,12 @@ const Vote = () => {
     }
 
     const nextStep = () => {
+        navigate("/controlSubmit")
+    }
+
+    const nextStepElection = () => {
+        dispatch(setElectedPeopleRedux(electedPeople))
+        dispatch(setListNumberRedux(listNumber))
         navigate("/controlSubmit")
     }
 
@@ -36,6 +52,12 @@ const Vote = () => {
             dispatch(setVotes(newBallot))
         }
     }; 
+
+    const makeElectedList = (pos, person) => {
+        let newList = [...electedPeople]
+        newList[pos] = person
+        setElectedPeople(newList)
+    }
 
 
     // Make list in HTML and questions is from redux
@@ -61,6 +83,57 @@ const Vote = () => {
         )
     }
 
+    // Make selectOptions for Lists in HTML
+    for (let i = 0; i < vote.questions.length; i++){
+        selectOptionsLists.push(
+            <>
+            <option value={i}>{vote.questions[i].questionName}</option>
+            </>
+            )
+    }
+
+    // List all Options for a voter in the election in HTML
+    for (let i = 0; i < vote.questions.length; i++) {
+        peopleInListHTML.push(
+            <div className="flex justify-center w-full">
+                <div className="flex justify-around w-auto my-3 bg-logored-50 rounded-lg">
+                    <label className="text-lg text-logobrown-1000 px-3">Person {i+1}: </label>
+                    <select onChange={(e) => makeElectedList(i, e.target.value)} class="h-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  focus:ring-logored-400 focus:broder-logored-400 block">
+                        <option>Empty</option>
+                        {selectOptionsAllCandidates}
+                    </select>
+                </div>
+            </div>
+        )
+    }
+
+    // Make selectOptions for each candidate in HTML
+    for (let i = 0; i < vote.questions.length; i++) {
+        for (let j=0; j < vote.questions[i].election_list_members.length; j++){
+            let count = 0;
+            electedPeople.forEach(element => {
+                if (element===i+","+j){
+                    count += 1
+                }
+            })
+            if(count<2){
+                selectOptionsAllCandidates.push(
+                    <>
+                    <option value={[i,j]}>{vote.questions[i].election_list_members[j]} ({vote.questions[i].questionName})</option>
+                    </>
+                )
+            }
+            else {
+            selectOptionsAllCandidates.push(
+                <>
+                <option value={[i,j]} disabled>{vote.questions[i].election_list_members[j]} ({vote.questions[i].questionName})</option>
+                </>
+            )
+        }
+        }
+    }
+
+
     return (
         <section>
 
@@ -71,6 +144,40 @@ const Vote = () => {
                     
                     <StepsVoting />
 
+                    {vote.questions[0].election_list_members.length!==0 ? 
+                    ( //Election
+                    <div class="w-7/10 p-10 py-6">
+                        <h1 class="text-5xl font-medium title-font text-logobrown-1000 tracking-wider">Election</h1>
+                        <p class="text-base py-7 text-logobrown-1000">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+
+                        <div class="flex justify-center w-full">
+                            <div class="w-3/4 bg-logored-100 rounded-lg p-8 flex flex-col">
+                                <div className="">
+                                    <h2 className="text-3xl font-medium title-font text-logobrown-1000 text-center mb-10">{vote.vote}</h2>
+                                    <div className="flex justify-center">
+                                        <div className="flex justify-center bg-logored-50 rounded-lg w-auto p-2">
+                                            <label className="h-full text-lg text-logobrown-1000 px-3">List: </label>
+                                            <select onChange={(e) => setListNumber(e.target.value)} class="h-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  focus:ring-logored-400 focus:broder-logored-400 block">
+                                                <option value={231}>None</option>
+                                                {selectOptionsLists}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div className="w-full">
+                                    {peopleInListHTML}
+                                    </div>
+                                </div>
+                            </div>        
+                        </div>
+
+                        <button onClick={() => back()} class="w-1/6 mt-20 float-left text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">Back</button>
+                        <button onClick={() => nextStepElection()} class="w-1/6 mt-20 float-right text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">Next Step</button>
+
+                    </div>
+
+                    )
+                    :
+                    ( //Vote
                     <div class="w-7/10 p-10 py-6">
                         <h1 class="text-5xl font-medium title-font text-logobrown-1000 tracking-wider">Vote</h1>
                         <p class="text-base py-7 text-logobrown-1000">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
@@ -89,8 +196,9 @@ const Vote = () => {
                         <button onClick={() => back()} class="w-1/6 mt-20 float-left text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">Back</button>
                         <button onClick={() => nextStep()} class="w-1/6 mt-20 float-right text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">Next Step</button>
 
-
                     </div>
+                    )}
+
                 </div>
 
             </div>
