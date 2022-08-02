@@ -1,6 +1,11 @@
 import {FaCheck, FaChartBar} from "react-icons/fa"
+import { useTranslation } from "react-i18next"
+
 
 const StepsResult = () => {
+
+    const {t, i18n} = useTranslation()
+
     
     return (
         <div class="w-3/10 pr-10 py-6 border-r-2 border-logobrown-300">
@@ -13,7 +18,7 @@ const StepsResult = () => {
                 <FaCheck size={20}/>
             </div>
             <div class="flex pl-4 items-center">
-                <h3 class="font-medium title-font text-lg text-logobrown-1000 tracking-wider">CREATION</h3>
+                <h3 class="font-medium title-font text-lg text-logobrown-1000 tracking-wider">{t("creationStep")}</h3>
             </div>
         </div>
 
@@ -25,7 +30,7 @@ const StepsResult = () => {
                 <FaCheck size={20}/>
             </div>
             <div class="flex pl-4 items-center">
-                <h3 class="font-medium title-font text-lg text-logobrown-1000 tracking-wider">KEY GENERATION</h3>
+                <h3 class="font-medium title-font text-lg text-logobrown-1000 tracking-wider">{t("keygenStep")}</h3>
             </div>
         </div>
 
@@ -37,7 +42,7 @@ const StepsResult = () => {
                 <FaCheck size={20}/>
             </div>
             <div class="flex pl-4 items-center">
-                <h3 class="font-medium title-font text-lg text-logobrown-1000 tracking-wider">VOTING</h3>
+                <h3 class="font-medium title-font text-lg text-logobrown-1000 tracking-wider">{t("votingStep")}</h3>
             </div>
         </div>
 
@@ -49,7 +54,7 @@ const StepsResult = () => {
                 <FaCheck size={20}/>
             </div>
             <div class="flex pl-4 items-center">
-                <h3 class="font-medium title-font text-lg text-logobrown-1000 tracking-wider">TALLYING</h3>
+                <h3 class="font-medium title-font text-lg text-logobrown-1000 tracking-wider">{t("tallyingStep")}</h3>
             </div>
         </div>
 
@@ -58,7 +63,7 @@ const StepsResult = () => {
                 <FaChartBar size={20} />
             </div>
             <div class="flex pl-4 items-center">
-                <h3 class="font-medium title-font text-lg text-logobrown-1000 tracking-wider">RESULT</h3>
+                <h3 class="font-medium title-font text-lg text-logobrown-1000 tracking-wider">{t("resultStep")}</h3>
             </div>
         </div>
 

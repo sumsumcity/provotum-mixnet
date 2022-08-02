@@ -8,6 +8,7 @@ import { setNumberOfSeats, setListOfAllElectionListMembers } from "../../redux/E
 import StepsCreateVote from "../../helpers/StepsCreateVote"
 import { useState } from "react"
 import { FaPlus, FaMinus, FaListAlt} from "react-icons/fa"
+import { useTranslation } from "react-i18next"
 
 const CreateVote = () => {
 
@@ -31,6 +32,8 @@ const CreateVote = () => {
     const [openModal4, setOpenModal4] = useState(false) // Next stept for election
     const [electionMemberInList, setElectionMemberInList] = useState([])
     const [currentListPos, setCurrentListPos] = useState(1000) // position of list in redux after submiting list
+
+    const {t, i18n} = useTranslation()
 
     // For List in HTML
     const questionsInList = [];
@@ -273,11 +276,11 @@ const CreateVote = () => {
 
                     {type===""? (
                         <div class="w-7/10 p-10 py-6">
-                            <h1 class="text-5xl font-medium text-logobrown-1000 tracking-wider">Creation</h1>
-                            <p class="text-base py-7 text-logobrown-1000">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                            <h1 class="text-5xl font-medium text-logobrown-1000 tracking-wider">{t("creationStep")}</h1>
+                            <p class="text-base py-7 text-logobrown-1000">{t("creationText")}</p>
                             <div class="flex justify-around py-32">
-                                <button onClick={() => dispatch(setType("vote"))} class="w-1/4 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">Create Vote</button>
-                                <button onClick={() => dispatch(setType("election"))} class="w-1/4 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">Create Election</button>
+                                <button onClick={() => dispatch(setType("vote"))} class="w-1/4 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("voteButtonCreate")}</button>
+                                <button onClick={() => dispatch(setType("election"))} class="w-1/4 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("electionButtonCreate")}</button>
                             </div>
                         </div>
 

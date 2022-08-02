@@ -1,0 +1,15 @@
+{
+    "connectionON":"Verbunden",
+    "connectionOFF":"Verbindung getrennt",
+
+    "creationStep":"ERSTELLUNG",
+    "keygenStep":"SCHLÜSSEL-ERZEUGUNG",
+    "votingStep":"ABSTIMMUNG",
+    "tallyingStep":"AUSZÄHLUNG",
+    "resultStep":"RESULTAT",
+
+    "voteButtonCreate":"Abstimmung erstellen",
+    "electionButtonCreate":"Wahl erstellen",
+    "creationText":"Entscheiden Sie, ob Sie eine Abstimmung oder eine Wahl erstellen möchten und betätigen Sie den jeweiligen Knopf. Sie werden automatisch zur Einrichtungsseite weitergeleitet."
+
+}

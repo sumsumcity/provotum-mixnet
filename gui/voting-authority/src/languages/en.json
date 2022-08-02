@@ -1,0 +1,16 @@
+{
+    "connectionON":"ON CHAIN",
+    "connectionOFF":"OFF CHAIN",
+
+    "creationStep":"CREATION",
+    "keygenStep":"KEY GENERATION",
+    "votingStep":"VOTING",
+    "tallyingStep":"TALLYING",
+    "resultStep":"RESULT",
+
+    "voteButtonCreate":"Create Vote",
+    "electionButtonCreate":"Create Election",
+    "creationText":"Decide whether you want to create a vote or an election and press the corresponding button. You will be automatically redirected to the creation site."
+
+
+}
