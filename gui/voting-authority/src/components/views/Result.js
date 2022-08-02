@@ -1,7 +1,6 @@
 import Header from "../../helpers/Header"
 import Footer from "../../helpers/Footer"
 import { useState, useEffect } from "react"
-import {useNavigate} from "react-router-dom"
 import { useSelector, useDispatch } from 'react-redux'
 import StepsResult from "../../helpers/StepsResult"
 import {FaCheck, FaRegTimesCircle } from "react-icons/fa"
@@ -47,25 +46,80 @@ const Result = () => {
         else{
 
             for (let i=0;i<questions.length;i++){
-                //What if question no lists
-
+                
                 const response = await requestResult(questions[i])
-                console.log(response)
+                let str=response.data.replace(/\[/g, '');
+                str=str.replace(/\]/g, '');
+                console.log(str)
 
                 for (let j=0;j<election.listOfAllElectionListMembers[i].length+1;j++){
                     let posNumberOfVotes=-1
                     if(j===election.listOfAllElectionListMembers[i].length){
-                        let posNumberOfVotes231 = response.data.search("231], Count:")
-                        setElectionResult(oldArray => [...oldArray, [questions[i],"Empty",response.data.charAt(posNumberOfVotes231+14)]])
+                        let posNumberOfVotes231 = str.search("231, Count:")
+                        if (posNumberOfVotes231!==-1){
+                            if(isNumber(str.charAt(posNumberOfVotes231+17))){ // if 100'000 vote for one person
+                                setElectionResult(oldArray => [...oldArray, [questions[i],"Empty",str.charAt(posNumberOfVotes231+12)+str.charAt(posNumberOfVotes231+13)+str.charAt(posNumberOfVotes231+14)+str.charAt(posNumberOfVotes231+15)+str.charAt(posNumberOfVotes231+16)+str.charAt(posNumberOfVotes231+17)]])
+                            }
+                            else if(isNumber(str.charAt(posNumberOfVotes231+16))){
+                                setElectionResult(oldArray => [...oldArray, [questions[i],"Empty",str.charAt(posNumberOfVotes231+12)+str.charAt(posNumberOfVotes231+13)+str.charAt(posNumberOfVotes231+14)+str.charAt(posNumberOfVotes231+15)+str.charAt(posNumberOfVotes231+16)]])
+                            }
+                            else if(isNumber(str.charAt(posNumberOfVotes231+15))){
+                                setElectionResult(oldArray => [...oldArray, [questions[i],"Empty",str.charAt(posNumberOfVotes231+12)+str.charAt(posNumberOfVotes231+13)+str.charAt(posNumberOfVotes231+14)+str.charAt(posNumberOfVotes231+15)]])
+                            }
+                            else if(isNumber(str.charAt(posNumberOfVotes231+14))){
+                                setElectionResult(oldArray => [...oldArray, [questions[i],"Empty",str.charAt(posNumberOfVotes231+12)+str.charAt(posNumberOfVotes231+13)+str.charAt(posNumberOfVotes231+14)]])
+                            }
+                            else if(isNumber(str.charAt(posNumberOfVotes231+13))){
+                                setElectionResult(oldArray => [...oldArray, [questions[i],"Empty",str.charAt(posNumberOfVotes231+12)+str.charAt(posNumberOfVotes231+13)]])
+                            }
+                            else{
+                                console.log(isNumber(str.charAt(posNumberOfVotes231+13)))
+                                setElectionResult(oldArray => [...oldArray, [questions[i],"Empty",str.charAt(posNumberOfVotes231+12)]])
+                            }
+                        }
                     }
                     else {
-                        posNumberOfVotes = response.data.search(arrayVoteNumbers[j]+"], Count:")
+                        posNumberOfVotes = str.search(" "+arrayVoteNumbers[j]+", Count:")
                     }
                     if (j<5 && posNumberOfVotes!==-1){
-                        setElectionResult(oldArray => [...oldArray, [questions[i],election.listOfAllElectionListMembers[i][j],response.data.charAt(posNumberOfVotes+12)]])
+                        if(isNumber(str.charAt(posNumberOfVotes+16))){ // if 100'000 vote for one person
+                            setElectionResult(oldArray => [...oldArray, [questions[i],election.listOfAllElectionListMembers[i][j],str.charAt(posNumberOfVotes+11)+str.charAt(posNumberOfVotes+12)+str.charAt(posNumberOfVotes+13)+str.charAt(posNumberOfVotes+14)+str.charAt(posNumberOfVotes+15)+str.charAt(posNumberOfVotes+16)]])
+                        }
+                        else if(isNumber(str.charAt(posNumberOfVotes+15))){
+                            setElectionResult(oldArray => [...oldArray, [questions[i],election.listOfAllElectionListMembers[i][j],str.charAt(posNumberOfVotes+11)+str.charAt(posNumberOfVotes+12)+str.charAt(posNumberOfVotes+13)+str.charAt(posNumberOfVotes+14)+str.charAt(posNumberOfVotes+15)]])
+                        }
+                        else if(isNumber(str.charAt(posNumberOfVotes+14))){
+                            setElectionResult(oldArray => [...oldArray, [questions[i],election.listOfAllElectionListMembers[i][j],str.charAt(posNumberOfVotes+11)+str.charAt(posNumberOfVotes+12)+str.charAt(posNumberOfVotes+13)+str.charAt(posNumberOfVotes+14)]])
+                        }
+                        else if(isNumber(str.charAt(posNumberOfVotes+13))){
+                            setElectionResult(oldArray => [...oldArray, [questions[i],election.listOfAllElectionListMembers[i][j],str.charAt(posNumberOfVotes+11)+str.charAt(posNumberOfVotes+12)+str.charAt(posNumberOfVotes+13)]])
+                        }
+                        else if(isNumber(str.charAt(posNumberOfVotes+12))){
+                            setElectionResult(oldArray => [...oldArray, [questions[i],election.listOfAllElectionListMembers[i][j],str.charAt(posNumberOfVotes+11)+str.charAt(posNumberOfVotes+12)]])
+                        }
+                        else{
+                            setElectionResult(oldArray => [...oldArray, [questions[i],election.listOfAllElectionListMembers[i][j],str.charAt(posNumberOfVotes+11)]])
+                        }
                     }
                     else if (j>=5 && posNumberOfVotes!==-1){
-                        setElectionResult(oldArray => [...oldArray, [questions[i],election.listOfAllElectionListMembers[i][j],response.data.charAt(posNumberOfVotes+13)]])
+                        if(isNumber(str.charAt(posNumberOfVotes+16))){ // if 100'000 vote for one person
+                            setElectionResult(oldArray => [...oldArray, [questions[i],election.listOfAllElectionListMembers[i][j],str.charAt(posNumberOfVotes+12)+str.charAt(posNumberOfVotes+13)+str.charAt(posNumberOfVotes+14)+str.charAt(posNumberOfVotes+15)+str.charAt(posNumberOfVotes+16)+str.charAt(posNumberOfVotes+17)]])
+                        }
+                        else if(isNumber(str.charAt(posNumberOfVotes+15))){
+                            setElectionResult(oldArray => [...oldArray, [questions[i],election.listOfAllElectionListMembers[i][j],str.charAt(posNumberOfVotes+12)+str.charAt(posNumberOfVotes+13)+str.charAt(posNumberOfVotes+14)+str.charAt(posNumberOfVotes+15)+str.charAt(posNumberOfVotes+16)]])
+                        }
+                        else if(isNumber(str.charAt(posNumberOfVotes+14))){
+                            setElectionResult(oldArray => [...oldArray, [questions[i],election.listOfAllElectionListMembers[i][j],str.charAt(posNumberOfVotes+12)+str.charAt(posNumberOfVotes+13)+str.charAt(posNumberOfVotes+14)+str.charAt(posNumberOfVotes+15)]])
+                        }
+                        else if(isNumber(str.charAt(posNumberOfVotes+13))){
+                            setElectionResult(oldArray => [...oldArray, [questions[i],election.listOfAllElectionListMembers[i][j],str.charAt(posNumberOfVotes+12)+str.charAt(posNumberOfVotes+13)+str.charAt(posNumberOfVotes+14)]])
+                        }
+                        else if(isNumber(str.charAt(posNumberOfVotes+12))){
+                            setElectionResult(oldArray => [...oldArray, [questions[i],election.listOfAllElectionListMembers[i][j],str.charAt(posNumberOfVotes+12)+str.charAt(posNumberOfVotes+13)]])
+                        }
+                        else{
+                            setElectionResult(oldArray => [...oldArray, [questions[i],election.listOfAllElectionListMembers[i][j],str.charAt(posNumberOfVotes+12)]])
+                        }
                     }
                 }
             }
@@ -82,6 +136,18 @@ const Result = () => {
         .catch(function (error) {
           return error;
         });
+      }
+
+      function isNumber(char) {
+        if (typeof char !== 'string') {
+          return false;
+        }
+      
+        if (char.trim() === '') {
+          return false;
+        }
+      
+        return !isNaN(char);
       }
 
     // Make list in HTML and questions is from redux
@@ -107,6 +173,7 @@ const Result = () => {
     for (let i=0; i<questions.length; i++){
         partyCandidateHTML=[]
         partyVotes=0
+        console.log(electionResult)
         for (let j=0; j<electionResult.length; j++){
             if(electionResult[j][0]===questions[i]){
                 partyVotes = parseInt(partyVotes)+parseInt(electionResult[j][2])
@@ -139,7 +206,6 @@ const Result = () => {
         <section>
 
             <Header />
-            {console.log(electionResult)}
 
             <div class="container px-5 py-10 mx-auto flex">
                 <div class="flex w-full">
