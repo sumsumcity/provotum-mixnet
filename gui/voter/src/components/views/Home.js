@@ -72,7 +72,7 @@ const Home = () => {
                                                 </div>
                                             )}
                                             <div className="flex justify-center basis-1/3 ">
-                                                <button onClick={() => fillOutBallot()} disabled={vote.phase!=="Voting" || user.data[0].votedQuestions.length!==0} class="w-3/4 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">Fill out ballot</button>
+                                                <button onClick={() => fillOutBallot()} disabled={vote.phase!=="Voting" || user.data[0].votedQuestions.length!==0} class="w-3/4 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">Fill out list</button>
                                             </div>
                                                 <div className="flex justify-center basis-1/3">
                                                 {vote.phase==="Voting" ? 

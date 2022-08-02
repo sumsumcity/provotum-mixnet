@@ -93,7 +93,7 @@ const Vote = () => {
     }
 
     // List all Options for a voter in the election in HTML
-    for (let i = 0; i < vote.questions.length; i++) {
+    for (let i = 0; i < vote.number_of_seats; i++) {
         peopleInListHTML.push(
             <div className="flex justify-center w-full">
                 <div className="flex justify-around w-auto my-3 bg-logored-50 rounded-lg">
