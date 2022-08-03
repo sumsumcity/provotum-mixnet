@@ -38,11 +38,134 @@ const Result = () => {
         if(type!=="election"){
             for(const [i, value] of questions.entries()){
                 const response = await requestResult(value)
-                console.log(response)
-                let posYes = response.data.search("1], Count:")
-                let posNo = response.data.search("3], Count:")
-                setYesVotes(oldArray => [...oldArray, response.data.charAt(posYes+12)])
-                setNoVotes(oldArray => [...oldArray, response.data.charAt(posNo+12)])
+                let str=response.data.replace(/\[/g, '');
+                str=str.replace(/\]/g, '');
+                console.log(str)
+                let posYes = str.search(" 1, Count:")
+                let posNo = str.search(" 3, Count:")
+                if(posYes!==-1 && posNo!==-1){
+                    // For No Votes
+                    if(isNumber(str.charAt(posNo+17))){ // If under 9'999'999 votes
+                        setNoVotes(oldArray => [...oldArray, str.charAt(posNo+11)+str.charAt(posNo+12)+str.charAt(posNo+13)+str.charAt(posNo+14)+str.charAt(posNo+15)+str.charAt(posNo+16)+str.charAt(posNo+17)])
+
+                    }
+                    else if(isNumber(str.charAt(posNo+16))){
+                        setNoVotes(oldArray => [...oldArray, str.charAt(posNo+11)+str.charAt(posNo+12)+str.charAt(posNo+13)+str.charAt(posNo+14)+str.charAt(posNo+15)+str.charAt(posNo+16)])
+
+                    }
+                    else if(isNumber(str.charAt(posNo+15))){
+                        setNoVotes(oldArray => [...oldArray, str.charAt(posNo+11)+str.charAt(posNo+12)+str.charAt(posNo+13)+str.charAt(posNo+14)+str.charAt(posNo+15)])
+
+                    }
+                    else if(isNumber(str.charAt(posNo+14))){
+                        setNoVotes(oldArray => [...oldArray, str.charAt(posNo+11)+str.charAt(posNo+12)+str.charAt(posNo+13)+str.charAt(posNo+14)])
+
+                    }
+                    else if(isNumber(str.charAt(posNo+13))){
+                        setNoVotes(oldArray => [...oldArray, str.charAt(posNo+11)+str.charAt(posNo+12)+str.charAt(posNo+13)])
+
+                    }
+                    else if(isNumber(str.charAt(posNo+12))){
+                        setNoVotes(oldArray => [...oldArray, str.charAt(posNo+11)+str.charAt(posNo+12)])
+
+                    }
+                    else{
+                        setNoVotes(oldArray => [...oldArray, str.charAt(posNo+11)])
+                    }
+
+                    //Vor Yes votes
+                    if(isNumber(str.charAt(posYes+17))){ // If under 9'999'999 votes
+                        setYesVotes(oldArray => [...oldArray, str.charAt(posYes+11)+str.charAt(posYes+12)+str.charAt(posYes+13)+str.charAt(posYes+14)+str.charAt(posYes+15)+str.charAt(posYes+16)+str.charAt(posYes+17)])
+
+                    }
+                    else if(isNumber(str.charAt(posYes+16))){
+                        setYesVotes(oldArray => [...oldArray, str.charAt(posYes+11)+str.charAt(posYes+12)+str.charAt(posYes+13)+str.charAt(posYes+14)+str.charAt(posYes+15)+str.charAt(posYes+16)])
+
+                    }
+                    else if(isNumber(str.charAt(posYes+15))){
+                        setYesVotes(oldArray => [...oldArray, str.charAt(posYes+11)+str.charAt(posYes+12)+str.charAt(posYes+13)+str.charAt(posYes+14)+str.charAt(posYes+15)])
+
+                    }
+                    else if(isNumber(str.charAt(posYes+14))){
+                        setYesVotes(oldArray => [...oldArray, str.charAt(posYes+11)+str.charAt(posYes+12)+str.charAt(posYes+13)+str.charAt(posYes+14)])
+
+                    }
+                    else if(isNumber(str.charAt(posYes+13))){
+                        setYesVotes(oldArray => [...oldArray, str.charAt(posYes+11)+str.charAt(posYes+12)+str.charAt(posYes+13)])
+
+                    }
+                    else if(isNumber(str.charAt(posYes+12))){
+                        setYesVotes(oldArray => [...oldArray, str.charAt(posYes+11)+str.charAt(posYes+12)])
+
+                    }
+                    else{
+                        setYesVotes(oldArray => [...oldArray, str.charAt(posYes+11)])
+                    }
+                }
+                else if(posYes===-1 && posNo!==-1){
+                    if(isNumber(str.charAt(posNo+17))){ // If under 9'999'999 votes
+                        setNoVotes(oldArray => [...oldArray, str.charAt(posNo+11)+str.charAt(posNo+12)+str.charAt(posNo+13)+str.charAt(posNo+14)+str.charAt(posNo+15)+str.charAt(posNo+16)+str.charAt(posNo+17)])
+
+                    }
+                    else if(isNumber(str.charAt(posNo+16))){
+                        setNoVotes(oldArray => [...oldArray, str.charAt(posNo+11)+str.charAt(posNo+12)+str.charAt(posNo+13)+str.charAt(posNo+14)+str.charAt(posNo+15)+str.charAt(posNo+16)])
+
+                    }
+                    else if(isNumber(str.charAt(posNo+15))){
+                        setNoVotes(oldArray => [...oldArray, str.charAt(posNo+11)+str.charAt(posNo+12)+str.charAt(posNo+13)+str.charAt(posNo+14)+str.charAt(posNo+15)])
+
+                    }
+                    else if(isNumber(str.charAt(posNo+14))){
+                        setNoVotes(oldArray => [...oldArray, str.charAt(posNo+11)+str.charAt(posNo+12)+str.charAt(posNo+13)+str.charAt(posNo+14)])
+
+                    }
+                    else if(isNumber(str.charAt(posNo+13))){
+                        setNoVotes(oldArray => [...oldArray, str.charAt(posNo+11)+str.charAt(posNo+12)+str.charAt(posNo+13)])
+
+                    }
+                    else if(isNumber(str.charAt(posNo+12))){
+                        setNoVotes(oldArray => [...oldArray, str.charAt(posNo+11)+str.charAt(posNo+12)])
+
+                    }
+                    else{
+                        setNoVotes(oldArray => [...oldArray, str.charAt(posNo+11)])
+                    }
+                    setYesVotes(oldArray => [...oldArray, "0"])
+                }
+                else if(posYes!==-1 && posNo===-1){
+                    if(isNumber(str.charAt(posYes+17))){ // If under 9'999'999 votes
+                        setYesVotes(oldArray => [...oldArray, str.charAt(posYes+11)+str.charAt(posYes+12)+str.charAt(posYes+13)+str.charAt(posYes+14)+str.charAt(posYes+15)+str.charAt(posYes+16)+str.charAt(posYes+17)])
+
+                    }
+                    else if(isNumber(str.charAt(posYes+16))){
+                        setYesVotes(oldArray => [...oldArray, str.charAt(posYes+11)+str.charAt(posYes+12)+str.charAt(posYes+13)+str.charAt(posYes+14)+str.charAt(posYes+15)+str.charAt(posYes+16)])
+
+                    }
+                    else if(isNumber(str.charAt(posYes+15))){
+                        setYesVotes(oldArray => [...oldArray, str.charAt(posYes+11)+str.charAt(posYes+12)+str.charAt(posYes+13)+str.charAt(posYes+14)+str.charAt(posYes+15)])
+
+                    }
+                    else if(isNumber(str.charAt(posYes+14))){
+                        setYesVotes(oldArray => [...oldArray, str.charAt(posYes+11)+str.charAt(posYes+12)+str.charAt(posYes+13)+str.charAt(posYes+14)])
+
+                    }
+                    else if(isNumber(str.charAt(posYes+13))){
+                        setYesVotes(oldArray => [...oldArray, str.charAt(posYes+11)+str.charAt(posYes+12)+str.charAt(posYes+13)])
+
+                    }
+                    else if(isNumber(str.charAt(posYes+12))){
+                        setYesVotes(oldArray => [...oldArray, str.charAt(posYes+11)+str.charAt(posYes+12)])
+
+                    }
+                    else{
+                        setYesVotes(oldArray => [...oldArray, str.charAt(posYes+11)])
+                    }
+                    setNoVotes(oldArray => [...oldArray, "0"])
+                }
+                else if(posYes===-1 && posNo===-1){ // Should never be the case
+                    setNoVotes(oldArray => [...oldArray, "0"])
+                    setYesVotes(oldArray => [...oldArray, "0"])
+                }
             }
         }
         else{
@@ -170,11 +293,11 @@ const Result = () => {
             <div className="flex justify-between ">
                 <div className="flex justify-start">
                     <FaCheck className=" text-green-800 mr-3 w-5 h-5" />
-                    <p>{t("yesVotes")} {yesVotes[index*2]}</p>
+                    <p>{t("yesVotes")} {yesVotes[index]}</p>
                 </div>
                 <div className="flex justify-end">
                     <FaRegTimesCircle className="text-red-700 mr-3 w-5 h-5"/>
-                    <p>{t("noVotes")} {noVotes[index*2]}</p>
+                    <p>{t("noVotes")} {noVotes[index]}</p>
                 </div>
             </div>
         </li>)
@@ -216,6 +339,9 @@ const Result = () => {
     return (
         <section>
 
+        {console.log(yesVotes)}
+{        console.log(noVotes)
+}
             <Header />
 
             <div class="container px-5 py-10 mx-auto flex">
