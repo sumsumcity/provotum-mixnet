@@ -5,14 +5,15 @@ import {useNavigate} from "react-router-dom"
 import { useSelector, useDispatch } from 'react-redux'
 import { FaKey, FaCheck } from "react-icons/fa"
 import StepsVoting from "../../helpers/StepsVoting"
+import { useTranslation } from "react-i18next"
 
 
 const Voting = () => {
 
+    const {t, i18n} = useTranslation()
+
     const axios = require('axios')
-    const navigate = useNavigate();
     const vote = useSelector(state => state.vote.obj)
-    const dispatch = useDispatch()
 
 
 
@@ -26,8 +27,8 @@ const Voting = () => {
                     <StepsVoting />
 
                     <div class="w-7/10 p-10 py-6">
-                        <h1 class="text-5xl font-medium title-font text-logobrown-1000 tracking-wider">Vote Creation</h1>
-                        <p class="text-base py-7 text-logobrown-1000">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                        <h1 class="text-5xl font-medium title-font text-logobrown-1000 tracking-wider">{t("titleVoting")}</h1>
+                        <p class="text-base py-7 text-logobrown-1000">{t("textVoting")}</p>
                     
                         <div class="flex justify-center ">
                             <div class="w-2/3 flex flex-col">
@@ -38,7 +39,7 @@ const Voting = () => {
                                     </svg>                                  
                                 </div>
                                 <p className="text-center text-logolblue-500 text-base mt-3">
-                                    Waiting for the voting authority to close the vote...
+                                    {t("statusVoting")}
                                 </p>
                             </div>
                         </div>

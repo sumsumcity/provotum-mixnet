@@ -1,6 +1,10 @@
 import {RiNumber1, RiNumber2, RiNumber3, RiNumber4, RiNumber5} from "react-icons/ri"
+import { useTranslation } from "react-i18next"
+
 
 const StepsCreateVote = () => {
+
+    const {t, i18n} = useTranslation()
     
     return (
         <div class="w-3/10 pr-10 py-6 border-r-2 border-logolblue-200">
@@ -13,7 +17,7 @@ const StepsCreateVote = () => {
                 <RiNumber1 size={20}/>
             </div>
             <div class="flex pl-4 items-center">
-                <h3 class="font-medium title-font text-lg text-logobrown-1000 tracking-wider">VOTE CREATION</h3>
+                <h3 class="font-medium title-font text-lg text-logobrown-1000 tracking-wider">{t("creationStep")}</h3>
             </div>
         </div>
 
@@ -25,7 +29,7 @@ const StepsCreateVote = () => {
                 <RiNumber2 size={20}/>
             </div>
             <div class="flex pl-4 items-center">
-                <h3 class="font-medium title-font text-lg text-logolblue-200 tracking-wider">KEY GENERATION</h3>
+                <h3 class="font-medium title-font text-lg text-logolblue-200 tracking-wider">{t("keygenStep")}</h3>
             </div>
         </div>
 
@@ -37,7 +41,7 @@ const StepsCreateVote = () => {
                 <RiNumber3 size={20}/>
             </div>
             <div class="flex pl-4 items-center">
-                <h3 class="font-medium title-font text-lg text-logolblue-200 tracking-wider">VOTING</h3>
+                <h3 class="font-medium title-font text-lg text-logolblue-200 tracking-wider">{t("votingStep")}</h3>
             </div>
         </div>
 
@@ -46,7 +50,7 @@ const StepsCreateVote = () => {
                 <RiNumber4 size={20}/>
             </div>
             <div class="flex pl-4 items-center">
-                <h3 class="font-medium title-font text-lg text-logolblue-200 tracking-wider">TALLYING</h3>
+                <h3 class="font-medium title-font text-lg text-logolblue-200 tracking-wider">{t("tallyingStep")}</h3>
             </div>
         </div>
 

@@ -1,0 +1,35 @@
+{
+    "connectionON":"Verbunden",
+    "connectionOFF":"Verbindung getrennt",
+
+    "creationStep":"ERSTELLUNG",
+    "keygenStep":"SCHLÜSSEL-ERZEUGUNG",
+    "votingStep":"ABSTIMMUNG",
+    "tallyingStep":"AUSZÄHLUNG",
+
+    "textCreation":"In diesem Schritt warten Sie darauf, dass die Voting Authority eine Abstimmung oder Wahl einrichtet. Wenn dies geschieht, werden Sie automatisch zum nächsten Schritt weitergeleitet.",
+    "waitingCreation":"Warten Sie auf die Voting Authority...",
+
+
+    "titleKeyGen":"Schlüsselerzeugung",
+    "textKeyGen":"Erstellen Sie einen Schlüssel. Jeder Sealers muss in diesem Schritt einen Schlüssel erstellen, damit die Voting Authority diese anschließend kombinieren kann. Dadurch wird sichergestellt, dass die Stimmzettel und die Wahllisten verschlüsselt sind. Wenn Sie einen Schlüssel erstellt haben müssen Sie warten, bis die Abstimmung oder die Wahl startet.",
+    "numberOfCreationsKeyGen":"öffentliche Schlüssel wurden erstellt",
+    "statusKeyGen":"warten auf Schlüsselerstellung",
+    "buttonKeyGen":"Schlüssel erstellen",
+    "loadingButton": "Laden...",
+    "successfullKeyGen":"Schlüsselerstellung war erfolgreich",
+    "waitingForVAKeyGen":"warten auf die Voting Authority bis sie die Abstimmung oder Wahl startet",
+
+
+    "titleVoting":"Abstimmung / Wahl",
+    "textVoting":"Warten Sie, bis die Abstimmung oder Wahl beendet ist. Das Ende der Wahl wird von der Voting Authority festgelegt. Wenn die Wahl beendet ist, werden Sie automatisch zur Auszählung weitergeleitet.",
+    "statusVoting":"Warten auf den Abschluss der Abstimmung oder Wahl durch die Voting Authority...",
+
+    "titleTallying":"Auszählung",
+    "textTallying":"Entschlüsseln Sie den Schlüssel für alle Fragen der Abstimmung oder alle Parteilisten der Wahlen. Es ist sehr wichtig, dass Sie alle Schlüssel entschlüsseln, sonst kann die Wahlbehörde das Ergebnis nicht einsehen. Die Entschlüsselung kann eine Weile dauern. Wenn die Entschlüsselung nicht funktioniert hat, versuchen Sie es einfach noch einmal. ",
+    "buttonTallying":"Entschlüsslen",
+    "keyDecryptionTallying":"Schlüssel entschlüsselt",
+    "successfullTallying":"Entschlüsselung war erfolgreich",
+    "errorWhileDecryptTallying":"Beim Entschlüsseln des Schlüssels ist etwas schief gelaufen! Bitte versuchen Sie es erneut!"
+
+}

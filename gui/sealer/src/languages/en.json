@@ -1,0 +1,35 @@
+{
+    "connectionON":"ON CHAIN",
+    "connectionOFF":"OFF CHAIN",
+
+    "creationStep":"CREATION",
+    "keygenStep":"KEY GENERATION",
+    "votingStep":"VOTING",
+    "tallyingStep":"TALLYING",
+
+    "textCreation":"In this step, you wait for the Voting Authority to set up a vote or election. When this happens, you will be automatically redirected to the next step. ",
+    "waitingCreation":"Waiting for the voting authority...",
+
+
+    "titleKeyGen":"Key Generation",
+    "textKeyGen":"Create a key. Each sealer must create a key in this step so that the election authority can then combine them. This ensures that the ballots and the election lists are encrypted. Once you have created a key, you must wait until the vote or election begins.",
+    "numberOfCreationsKeyGen":"public keys have been created",
+    "statusKeyGen":"waiting for key creation",
+    "buttonKeyGen":"Create Key",
+    "loadingButton": "Loading...",
+    "successfullKeyGen":"key creation was successfull",
+    "waitingForVAKeyGen":"wait for voting authority to start vote or election",
+
+
+    "titleVoting":"Voting / Election",
+    "textVoting":"Wait until the voting or election is over. The end of the election is determined by the election authority. When the election is over, you will be automatically redirected to the Tallying step.",
+    "statusVoting":"Waiting for the voting authority to close the vote or election...",
+
+
+    "titleTallying":"Tallying",
+    "textTallying":"Decrypt the key for all the questions or all the party lists. It is very important that you decrypt all the keys, otherwise the Voting Authority will not be able to see the result. Decryption may take a while. If the decryption did not work, just try again.",
+    "buttonTallying":"Decrypt Ballots",
+    "keyDecryptionTallying":"key decryption",
+    "successfullTallying":"decryption was successfull",
+    "errorWhileDecryptTallying":"Something went wrong while decrypting the key! Please try again!"
+}
