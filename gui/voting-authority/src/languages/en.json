@@ -10,7 +10,62 @@
 
     "voteButtonCreate":"Create Vote",
     "electionButtonCreate":"Create Election",
-    "creationText":"Decide whether you want to create a vote or an election and press the corresponding button. You will be automatically redirected to the creation site."
+    "creationText":"Decide whether you want to create a vote or an election and press the corresponding button. You will be automatically redirected to the creation site.",
 
+    "voteCreationTitleCreate":"Vote Creation",
+    "voteCreationTextCreate":"Enter the name of the voting and the voting questions. Use the + and - buttons to add or delete more questions. When formulating the questions, it is important that it can be answered with Yes or No. When you are done, click the 'Submit' and the 'Next Step' button.",
+    "voteFormCreate":"Vote",
+    "questionFormCreate":"Question",
+    "submitButton":"Submit",
+    "backButton":"Back",
+    "nextStepButton":"Next Step",
+    "loadingButton":"Loading...",
+    "deleteButtonVoteCreate":"Delete Vote",
+
+    "electionCreationTitleCreate":"Vote Creation",
+    "electionCreationTextCreate":"Enter the name of the election, the number of seats in the parliament and the parties that can create a list. Use the + and - buttons to add or delete more parties. Each party must submit a list. If you notice an error in the list and it has already been submitted, you can simply delete the election and start over. However, when you are done, click the 'Submit' and 'Next Step' buttons.",
+    "electionFormCreate":"Election",
+    "numberOfSeatsSelect":"Number of Seats",
+    "partyFormCreate":"Party",
+    "createListButoonCreate":"Create List",
+    "deleteButtonElectionCreate":"Delete Election",
+
+    "modal1Title":"Are you sure you want to create this vote?",
+    "modal1Subtitle":"After creation you cannot edit this vote.",
+    "modalYesSure":"Yes, I'm sure",
+    "modalNo":"No, cancel",
+    "modalSubmitList":"Submit List",
+    "modalCancel":"Cancel",
+    "modal3Title":"Are you sure you want to create this list?",
+    "modal3Subtitle":"After creation you cannot edit this list and the number of seats.",
+    "modal4Title":"Are you sure you want to create this election?",
+    "modal4Subtitle":"After creation you cannot edit this election.",
+
+
+    "titleKeyGen":"Key Generation",
+    "textKeyGen":"Wait until all the keys have been created by the sealers. When this is done, you can combine these keys and proceed to the next step. By combining the keys, a public key is created that can be used to encrypt the ballots. ",
+    "numberOfKeysKeyGen":" public keys have been created",
+    "waitingforSealersKeyGen":"waiting for sealers",
+    "readyForCombineKeyGen":"ready to combine key shares",
+    "combineKeysButtonKeyGen":"Combine Keys",
+
+
+    "titleVoting":"Voting / Election",
+    "textVoting":"This step opens the voting or election. In this step, you wait until you decide that the vote or election is closed. If you click the 'Next Step' button, the vote or election will be closed and voters will not be able to cast their ballots or lists anymore.",
+    "modalTitleVoting":"Are you sure you want to end the vote or election?",
+    "modalSubtitleVoting":"After the end of the voting or election no one can submit their ballots.",
+
+
+    "titleTallying":"Tallying",
+    "textTallying":"Wait until all keys have been decrypted by the sealers. When this is done, the decryption must be combined for all questions or party lists. If only one sealer forgets to decrypt a question or a party list, the result cannot be viewed.",
+    "waitingForSealersTallying":"sealers decrypted the key",
+    "combineDecryptionButtonTallying":"Combine Decryption",
+
+
+    "titleResult":"Result",
+    "textResultVote":"Voting has ended and below you will find the result. For each voting question only the yes and no votes are listed. The blank votes are not shown.",
+    "textResultElection":"The election is over and below you will find the result. The number in parentheses next to the party is the number of votes for that party. Next to it are the members of the party and their votes. Only the members who received at least one vote are listed. ",
+    "yesVotes":"Yes-Votes:",
+    "noVotes":"No-Votes:"
 
 }

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { useSelector, useDispatch } from 'react-redux'
 import StepsResult from "../../helpers/StepsResult"
 import {FaCheck, FaRegTimesCircle } from "react-icons/fa"
+import { useTranslation } from "react-i18next"
 
 
 const Result = () => {
@@ -22,6 +23,7 @@ const Result = () => {
     const [arrayVoteNumbers, setArrayVoteNumbers] = useState([1,3,4,7,8,10,11,12,16,17,19,21,23,25,26,27,28,29,30,33,36,37,40,41,44,47,48,49,51,53,57,61,62,63,64,65])
     const [electionResult, setElectionResult] = useState([])
 
+    const {t, i18n} = useTranslation()
 
     const questionsInList = [];
     const electionResultHTML = [];
@@ -168,11 +170,11 @@ const Result = () => {
             <div className="flex justify-between ">
                 <div className="flex justify-start">
                     <FaCheck className=" text-green-800 mr-3 w-5 h-5" />
-                    <p>Yes-Votes: {yesVotes[index*2]}</p>
+                    <p>{t("yesVotes")} {yesVotes[index*2]}</p>
                 </div>
                 <div className="flex justify-end">
                     <FaRegTimesCircle className="text-red-700 mr-3 w-5 h-5"/>
-                    <p>No-Votes: {noVotes[index*2]}</p>
+                    <p>{t("noVotes")} {noVotes[index*2]}</p>
                 </div>
             </div>
         </li>)
@@ -223,8 +225,8 @@ const Result = () => {
                     {type==="election" ? 
                     (
                     <div class="w-7/10 p-10 py-6">
-                        <h1 class="text-5xl font-medium title-font text-logobrown-1000 tracking-wider">Result</h1>
-                        <p class="text-base py-7 text-logobrown-1000">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                        <h1 class="text-5xl font-medium title-font text-logobrown-1000 tracking-wider">{t("titleResult")}</h1>
+                        <p class="text-base py-7 text-logobrown-1000">{t("textResultElection")}</p>
                         <div class="flex justify-center ">
                             <div class="w-2/3 bg-logobrown-300 rounded-lg p-8 flex flex-col">
                                 <div class="pb-1 text-center">
@@ -239,8 +241,8 @@ const Result = () => {
                     : 
                     (
                     <div class="w-7/10 p-10 py-6">
-                        <h1 class="text-5xl font-medium title-font text-logobrown-1000 tracking-wider">Result</h1>
-                        <p class="text-base py-7 text-logobrown-1000">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                        <h1 class="text-5xl font-medium title-font text-logobrown-1000 tracking-wider">{t("titleResult")}</h1>
+                        <p class="text-base py-7 text-logobrown-1000">{t("textResultVote")}</p>
                         <div class="flex justify-center ">
                             <div class="w-2/3 bg-logobrown-300 rounded-lg p-8 flex flex-col">
                                 <div class="pb-1 text-center">
