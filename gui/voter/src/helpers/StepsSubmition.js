@@ -1,7 +1,10 @@
 import { RiNumber2, RiNumber3, RiNumber4, RiNumber5 } from "react-icons/ri"
 import { FaCheck } from "react-icons/fa"
+import { useTranslation } from "react-i18next"
 
 const StepsSubmition = () => {
+
+    const {t, i18n} = useTranslation()
 
     return (
         <div class="w-3/10 pr-10 py-6 border-r-2 border-logored-100">
@@ -14,7 +17,7 @@ const StepsSubmition = () => {
                     <FaCheck size={20} />
                 </div>
                 <div class="flex pl-4 items-center">
-                    <h3 class="font-medium title-font text-lg text-logobrown-1000 tracking-wider">VOTE/ELECTION</h3>
+                    <h3 class="font-medium title-font text-lg text-logobrown-1000 tracking-wider">{t("firstStep")}</h3>
                 </div>
             </div>
 
@@ -26,7 +29,7 @@ const StepsSubmition = () => {
                     <RiNumber2 size={20} />
                 </div>
                 <div class="flex pl-4 items-center">
-                    <h3 class="font-medium title-font text-lg text-logobrown-1000 tracking-wider">SUBMITION</h3>
+                    <h3 class="font-medium title-font text-lg text-logobrown-1000 tracking-wider">{t("secondStep")}</h3>
                 </div>
             </div>
 
@@ -35,7 +38,7 @@ const StepsSubmition = () => {
                     <RiNumber3 size={20} />
                 </div>
                 <div class="flex pl-4 items-center">
-                    <h3 class="font-medium title-font text-lg text-logored-100 tracking-wider">CONFIRMATION</h3>
+                    <h3 class="font-medium title-font text-lg text-logored-100 tracking-wider">{t("thirdStep")}</h3>
                 </div>
             </div>
 

@@ -6,9 +6,12 @@ import { setStep } from "../redux/StepSlice"
 import { setChainStatus } from "../redux/ChainSlice"
 import { setVoteObj} from "../redux/VoteSlice"
 import { setUserObj } from "../redux/UserSlice"
+import { useTranslation } from "react-i18next"
 
 // Makes Header and also checks if the step of redux is the same like the step in the db
 const Header = () => {
+
+    const {t, i18n} = useTranslation()
 
     const axios = require('axios')
     const step = useSelector(state => state.step.value)
@@ -96,9 +99,9 @@ const Header = () => {
             </div>
             <div class="w-1/3 flex justify-end">
                 {chainStatus==="ON CHAIN" ? (
-                    <h3 className=" text-green-800 font-medium text-xl pr-4">ON CHAIN</h3>
+                    <h3 className=" text-green-800 font-medium text-xl pr-4">{t("connectionON")}</h3>
                 ) : (
-                    <h3 className="text-red-800 font-medium text-xl pr-4">OFF CHAIN</h3>
+                    <h3 className="text-red-800 font-medium text-xl pr-4">{t("connectionOFF")}</h3>
                 )}
                 <a href="https://github.com/provotum">
                     <img src={github_logo} width="35" alt="github logo" class="float-right hover:scale-150 duration-150" />

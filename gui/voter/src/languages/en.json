@@ -1,0 +1,56 @@
+{
+    "connectionON":"ON CHAIN",
+    "connectionOFF":"OFF CHAIN",
+
+    "firstStep":"VOTE/ELECTION",
+    "secondStep":"SUBMITION",
+    "thirdStep":"CONFRIMATION",
+
+    "nextStepButton":"Next Step",
+    "backButton":"Back",
+    "submitButton":"Submit",
+    "logoutButton":"Logout",
+
+
+
+    "titleLogin":"Provotum",
+    "loadingButton":"Laden...",
+    "usernameLogin":"Username",
+    "passwordLogin":"Password",
+    "buttonLogin":"Login",
+
+
+    "titleHome":"Home",
+    "textHome":"Wait until a vote or election has been created and opened. If the vote or election has an open status, you should be able to fill out the ballot. However, if this button cannot be pressed, this user has already participated in the vote or election once.  ",
+    "statusHome":"No votes or elections are open...",
+    "logoutButtonHome":"Logout",
+    "numberOfQuestionsHome":"Number of Questions:",
+    "numberOfListsHome":"Number of Lists:",
+    "statusOpenHome":"Open",
+    "statusClosedHome":"Closed",
+    "buttonHome":"Fill out ballot",
+
+
+    "titleVote":"Vote",
+    "textVote":"Fill out the ballot. For each question, you can either check yes or no, or leave the box blank. Click the 'Next Step' button when you are satisfied with your choice. ",
+    "yesVote":"Yes",
+    "noVote":"No",
+    "emptyVote":"Empty",
+
+    "titleElectionVote":"Election",
+    "textElectionVote":"Select a list with which you want to vote and enter the candidates you want to elect in this list. Note that Panachage and Cumulative voting are also possible. Click the 'Next Step' button when you are satisfied with your choice.",
+    "listVote":"List:",
+    "noneVote":"None",
+
+
+    "titleSubmition":"Einreichung",
+    "textSubmition":"Check your entries. These can be changed by clicking the 'Back' button. However, if you are satisfied, you can proceed by clicking the 'Submit' button. Your ballot will be cast during this process and cannot be changed later. This may take a while. ",
+    "emptyListSubmition":"List: Empty List",
+
+
+
+    "titleConfirmation":"Confirmation",
+    "textConfirmation":"You have successfully participated in the vote or election. Your ballot has been sent successfully. You can now either log out directly or return to the home page.",
+    "successfullConfirmation":"Your ballot was successfully submitted",
+    "buttonConfirmation":"Home"
+}

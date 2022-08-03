@@ -2,8 +2,11 @@ import Header from "../../helpers/Header"
 import Footer from "../../helpers/Footer"
 import {useNavigate} from "react-router-dom"
 import { useSelector } from 'react-redux'
+import { useTranslation } from "react-i18next"
 
 const Home = () => {
+
+    const {t, i18n} = useTranslation()
 
     const axios = require('axios')
     const navigate = useNavigate();
@@ -50,8 +53,8 @@ const Home = () => {
                 <div class="flex w-full">
 
                     <div class="w-7/10 p-10 py-6">
-                        <h1 class="text-5xl font-medium title-font text-logobrown-1000 tracking-wider">Home</h1>
-                        <p class="text-base py-7 text-logobrown-1000">Welcome {user.data[0].name}: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                        <h1 class="text-5xl font-medium title-font text-logobrown-1000 tracking-wider">{t("titleHome")}</h1>
+                        <p class="text-base py-7 text-logobrown-1000">{t("textHome")}</p>
         
                         {vote!==null ? 
                         (
@@ -62,31 +65,31 @@ const Home = () => {
                                         <div className="flex justify-between px-20">
                                             {vote.questions[0].election_list_members.length!==0 ? (
                                                 <div className="flex justify-center basis-1/3 m-auto">
-                                                    <p className="text-lg text-logobrown-1000">Number of Lists: {vote.questions.length}</p>
+                                                    <p className="text-lg text-logobrown-1000">{t("numberOfListsHome")} {vote.questions.length}</p>
                                                 </div>
                                             ) 
                                             : 
                                             (
                                                 <div className="flex justify-center basis-1/3 m-auto">
-                                                    <p className="text-lg text-logobrown-1000">Number of Questions: {vote.questions.length}</p>
+                                                    <p className="text-lg text-logobrown-1000">{t("numberOfQuestionsHome")} {vote.questions.length}</p>
                                                 </div>
                                             )}
                                             <div className="flex justify-center basis-1/3 ">
-                                                <button onClick={() => fillOutBallot()} disabled={vote.phase!=="Voting" || user.data[0].votedQuestions.length!==0} class="w-3/4 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">Fill out list</button>
+                                                <button onClick={() => fillOutBallot()} disabled={vote.phase!=="Voting" || user.data[0].votedQuestions.length!==0} class="w-3/4 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("buttonHome")}</button>
                                             </div>
                                                 <div className="flex justify-center basis-1/3">
                                                 {vote.phase==="Voting" ? 
                                                 (
                                                     <div className="flex">
                                                         <p className="text-lg text-logobrown-1000">Status:</p>
-                                                        <p className="text-lg pl-1 text-green-800">Open</p>
+                                                        <p className="text-lg pl-1 text-green-800">{t("statusOpenHome")}</p>
                                                     </div>
                                                 ) 
                                                 : 
                                                 (
                                                     <div className="flex m-auto">
                                                         <p className="text-lg text-logobrown-1000">Status:</p>
-                                                        <p className="text-lg pl-1 text-red-800">Closed</p>
+                                                        <p className="text-lg pl-1 text-red-800">{t("statusClosedHome")}</p>
                                                     </div>
                                                 )}
                                             </div>
@@ -106,13 +109,13 @@ const Home = () => {
                                         </svg>                                  
                                     </div>
                                     <p className="text-center text-logored-100 text-base mt-3">
-                                        No votes or elections are open...
+                                        {t("statusHome")}
                                     </p>
                                 </div>
                             </div>
                         )}
 
-                        <button onClick={() => logout()} class="w-1/6 mt-20 float-right text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">Logout</button>
+                        <button onClick={() => logout()} class="w-1/6 mt-20 float-right text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("logoutButtonHome")}</button>
 
 
                     </div>

@@ -1,0 +1,54 @@
+{
+    "connectionON":"Verbunden",
+    "connectionOFF":"Verbindung getrennt",
+
+    "firstStep":"ABSTIMMUNG/WAHL",
+    "secondStep":"EINREICHUNG",
+    "thirdStep":"BESTÄTIGUNG",
+
+    "nextStepButton":"Nächster Schritt",
+    "backButton":"Zurück",
+    "submitButton":"Einreichen",
+    "logoutButton":"Abmelden",
+
+
+    "titleLogin":"Provotum",
+    "loadingButton":"Laden...",
+    "usernameLogin":"Benutzernamen",
+    "passwordLogin":"Passwort",
+    "buttonLogin":"Anmelden",
+
+
+    "titleHome":"Startseite",
+    "textHome":"Warten Sie, bis eine Abstimmung oder Wahl erstellt und geöffnet wurde. Wenn die Umfrage oder Wahl einen offenen Status hat, sollten Sie den Stimmzettel ausfüllen können. Wenn diese Taste jedoch nicht betätigt werden kann, hat dieser Benutzer bereits einmal an der Abstimmung oder Wahl teilgenommen. ",
+    "statusHome":"Keine Abstimmungen oder Wahlen sind erstellt...",
+    "logoutButtonHome":"Abmelden",
+    "numberOfQuestionsHome":"Anzahl Fragen:",
+    "numberOfListsHome":"Anzahl Listen:",
+    "statusOpenHome":"Offen",
+    "statusClosedHome":"Geschlossen",
+    "buttonHome":"Stimmzettel ausfüllen",
+
+
+    "titleVote":"Abstimmung",
+    "textVote":"Füllen Sie den Stimmzettel aus. Bei jeder Frage können Sie entweder ja oder nein ankreuzen oder das Feld leer lassen. Klicken Sie auf die 'Nächster Schritt'-Taste, wenn Sie mit Ihrer Wahl zufrieden sind. ",
+    "yesVote":"Ja",
+    "noVote":"Nein",
+    "emptyVote":"Leer",
+
+    "titleElectionVote":"Wahl",
+    "textElectionVote":"Wählen Sie eine Liste, mit der Sie wählen wollen, und tragen Sie die Kandidaten, die Sie wählen wollen, in diese Liste ein. Beachten Sie, dass auch Panaschieren und Kumulieren möglich sind. Klicken Sie auf die 'Nächster Schritt'-Taste, wenn Sie mit Ihrer Wahl zufrieden sind.",
+    "listVote":"Liste:",
+    "noneVote":"Keine",
+
+
+    "titleSubmition":"Einreichung",
+    "textSubmition":"Überprüfen Sie ihre Einträge. Diese können durch Klicken auf die 'Zurück'-Taste geändert werden. Wenn Sie jedoch zufrieden sind, können Sie mit dem nächsten Schritt fortfahren indem sie die 'Einreichen'-Taste betätigen. Ihr Stimmzettel wird dabei abgegeben und kann später nicht mehr geändert werden. Dies kann eine Weile dauern. ",
+    "emptyListSubmition":"Liste: Leere Liste",
+
+
+    "titleConfirmation":"Bestätigung",
+    "textConfirmation":"Sie haben erfolgreich an der Abstimmung oder Wahl teilgenommen. Ihr Stimmzettel wurde erfolgreich abgeschickt. Sie können sich nun entweder direkt abmelden oder zur Startseite zurückkehren.",
+    "successfullConfirmation":"Das Einreichung des Stimmzettels war erfolgreich",
+    "buttonConfirmation":"Zur Startseite"
+}

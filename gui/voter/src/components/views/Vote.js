@@ -6,10 +6,12 @@ import StepsVoting from "../../helpers/StepsVoting"
 import { useState } from "react"
 import { setVotes } from "../../redux/BallotSlice"
 import { setElectedPeopleRedux, setListNumberRedux } from "../../redux/ElectionSlice"
-
+import { useTranslation } from "react-i18next"
 
 
 const Vote = () => {
+
+    const {t, i18n} = useTranslation()
 
     const navigate = useNavigate();
     const vote = useSelector(state => state.vote.obj)
@@ -71,11 +73,11 @@ const Vote = () => {
                     <div className="w-1/3">
                         <div class="flex pl-10 py-1">
                             <input onChange={() => handleChange(index, 1)} checked={ballot[index]===1} type="checkbox" className="w-4 h-4 accent-green-700 my-auto"/>
-                            <label className="pl-1">Yes</label>
+                            <label className="pl-1">{t("yesVote")}</label>
                         </div>
                         <div class="flex pl-10 py-1">
                             <input onChange={() => handleChange(index, 3)} checked={ballot[index]===3} type="checkbox" className="w-4 h-4 accent-red-700 my-auto"/>
-                            <label className="pl-1">No</label>
+                            <label className="pl-1">{t("noVote")}</label>
                         </div>
                     </div>
                 </div>
@@ -99,7 +101,7 @@ const Vote = () => {
                 <div className="flex justify-around w-auto my-3 bg-logored-50 rounded-lg">
                     <label className="text-lg text-logobrown-1000 px-3">Person {i+1}: </label>
                     <select onChange={(e) => makeElectedList(i, e.target.value)} class="h-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  focus:ring-logored-400 focus:broder-logored-400 block">
-                        <option>Empty</option>
+                        <option>{t("emptyVote")}</option>
                         {selectOptionsAllCandidates}
                     </select>
                 </div>
@@ -147,8 +149,8 @@ const Vote = () => {
                     {vote.questions[0].election_list_members.length!==0 ? 
                     ( //Election
                     <div class="w-7/10 p-10 py-6">
-                        <h1 class="text-5xl font-medium title-font text-logobrown-1000 tracking-wider">Election</h1>
-                        <p class="text-base py-7 text-logobrown-1000">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                        <h1 class="text-5xl font-medium title-font text-logobrown-1000 tracking-wider">{t("titleElectionVote")}</h1>
+                        <p class="text-base py-7 text-logobrown-1000">{t("textElectionVote")}</p>
 
                         <div class="flex justify-center w-full">
                             <div class="w-3/4 bg-logored-100 rounded-lg p-8 flex flex-col">
@@ -156,9 +158,9 @@ const Vote = () => {
                                     <h2 className="text-3xl font-medium title-font text-logobrown-1000 text-center mb-10">{vote.vote}</h2>
                                     <div className="flex justify-center">
                                         <div className="flex justify-center bg-logored-50 rounded-lg w-auto p-2">
-                                            <label className="h-full text-lg text-logobrown-1000 px-3">List: </label>
+                                            <label className="h-full text-lg text-logobrown-1000 px-3">{t("listVote")} </label>
                                             <select onChange={(e) => setListNumber(e.target.value)} class="h-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  focus:ring-logored-400 focus:broder-logored-400 block">
-                                                <option value={231}>None</option>
+                                                <option value={231}>{t("noneVote")}</option>
                                                 {selectOptionsLists}
                                             </select>
                                         </div>
@@ -170,8 +172,8 @@ const Vote = () => {
                             </div>        
                         </div>
 
-                        <button onClick={() => back()} class="w-1/6 mt-20 float-left text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">Back</button>
-                        <button onClick={() => nextStepElection()} class="w-1/6 mt-20 float-right text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">Next Step</button>
+                        <button onClick={() => back()} class="w-1/6 mt-20 float-left text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("backButton")}</button>
+                        <button onClick={() => nextStepElection()} class="w-1/6 mt-20 float-right text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("nextStepButton")}</button>
 
                     </div>
 
@@ -179,8 +181,8 @@ const Vote = () => {
                     :
                     ( //Vote
                     <div class="w-7/10 p-10 py-6">
-                        <h1 class="text-5xl font-medium title-font text-logobrown-1000 tracking-wider">Vote</h1>
-                        <p class="text-base py-7 text-logobrown-1000">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                        <h1 class="text-5xl font-medium title-font text-logobrown-1000 tracking-wider">{t("titleVote")}</h1>
+                        <p class="text-base py-7 text-logobrown-1000">{t("textVote")}</p>
 
                         <div class="flex justify-center w-full">
                             <div class="w-3/4 bg-logored-100 rounded-lg p-8 flex flex-col">
@@ -193,8 +195,8 @@ const Vote = () => {
                             </div>        
                         </div>
 
-                        <button onClick={() => back()} class="w-1/6 mt-20 float-left text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">Back</button>
-                        <button onClick={() => nextStep()} class="w-1/6 mt-20 float-right text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">Next Step</button>
+                        <button onClick={() => back()} class="w-1/6 mt-20 float-left text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("backButton")}</button>
+                        <button onClick={() => nextStep()} class="w-1/6 mt-20 float-right text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("nextStepButton")}</button>
 
                     </div>
                     )}
