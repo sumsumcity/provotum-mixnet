@@ -61,6 +61,20 @@ const Vote = () => {
         setElectedPeople(newList)
     }
 
+    const candidateChecker  = () => {
+        if (electedPeople.length>0){
+            for (let i=0; i<electedPeople.length;i++){
+                if(electedPeople[i]!=="Empty" && electedPeople[i]!==undefined){
+                    return false
+                }
+            }
+            return true
+        }
+        else{
+            return true
+        }
+    }
+
 
     // Make list in HTML and questions is from redux
     for (const [index, value] of vote.questions.entries()) {
@@ -171,9 +185,9 @@ const Vote = () => {
                                 </div>
                             </div>        
                         </div>
-
+                        {console.log(electedPeople)}
                         <button onClick={() => back()} class="w-1/6 mt-20 float-left text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("backButton")}</button>
-                        <button onClick={() => nextStepElection()} class="w-1/6 mt-20 float-right text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("nextStepButton")}</button>
+                        <button onClick={() => nextStepElection()} disabled={candidateChecker()} class="w-1/6 mt-20 float-right text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("nextStepButton")}</button>
 
                     </div>
 
