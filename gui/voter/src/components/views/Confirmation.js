@@ -63,8 +63,8 @@ const Confirmation = () => {
                             <p className="text-lg py-7 text-green-700">{t("successfullConfirmation")}</p>     
                         </div>
 
-                        <button onClick={() => logout()} class="w-1/6 mt-20 float-left text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("logoutButton")}</button>
-                        <button onClick={() => home()} class="w-1/6 mt-20 float-right text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("buttonConfirmation")}</button>
+                        <button onClick={() => logout()} class="w-1/6 mt-20 float-left text-white bg-logolblue-500 py-2 px-8 enabled:hover:bg-logolblue-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("logoutButton")}</button>
+                        <button onClick={() => home()} class="w-1/6 mt-20 float-right text-white bg-logolblue-500 py-2 px-8 enabled:hover:bg-logolblue-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("buttonConfirmation")}</button>
 
                     </div>
                 </div>

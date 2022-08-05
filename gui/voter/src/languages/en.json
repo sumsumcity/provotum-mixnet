@@ -4,7 +4,7 @@
 
     "firstStep":"VOTE/ELECTION",
     "secondStep":"SUBMITION",
-    "thirdStep":"CONFRIMATION",
+    "thirdStep":"CONFIRMATION",
 
     "nextStepButton":"Next Step",
     "backButton":"Back",
@@ -50,7 +50,7 @@
 
 
     "titleConfirmation":"Confirmation",
-    "textConfirmation":"You have successfully participated in the vote or election. Your ballot has been sent successfully. You can now either log out directly or return to the home page.",
+    "textConfirmation":"You have successfully participated in the vote or election. Your ballot has been sent successfully. You can now either log out directly or return to the homepage.",
     "successfullConfirmation":"Your ballot was successfully submitted",
-    "buttonConfirmation":"Home"
+    "buttonConfirmation":"Homepage"
 }

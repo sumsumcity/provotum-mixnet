@@ -79,7 +79,7 @@ const Vote = () => {
     // Make list in HTML and questions is from redux
     for (const [index, value] of vote.questions.entries()) {
         questionsInList.push(
-            <li key={index} className="my-5 bg-logored-50 rounded-lg">
+            <li key={index} className="my-5 bg-logolblue-50 rounded-lg">
                 <div className="flex justify-between">
                     <div className="m-auto w-2/3">
                         <p className="text-lg text-logobrown-1000 px-3 py-5">{value.questionName}</p>
@@ -112,9 +112,9 @@ const Vote = () => {
     for (let i = 0; i < vote.number_of_seats; i++) {
         peopleInListHTML.push(
             <div className="flex justify-center w-full">
-                <div className="flex justify-around w-auto my-3 bg-logored-50 rounded-lg">
+                <div className="flex justify-around w-auto my-3 bg-logolblue-50 rounded-lg">
                     <label className="text-lg text-logobrown-1000 px-3">Person {i+1}: </label>
-                    <select onChange={(e) => makeElectedList(i, e.target.value)} class="h-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  focus:ring-logored-400 focus:broder-logored-400 block">
+                    <select onChange={(e) => makeElectedList(i, e.target.value)} class="h-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  focus:ring-logolblue-400 focus:broder-logolblue-400 block">
                         <option>{t("emptyVote")}</option>
                         {selectOptionsAllCandidates}
                     </select>
@@ -167,13 +167,13 @@ const Vote = () => {
                         <p class="text-base py-7 text-logobrown-1000">{t("textElectionVote")}</p>
 
                         <div class="flex justify-center w-full">
-                            <div class="w-3/4 bg-logored-100 rounded-lg p-8 flex flex-col">
+                            <div class="w-3/4 bg-logolblue-100 rounded-lg p-8 flex flex-col">
                                 <div className="">
                                     <h2 className="text-3xl font-medium title-font text-logobrown-1000 text-center mb-10">{vote.vote}</h2>
                                     <div className="flex justify-center">
-                                        <div className="flex justify-center bg-logored-50 rounded-lg w-auto p-2">
+                                        <div className="flex justify-center bg-logolblue-50 rounded-lg w-auto p-2">
                                             <label className="h-full text-lg text-logobrown-1000 px-3">{t("listVote")} </label>
-                                            <select onChange={(e) => setListNumber(e.target.value)} class="h-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  focus:ring-logored-400 focus:broder-logored-400 block">
+                                            <select onChange={(e) => setListNumber(e.target.value)} class="h-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  focus:ring-logolblue-400 focus:broder-logolblue-400 block">
                                                 <option value={231}>{t("noneVote")}</option>
                                                 {selectOptionsLists}
                                             </select>
@@ -186,8 +186,8 @@ const Vote = () => {
                             </div>        
                         </div>
                         {console.log(electedPeople)}
-                        <button onClick={() => back()} class="w-1/6 mt-20 float-left text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("backButton")}</button>
-                        <button onClick={() => nextStepElection()} disabled={candidateChecker()} class="w-1/6 mt-20 float-right text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("nextStepButton")}</button>
+                        <button onClick={() => back()} class="w-1/6 mt-20 float-left text-white bg-logolblue-500 py-2 px-8 enabled:hover:bg-logolblue-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("backButton")}</button>
+                        <button onClick={() => nextStepElection()} disabled={candidateChecker()} class="w-1/6 mt-20 float-right text-white bg-logolblue-500 py-2 px-8 enabled:hover:bg-logolblue-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("nextStepButton")}</button>
 
                     </div>
 
@@ -199,7 +199,7 @@ const Vote = () => {
                         <p class="text-base py-7 text-logobrown-1000">{t("textVote")}</p>
 
                         <div class="flex justify-center w-full">
-                            <div class="w-3/4 bg-logored-100 rounded-lg p-8 flex flex-col">
+                            <div class="w-3/4 bg-logolblue-100 rounded-lg p-8 flex flex-col">
                                 <div className="">
                                     <h2 className="text-3xl font-medium title-font text-logobrown-1000 text-center mb-10">{vote.vote}</h2>
                                     <ul className="">
@@ -209,8 +209,8 @@ const Vote = () => {
                             </div>        
                         </div>
 
-                        <button onClick={() => back()} class="w-1/6 mt-20 float-left text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("backButton")}</button>
-                        <button onClick={() => nextStep()} class="w-1/6 mt-20 float-right text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("nextStepButton")}</button>
+                        <button onClick={() => back()} class="w-1/6 mt-20 float-left text-white bg-logolblue-500 py-2 px-8 enabled:hover:bg-logolblue-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("backButton")}</button>
+                        <button onClick={() => nextStep()} class="w-1/6 mt-20 float-right text-white bg-logolblue-500 py-2 px-8 enabled:hover:bg-logolblue-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("nextStepButton")}</button>
 
                     </div>
                     )}
