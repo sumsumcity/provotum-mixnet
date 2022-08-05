@@ -65,7 +65,7 @@ const Header = () => {
         }
     
     return (
-        <header class="bg-logolblue-200">
+        <header class="bg-logodblue-100">
         <div class="container mx-auto p-3 flex flex-wrap justify-between items-center">
             <div class="w-1/3">
                 <a class="flex items-center text-logobrown-1000">
