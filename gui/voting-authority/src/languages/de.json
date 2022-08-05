@@ -13,17 +13,19 @@
     "creationText":"Entscheiden Sie, ob Sie eine Abstimmung oder eine Wahl erstellen möchten und betätigen Sie den jeweiligen Knopf. Sie werden automatisch zur Einrichtungsseite weitergeleitet.",
 
     "voteCreationTitleCreate":"Erstellung der Abstimmung",
-    "voteCreationTextCreate":"Geben Sie den Namen der Abstimmung und die Abstimmungsfragen ein. Mit den + und - Tasten können Sie weitere Fragen hinzufügen oder löschen. Bei der Formulierung der Frage ist es wichtig, dass Sie mit Ja oder Nein beantwortet werden kann. Wenn Sie fertig sind, klicken Sie auf die 'Senden'- und 'Nächster Schritt'-Taste.",
+    "voteCreationTextCreate":"Geben Sie den Namen der Abstimmung und die Abstimmungsfragen ein. Mit den + und - Tasten können Sie weitere Fragen hinzufügen oder löschen. Bei der Formulierung der Frage ist es wichtig, dass Sie mit Ja oder Nein beantwortet werden kann. Wenn Sie fertig sind, klicken Sie auf die 'Senden'- und 'Abstimmung erstellen'-Taste.",
     "voteFormCreate":"Abstimmung",
     "questionFormCreate":"Frage",
     "submitButton":"Senden",
     "backButton":"Zurück",
     "nextStepButton":"Nächster Schritt",
+    "createVoteButton":"Abstimmung erstellen",
+    "createElectionButton":"Wahl erstellen",
     "loadingButton":"Laden...",
     "deleteButtonVoteCreate":"Abstimmung löschen",
 
     "electionCreationTitleCreate":"Erstellung der Wahl",
-    "electionCreationTextCreate":"Geben Sie den Namen der Wahl, die Anzahl Sitze im Parlament und die Parteien, die eine Liste bereit stellen, ein. Mit den + und - Tasten können Sie weitere Parteien hinzufügen oder löschen. Jede Partei muss eine Liste zur Verfügung stellen. Wenn Sie einen Fehler in der Liste bemerken und diese schon eingereicht wurde, können sie die Wahl einfach löschen und neu beginnen. Wenn Sie jedoch fertig sind, klicken Sie auf die 'Senden'- und 'Nächster Schritt'-Taste.",
+    "electionCreationTextCreate":"Geben Sie den Namen der Wahl, die Anzahl Sitze im Parlament und die Parteien, die eine Liste bereit stellen, ein. Mit den + und - Tasten können Sie weitere Parteien hinzufügen oder löschen. Jede Partei muss eine Liste zur Verfügung stellen. Wenn Sie einen Fehler in der Liste bemerken und diese schon eingereicht wurde, können sie die Wahl einfach löschen und neu beginnen. Wenn Sie jedoch fertig sind, klicken Sie auf die 'Senden'- und 'Wahl erstellen'-Taste.",
     "electionFormCreate":"Wahl",
     "numberOfSeatsSelect":"Anzahl von Sitze",
     "partyFormCreate":"Partei",
@@ -50,21 +52,27 @@
 
 
     "titleVoting":"Abstimmung / Wahl",
-    "textVoting":"Mit diesem Schritt wird die Abstimmung oder Wahl eröffnet. In diesem Schritt warten Sie, bis Sie entscheiden, dass die Abstimmung oder Wahl geschlossen werden soll. Wenn Sie auf die 'Nächster Schritt'-Taste klicken, wird die Abstimmung oder die Wahl geschlossen und die Stimmbürger können ihre Stimmzettel oder Listen nicht mehr einreichen.",
+    "textVoting":"Mit diesem Schritt wird die Abstimmung oder Wahl eröffnet. In diesem Schritt warten Sie, bis Sie entscheiden, dass die Abstimmung oder Wahl geschlossen werden soll. Wenn Sie auf die 'Abstimmung beenden'-Taste oder auf die 'Wahl beenden'-Taste klicken, wird die Abstimmung oder die Wahl geschlossen und die Stimmbürger können ihre Stimmzettel oder Listen nicht mehr einreichen.",
     "modalTitleVoting":"Sind Sie sicher, dass Sie diese Abstimmung oder Wahl schliessen wollen?",
     "modalSubtitleVoting":"Danach können die Stimmbüger ihre Stimmzettel und Listen nicht mehr einreichen.",
+    "endVoteButton": "Abstimmung beenden",
+    "endElectionButton": "Wahl beenden",
 
 
     "titleTallying":"Auszählung",
     "textTallying":"Warten Sie, bis alle Schlüssel von den Sealer entschlüsselt worden sind. Wenn dies geschehen ist, muss die Entschlüsselung für alle Fragen oder Parteilisten kombiniert werden. Wenn nur ein Sealer vergisst, eine Frage oder eine Parteiliste zu entschlüsseln, kann das Ergebnis nicht eingesehen werden.",
     "waitingForSealersTallying":"Sealers haben ihre Schlüssel entschlüsselt",
     "combineDecryptionButtonTallying":"Entschlüsselung kombinieren",
+    "decryptionSuccessful":"Entschlüsselung war erfolgreich",
+    "resultButton":"Resultate",
 
 
     "titleResult":"Resultat",
     "textResultVote":"Die Abstimmung ist zu Ende und anbei finden Sie das Resultat auf. Es werden zu jeder Abstimmungsfrage nur die Ja und Nein Stimmen aufgelistet. Die leeren Stimmen werden nicht angezeigt.",
     "textResultElection":"Die Wahl ist vorbei und anbei finden Sie das Ergebnis. Die Zahl in Klammern neben der Partei ist die Anzahl der Stimmen für diese Partei. Daneben stehen die Mitglieder der Partei und ihre Stimmen. Es sind nur die Mitglieder aufgeführt, die mindestens eine Stimme erhalten haben.",
     "yesVotes":"Ja-Stimmen:",
-    "noVotes":"Nein-Stimmen:"
+    "noVotes":"Nein-Stimmen:",
+    "closeWindow":"Fenster schliessen"
+
 
 }

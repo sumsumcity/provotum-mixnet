@@ -15,6 +15,7 @@ const Voting = () => {
     const navigate = useNavigate();
     const vote = useSelector(state => state.vote.name)
     const questions = useSelector(state => state.vote.questions)
+    const type = useSelector(state => state.vote.type)
     const dispatch = useDispatch()
 
     const [openModal, setOpenModal] = useState(false)
@@ -60,7 +61,7 @@ const Voting = () => {
 
           // Make list in HTML and questions is from redux
           for (const [index, value] of questions.entries()) {
-            questionsInList.push(<li key={index}><hr class="border-logored-500 border-1"/><p class="text-lg p-2 font-medium text-logobrown-1000 tracking-wider">{value}</p></li>)
+            questionsInList.push(<li key={index}><p class="text-lg p-2 font-medium text-logobrown-1000 tracking-wider">{index+1}: {value}</p></li>)
         }
 
 
@@ -81,7 +82,7 @@ const Voting = () => {
                                 <div class="pb-1 text-center">
                                     <p class="text-3xl font-bold text-logobrown-1000 tracking-wider">{vote}</p>                                    
                                 </div>
-                                <hr className="border-logored-500 border-2" />
+                                <hr className="border-logored-500 border-1" />
 
                                 <ul className="text-center">
                                     {questionsInList}
@@ -102,9 +103,15 @@ const Voting = () => {
                                 </button>
                                 ) 
                                 : 
+                                type === "election" ?
                                 (
-                                <button onClick={() => setOpenModal(true)} class="w-full text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("nextStepButton")}</button>
-                                )}
+                                <button onClick={() => setOpenModal(true)} class="w-full text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("endElectionButton")}</button>
+                                )
+                                :
+                                (
+                                <button onClick={() => setOpenModal(true)} class="w-full text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("endVoteButton")}</button>
+                                )
+                            }
                         </div>
                     </div>
                 </div>

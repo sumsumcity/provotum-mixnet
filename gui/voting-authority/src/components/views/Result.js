@@ -288,17 +288,48 @@ const Result = () => {
     for (const [index, value] of questions.entries()) {
         questionsInList.push(
         <li key={index}>
-            <hr class="border-logored-500 border-1"/>
-            <p class="text-lg text-center p-2 font-medium text-logobrown-1000 tracking-wider">{value}</p>
+            <p class="text-lg text-center p-2 font-medium text-logobrown-1000 tracking-wider">{index+1}: {value}</p>
             <div className="flex justify-between ">
-                <div className="flex justify-start">
-                    <FaCheck className=" text-green-800 mr-3 w-5 h-5" />
-                    <p>{t("yesVotes")} {yesVotes[index]}</p>
-                </div>
-                <div className="flex justify-end">
-                    <FaRegTimesCircle className="text-red-700 mr-3 w-5 h-5"/>
-                    <p>{t("noVotes")} {noVotes[index]}</p>
-                </div>
+                {yesVotes[index]>noVotes[index] ? (
+                <>
+                    <div className="flex justify-start">
+                        <FaCheck className=" text-green-800 mr-3 w-5 h-5" />
+                        <p className="font-medium">{t("yesVotes")} {yesVotes[index]}</p>
+                    </div>
+                    <div className="flex justify-end">
+                        <FaRegTimesCircle className="text-red-700 mr-3 w-5 h-5"/>
+                        <p>{t("noVotes")} {noVotes[index]}</p>
+                    </div>
+                </>
+                ) 
+                : 
+                yesVotes[index]===noVotes[index] ?
+                (
+                <>
+                    <div className="flex justify-start">
+                        <FaCheck className=" text-green-800 mr-3 w-5 h-5" />
+                        <p className="font-medium">{t("yesVotes")} {yesVotes[index]}</p>
+                    </div>
+                    <div className="flex justify-end">
+                        <FaRegTimesCircle className="text-red-700 mr-3 w-5 h-5"/>
+                        <p className="font-medium">{t("noVotes")} {noVotes[index]}</p>
+                    </div>
+                </>
+                ) 
+                : 
+                (
+                    <>
+                    <div className="flex justify-start">
+                        <FaCheck className=" text-green-800 mr-3 w-5 h-5" />
+                        <p>{t("yesVotes")} {yesVotes[index]}</p>
+                    </div>
+                    <div className="flex justify-end">
+                        <FaRegTimesCircle className="text-red-700 mr-3 w-5 h-5"/>
+                        <p className="font-medium">{t("noVotes")} {noVotes[index]}</p>
+                    </div>
+                </>
+                )}
+
             </div>
         </li>)
     }
@@ -344,7 +375,7 @@ const Result = () => {
 }
             <Header />
 
-            <div class="container px-5 py-10 mx-auto flex">
+            <div class="container px-5 py-10 mx-auto">
                 <div class="flex w-full">
                     <StepsResult />
 
@@ -358,7 +389,7 @@ const Result = () => {
                                 <div class="pb-1 text-center">
                                     <p class="text-3xl font-bold text-logobrown-1000 tracking-wider">{vote}</p>                                    
                                 </div>
-                                <hr className="border-logored-500 border-2" />
+                                <hr className="border-logored-500 border-1" />
                                 {electionResultHTML}
                             </div>
                         </div>
@@ -374,7 +405,7 @@ const Result = () => {
                                 <div class="pb-1 text-center">
                                     <p class="text-3xl font-bold text-logobrown-1000 tracking-wider">{vote}</p>                                    
                                 </div>
-                                <hr className="border-logored-500 border-2" />
+                                <hr className="border-logored-500 border-1" />
 
                                 <ul className="text-center">
                                     {questionsInList}
@@ -385,7 +416,12 @@ const Result = () => {
                     )}
                 </div>
 
+            <div class="float-right py-20 w-1/8">
+                <button onClick={() => window.close()} class="w-full text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("closeWindow")}</button>
             </div>
+
+            </div>
+
 
 
             <Footer />

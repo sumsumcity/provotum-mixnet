@@ -116,8 +116,7 @@ const Tallying = () => {
           for (const [index, value] of questions.entries()) {
             questionsInList.push(
             <li key={index}>
-                <hr class="border-logored-500 border-1"/>
-                <p class="text-lg text-center p-2 font-medium text-logobrown-1000 tracking-wider">{value}</p>
+                <p class="text-lg text-center p-2 font-medium text-logobrown-1000 tracking-wider">{index+1}: {value}</p>
                 <div className="flex justify-between">
                     <div className="flex justify-start">
                         {apiQuestions[index].decrypted_sealers.length===maxNumberOfSealers ? 
@@ -145,9 +144,13 @@ const Tallying = () => {
                         </button>
                         ) 
                         : 
+                        !apiQuestions[index].combined_decrypted_shares ?
                         (
-                        <button onClick={() => combineDecryptedKeys(index)} disabled={apiQuestions[index].decrypted_sealers.length!==maxNumberOfSealers || apiQuestions[index].combined_decrypted_shares} class="w-full h-3/4 text-white bg-logored-500 pb-3 pt-1 px-3 enabled:hover:bg-logored-700 rounded-lg text-base transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("combineDecryptionButtonTallying")}</button>
-                        )}
+                        <button onClick={() => combineDecryptedKeys(index)} disabled={apiQuestions[index].decrypted_sealers.length!==maxNumberOfSealers} class="w-full h-3/4 text-white bg-logored-500 pb-3 pt-1 px-3 enabled:hover:bg-logored-700 rounded-lg text-base transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("combineDecryptionButtonTallying")}</button>
+                        )
+                        :
+                        (<div className="flex"><FaCheck className=" text-green-800 mr-3 w-5 h-5" /><p className="">{t("decryptionSuccessful")}</p></div>)
+                    }
                     </div>
                 </div>
             </li>)
@@ -171,7 +174,7 @@ const Tallying = () => {
                                 <div class="pb-1 text-center">
                                     <p class="text-3xl font-bold text-logobrown-1000 tracking-wider">{vote}</p>                                    
                                 </div>
-                                <hr className="border-logored-500 border-2" />
+                                <hr className="border-logored-500 border-1" />
 
                                 <ul className="text-center">
                                     {questionsInList}
@@ -193,7 +196,7 @@ const Tallying = () => {
                                 ) 
                                 : 
                                 (
-                            <button onClick={() => nextStep()} disabled={nextStepPossible()} class="w-full text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("nextStepButton")}</button>
+                            <button onClick={() => nextStep()} disabled={nextStepPossible()} class="w-full text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("resultButton")}</button>
                                 )}
                         </div>
                     </div>
