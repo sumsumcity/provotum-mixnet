@@ -31,5 +31,6 @@
     "buttonTallying":"Decrypt Ballots",
     "keyDecryptionTallying":"key decryption",
     "successfullTallying":"decryption was successfull",
-    "errorWhileDecryptTallying":"Something went wrong while decrypting the key! Please try again!"
+    "errorWhileDecryptTallying":"Something went wrong while decrypting the key! Please try again!",
+    "closeWindow":"Close Window"
 }

@@ -30,6 +30,7 @@
     "buttonTallying":"Entschlüsslen",
     "keyDecryptionTallying":"Schlüssel entschlüsselt",
     "successfullTallying":"Entschlüsselung war erfolgreich",
-    "errorWhileDecryptTallying":"Beim Entschlüsseln des Schlüssels ist etwas schief gelaufen! Bitte versuchen Sie es erneut!"
+    "errorWhileDecryptTallying":"Beim Entschlüsseln des Schlüssels ist etwas schief gelaufen! Bitte versuchen Sie es erneut!",
+    "closeWindow":"Fenster schliessen"
 
 }

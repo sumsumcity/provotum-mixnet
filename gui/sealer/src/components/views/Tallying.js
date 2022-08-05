@@ -42,6 +42,18 @@ const Tallying = () => {
         }
     }
 
+    // If close Window Button should be disabled or not 
+    const sealerDecryptedAll = () => {
+        for (const [index, value] of vote.questions.entries()){
+            if (vote.questions[index].decrypted_sealers.indexOf(window._env_.SEALER) < 0){
+                return true
+
+            }
+        }
+        return false
+
+    }
+
     const requestCreateKey = (index) => {
         console.log(vote.questions[index].questionName)
         return axios.post('http://localhost:4000/postvoting/decrypt', {
@@ -62,7 +74,7 @@ const Tallying = () => {
       for (const [index, value] of vote.questions.entries()){
         questionsInList.push(
             <li key={index}>
-                <div className="flex justify-center"><p className=" text-xl text-logobrown-1000 mx-2">{vote.questions[index].questionName}</p></div>
+                <div className="flex justify-center"><p className=" text-xl text-logobrown-1000 mx-2">{index+1}: {vote.questions[index].questionName}</p></div>
                 {(vote.questions[index].decrypted_sealers.indexOf(window._env_.SEALER) > -1) ? 
                     (
                     <div className="flex justify-between">
@@ -111,7 +123,7 @@ const Tallying = () => {
 
             <Header />
 
-            <div class="container px-5 py-10 mx-auto flex">
+            <div class="container px-5 py-10 mx-auto">
                 <div class="flex w-full">
                     
                     <StepsTallying />
@@ -128,6 +140,10 @@ const Tallying = () => {
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="float-right py-20 w-1/8">
+                    <button onClick={() => window.close()} disabled={sealerDecryptedAll()} class="w-full text-white bg-logodblue-300 py-2 px-8 enabled:hover:bg-logodblue-500 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("closeWindow")}</button>
                 </div>
 
             </div>
