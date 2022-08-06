@@ -7,7 +7,7 @@ import { setVoteName, setVoteQuestion, setType } from "../../redux/VoteSlice"
 import { setNumberOfSeats, setListOfAllElectionListMembers } from "../../redux/ElectionSlice"
 import StepsCreateVote from "../../helpers/StepsCreateVote"
 import { useState } from "react"
-import { FaPlus, FaMinus, FaListAlt} from "react-icons/fa"
+import { FaPlus, FaMinus, FaListAlt, FaEdit} from "react-icons/fa"
 import { useTranslation } from "react-i18next"
 
 const CreateVote = () => {
@@ -30,8 +30,11 @@ const CreateVote = () => {
     const [openModal2, setOpenModal2] = useState(false) // Modal for list election
     const [openModal3, setOpenModal3] = useState(false) // Modal are you sure election
     const [openModal4, setOpenModal4] = useState(false) // Next stept for election
+    const [openModalEditVoteQuestions, setOpenModalEditVoteQuestions] = useState(false)
     const [electionMemberInList, setElectionMemberInList] = useState([])
     const [currentListPos, setCurrentListPos] = useState(1000) // position of list in redux after submiting list
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0) // questionIndex if someone wants to edit the question
+    const [editQuestionValue, setEditQuestionValue] = useState("") // value of the question which will be edited
 
     const {t, i18n} = useTranslation()
 
@@ -157,6 +160,20 @@ const CreateVote = () => {
         nextStep();
       }
 
+    const editValueInVote = (index) => {
+        setCurrentQuestionIndex(index)
+        setEditQuestionValue(questions[index])
+        setOpenModalEditVoteQuestions(true);
+        console.log(questions)
+    }
+
+    const changeVoteInRedux = () => {
+        let arr = [...questions]
+        arr[currentQuestionIndex] = editQuestionValue
+        dispatch(setVoteQuestion(arr))
+        setOpenModalEditVoteQuestions(false)
+    }
+
     const requestVoteCreation = () => {
         return axios.post('http://localhost:4000/prevoting/setup', {
             vote: vote,
@@ -208,7 +225,11 @@ const CreateVote = () => {
 
       // Make list in HTML and questions is from redux
       for (const [index, value] of questions.entries()) {
-        questionsInList.push(<li key={index}><p class="text-lg p-2 font-medium text-logobrown-1000 tracking-wider">{index+1}: {value}</p></li>)
+        questionsInList.push(
+        <li key={index} className="flex justify-center">
+            <p class="text-lg p-2 font-medium text-logobrown-1000 tracking-wider">{index+1}: {value}</p>
+            <button onClick={() => editValueInVote(index)}><FaEdit size={17} className="text-logobrown-1000" /></button>
+        </li>)
     }
 
     // Make list in HTML
@@ -387,7 +408,7 @@ const CreateVote = () => {
                                     <div class="flex justify-between">
                                         <div className="flex justify-start w-1/3">
                                             <button onClick={() => editNumberOfQuestions(numberOfQuestions+1)} class="px-4 mr-3 text-white bg-logored-500 enabled:hover:bg-logored-700 rounded-full text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"><FaPlus /></button>
-                                            <button onClick={() => editNumberOfQuestions(numberOfQuestions-1)} class="px-4 text-white bg-logored-500 enabled:hover:bg-logored-700 rounded-full text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"><FaMinus /></button>
+                                            <button onClick={() => editNumberOfQuestions(numberOfQuestions-1)} disabled={numberOfQuestions===1} class="px-4 text-white bg-logored-500 enabled:hover:bg-logored-700 rounded-full text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"><FaMinus /></button>
                                         </div>
                                         <button onClick={() => submitVoteToRedux()} disabled={voteNameForm==="" || !voteNameForm[0].replace(/\s/g, '').length} class="w-1/3 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("submitButton")}</button>
                                     </div>
@@ -506,6 +527,28 @@ const CreateVote = () => {
             </div>) 
             : null}
 
+            {openModalEditVoteQuestions ? (
+            <div class="fixed top-0 right-0 left-0 bottom-0 z-50 bg-gray-600 bg-opacity-50">
+                <div class="flex items-center justify-center p-4 w-full h-full ">
+                    <div class="relative w-1/3 bg-white rounded-lg shadow dark:bg-gray-700">
+                        <button onClick={() => setOpenModalEditVoteQuestions(false)} type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
+                        </button>
+                        <div class="p-6 text-center">
+                            <div className="flex justify-center pb-4">
+                                <FaEdit size={40} className="text-gray-500"/>
+                            </div>
+                            <div className="pb-2">
+                                <input value={editQuestionValue} onChange={(e) => setEditQuestionValue(e.target.value)} class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                            </div>
+                            <button onClick={() => changeVoteInRedux()} class="text-white bg-logored-500 hover:bg-logored-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                                {t("editQuestionValue")}
+                            </button>                        
+                        </div>
+                    </div>
+                </div>
+            </div>) 
+            : null}
 
             <Footer />
             </div>

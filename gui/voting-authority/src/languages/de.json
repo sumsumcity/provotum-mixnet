@@ -23,6 +23,7 @@
     "createElectionButton":"Wahl erstellen",
     "loadingButton":"Laden...",
     "deleteButtonVoteCreate":"Abstimmung löschen",
+    "editQuestionValue":"Frage bearbeiten",
 
     "electionCreationTitleCreate":"Erstellung der Wahl",
     "electionCreationTextCreate":"Geben Sie den Namen der Wahl, die Anzahl Sitze im Parlament und die Parteien, die eine Liste bereit stellen, ein. Mit den + und - Tasten können Sie weitere Parteien hinzufügen oder löschen. Jede Partei muss eine Liste zur Verfügung stellen. Wenn Sie einen Fehler in der Liste bemerken und diese schon eingereicht wurde, können sie die Wahl einfach löschen und neu beginnen. Wenn Sie jedoch fertig sind, klicken Sie auf die 'Senden'- und 'Wahl erstellen'-Taste.",

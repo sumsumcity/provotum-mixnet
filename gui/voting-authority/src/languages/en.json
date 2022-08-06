@@ -23,8 +23,9 @@
     "createElectionButton":"Create Election",
     "loadingButton":"Loading...",
     "deleteButtonVoteCreate":"Delete Vote",
+    "editQuestionValue":"Edit Question",
 
-    "electionCreationTitleCreate":"Vote Creation",
+    "electionCreationTitleCreate":"Election Creation",
     "electionCreationTextCreate":"Enter the name of the election, the number of seats in the parliament and the parties that can create a list. Use the + and - buttons to add or delete more parties. Each party must submit a list. If you notice an error in the list and it has already been submitted, you can simply delete the election and start over. However, when you are done, click the 'Submit' and 'Create Election' buttons.",
     "electionFormCreate":"Election",
     "numberOfSeatsSelect":"Number of Seats",
