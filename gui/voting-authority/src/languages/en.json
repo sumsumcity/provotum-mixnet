@@ -22,8 +22,9 @@
     "createVoteButton":"Create Vote",
     "createElectionButton":"Create Election",
     "loadingButton":"Loading...",
-    "deleteButtonVoteCreate":"Delete Vote",
-    "editQuestionValue":"Edit Question",
+    "deleteVote":"Delete",
+    "editVote":"Edit",
+    "placeholderVote":"Popular Vote on 15 May 2022",
 
     "electionCreationTitleCreate":"Election Creation",
     "electionCreationTextCreate":"Enter the name of the election, the number of seats in the parliament and the parties that can create a list. Use the + and - buttons to add or delete more parties. Each party must submit a list. If you notice an error in the list and it has already been submitted, you can simply delete the election and start over. However, when you are done, click the 'Submit' and 'Create Election' buttons.",
@@ -43,6 +44,9 @@
     "modal3Subtitle":"After creation you cannot edit this list and the number of seats.",
     "modal4Title":"Are you sure you want to create this election?",
     "modal4Subtitle":"After creation you cannot edit this election.",
+    "modalDeleteTitle":"Are you sure you want to go back?",
+    "modalDeleteSubtitle":"This will delete everything you have created.",
+    
 
 
     "titleKeyGen":"Key Generation",

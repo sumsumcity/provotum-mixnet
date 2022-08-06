@@ -22,8 +22,9 @@
     "createVoteButton":"Abstimmung erstellen",
     "createElectionButton":"Wahl erstellen",
     "loadingButton":"Laden...",
-    "deleteButtonVoteCreate":"Abstimmung löschen",
-    "editQuestionValue":"Frage bearbeiten",
+    "deleteVote":"Löschen",
+    "editVote":"Abstimmung bearbeiten",
+    "placeholderVote":"Volksabstimmung vom 15. Mai 2022",
 
     "electionCreationTitleCreate":"Erstellung der Wahl",
     "electionCreationTextCreate":"Geben Sie den Namen der Wahl, die Anzahl Sitze im Parlament und die Parteien, die eine Liste bereit stellen, ein. Mit den + und - Tasten können Sie weitere Parteien hinzufügen oder löschen. Jede Partei muss eine Liste zur Verfügung stellen. Wenn Sie einen Fehler in der Liste bemerken und diese schon eingereicht wurde, können sie die Wahl einfach löschen und neu beginnen. Wenn Sie jedoch fertig sind, klicken Sie auf die 'Senden'- und 'Wahl erstellen'-Taste.",
@@ -43,6 +44,8 @@
     "modal3Subtitle":"Nach der Erstellung können Sie diese Liste und die Anzahl von Sitze nicht mehr bearbeiten",
     "modal4Title":"Sind Sie sicher, dass Sie diese Wahl erstellen wollen?",
     "modal4Subtitle":"Nach der Erstellung können Sie diese Wahl nicht mehr bearbeiten.",
+    "modalDeleteTitle":"Sind Sie sicher, dass Sie zurückgehen wollen?",
+    "modalDeleteSubtitle":"Dadurch wird alles gelöscht, was Sie erstellt haben.",
 
     "titleKeyGen":"SCHLÜSSELERZEUGUNG",
     "textKeyGen":"Warten Sie, bis alle Schlüssel von den Sealer erstellt wurden. Wenn dies geschehen ist, können Sie diese Schlüssel zu einem Schlüssel kombinieren und dann mit dem nächsten Schritt fortfahren. Durch das Kombinieren der Schlüssel wird ein öffentlicher Schlüssel erstellt, der zur Verschlüsselung der Stimmzettel verwendet wird. ",

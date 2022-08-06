@@ -7,7 +7,7 @@ import { setVoteName, setVoteQuestion, setType } from "../../redux/VoteSlice"
 import { setNumberOfSeats, setListOfAllElectionListMembers } from "../../redux/ElectionSlice"
 import StepsCreateVote from "../../helpers/StepsCreateVote"
 import { useState } from "react"
-import { FaPlus, FaMinus, FaListAlt, FaEdit} from "react-icons/fa"
+import { FaPlus, FaMinus, FaListAlt, FaEdit, FaTrash} from "react-icons/fa"
 import { useTranslation } from "react-i18next"
 
 const CreateVote = () => {
@@ -30,17 +30,20 @@ const CreateVote = () => {
     const [openModal2, setOpenModal2] = useState(false) // Modal for list election
     const [openModal3, setOpenModal3] = useState(false) // Modal are you sure election
     const [openModal4, setOpenModal4] = useState(false) // Next stept for election
-    const [openModalEditVoteQuestions, setOpenModalEditVoteQuestions] = useState(false)
+    const [openModalDelete, setOpenModalDelete] = useState(false) // Modal are you sure delete
     const [electionMemberInList, setElectionMemberInList] = useState([])
     const [currentListPos, setCurrentListPos] = useState(1000) // position of list in redux after submiting list
-    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0) // questionIndex if someone wants to edit the question
-    const [editQuestionValue, setEditQuestionValue] = useState("") // value of the question which will be edited
+
+    // states for edit
+    const [clickedEdit, setClickedEdit] = useState(false)  // to true if something must be edited
+    const [editQuestions, setEditQuestions] = useState([]) // all questsions in redux which will be edited
 
     const {t, i18n} = useTranslation()
 
     // For List in HTML
     const questionsInList = [];
     const questionsInForm = [];
+    const questionsInFormEdit = [];
     const selectOptions = [];
     const electionMemberInListHtml = [];
 
@@ -51,8 +54,9 @@ const CreateVote = () => {
     }
 
     const addToQuestionList = (value, index) => {
-        voteQuestionForm[index] = value;
-        setVoteQuestionForm(voteQuestionForm)
+        let arr = [...voteQuestionForm]
+        arr[index] = value
+        setVoteQuestionForm(arr)
 
     }
 
@@ -64,7 +68,13 @@ const CreateVote = () => {
 
     const submitVoteToRedux = () => {
         dispatch(setVoteName(voteNameForm))
-        dispatch(setVoteQuestion(voteQuestionForm))
+        let finalArr = []
+        for (let i = 0; i<voteQuestionForm.length;i++){
+            if (voteQuestionForm[i]!=="" && voteQuestionForm[i]!==undefined){
+                finalArr.push(voteQuestionForm[i])
+            }
+        }
+        dispatch(setVoteQuestion(finalArr)) 
     }
 
     const submitListToRedux = () => {
@@ -119,59 +129,112 @@ const CreateVote = () => {
         nextStep();
       }
 
-      const makeRequestElection = async () => {
-        setOpenModal4(false)
-        setClickedNextStep(true)
-        const requestVot = await requestVoteCreation()
-        // Error handling
-        if(requestVot.status===0){
-            setClickedNextStep(false);
-            alert("There is no connection to the API or Blockchain. Please start the docker containers")
-            return
+    const makeRequestElection = async () => {
+    setOpenModal4(false)
+    setClickedNextStep(true)
+    const requestVot = await requestVoteCreation()
+    // Error handling
+    if(requestVot.status===0){
+        setClickedNextStep(false);
+        alert("There is no connection to the API or Blockchain. Please start the docker containers")
+        return
+    }
+    else if (requestVot.status!==200){
+        setClickedNextStep(false);
+        alert("Something went wrong while creating the vote! See the console for details.")
+        return
+    }
+    const requestList = await requestAddElectionListToParty(0)
+    if (requestList.status!==200){
+        alert("Something went wrong while adding the list to Party! Please restart all docker-containers to start over.")
+        return
+    }
+    for (let i=1;i<questions.length;i++){
+        if (questions[i]==="" || questions[i]===undefined || !questions[i].replace(/\s/g, '').length) {
+            console.log("This question is not valid")
         }
-        else if (requestVot.status!==200){
-            setClickedNextStep(false);
-            alert("Something went wrong while creating the vote! See the console for details.")
-            return
-        }
-        const requestList = await requestAddElectionListToParty(0)
-        if (requestList.status!==200){
-            alert("Something went wrong while adding the list to Party! Please restart all docker-containers to start over.")
-            return
-        }
-        for (let i=1;i<questions.length;i++){
-            if (questions[i]==="" || questions[i]===undefined || !questions[i].replace(/\s/g, '').length) {
-                console.log("This question is not valid")
+        else {
+            const requestQue = await requestQuestionAddition(i)
+            if (requestQue.status!==200){
+                setClickedNextStep(false)
+                alert("Something went wrong while adding a question! See the console for details. Please restart all docker-containers to start over.")
+                return
             }
-            else {
-                const requestQue = await requestQuestionAddition(i)
-                if (requestQue.status!==200){
-                    setClickedNextStep(false)
-                    alert("Something went wrong while adding a question! See the console for details. Please restart all docker-containers to start over.")
-                    return
-                }
-                const requestList = await requestAddElectionListToParty(i)
-                if (requestList.status!==200){
-                    alert("Something went wrong while adding the list to Party! Please restart all docker-containers to start over.")
-                    return
-                }
+            const requestList = await requestAddElectionListToParty(i)
+            if (requestList.status!==200){
+                alert("Something went wrong while adding the list to Party! Please restart all docker-containers to start over.")
+                return
             }
         }
-        nextStep();
-      }
-
-    const editValueInVote = (index) => {
-        setCurrentQuestionIndex(index)
-        setEditQuestionValue(questions[index])
-        setOpenModalEditVoteQuestions(true);
-        console.log(questions)
+    }
+    nextStep();
     }
 
-    const changeVoteInRedux = () => {
-        let arr = [...questions]
-        arr[currentQuestionIndex] = editQuestionValue
-        dispatch(setVoteQuestion(arr))
-        setOpenModalEditVoteQuestions(false)
+    const deleteQuestion = (index) => {
+        voteQuestionForm.splice(index,1)
+        editNumberOfQuestions(numberOfQuestions-1)
+    }
+
+    const checkIfAbleToDecrease = () => {
+        let arr = []
+        for (let i=0;i<voteQuestionForm.length;i++){
+            if(voteQuestionForm[i]!=='' && voteQuestionForm[i]!==undefined){
+                arr.push(voteQuestionForm)
+            }
+        }
+        if (arr.length<numberOfQuestions){
+            return false
+        }
+        else {
+            return true
+        }
+    }
+
+    const checkIfAbleToDecreaseEdit = () => {
+        let arr = []
+        for (let i=0;i<editQuestions.length;i++){
+            if(editQuestions[i]!=='' && editQuestions[i]!==undefined){
+                arr.push(editQuestions)
+            }
+        }
+        if (arr.length<numberOfQuestions){
+            return false
+        }
+        else {
+            return true
+        }
+    }
+    
+    const prepareEdit = () => {
+        setEditQuestions(questions)
+        setNumberOfQuestions(questions.length)
+        setClickedEdit(true)
+    }
+
+    const editQuestionValue = (newValue, index) => {
+        let arr = [...editQuestions]
+        arr[index] = newValue
+        setEditQuestions(arr)
+    }
+
+    const submitEditQuestions = () => {
+        let finalArr = []
+        for (let i = 0; i<editQuestions.length;i++){
+            if (editQuestions[i]!=="" && editQuestions[i]!==undefined){
+                finalArr.push(editQuestions[i])
+            }
+        }
+        dispatch(setVoteQuestion(finalArr)) 
+        setClickedEdit(false)
+    }
+
+    const deleteQuestionEdit = (index) => {
+        console.log(editQuestions)
+        let arr = []
+        arr = [...editQuestions]
+        arr.splice(index,1)
+        setEditQuestions(arr)
+        editNumberOfQuestions(numberOfQuestions-1)
     }
 
     const requestVoteCreation = () => {
@@ -228,11 +291,10 @@ const CreateVote = () => {
         questionsInList.push(
         <li key={index} className="flex justify-center">
             <p class="text-lg p-2 font-medium text-logobrown-1000 tracking-wider">{index+1}: {value}</p>
-            <button onClick={() => editValueInVote(index)}><FaEdit size={17} className="text-logobrown-1000" /></button>
         </li>)
     }
 
-    // Make list in HTML
+    // Make list in HTML CreateVoteList
     for (let i = 0; i < numberOfQuestions; i++){
         if (type==="election"){
             questionsInForm.push(
@@ -245,16 +307,67 @@ const CreateVote = () => {
                 </>
                 )
         }
-        else {
+        else if (type==="vote" && i===0) {
             questionsInForm.push(
                 <>
-                <label for="question" class="leading-7 text-md text-logobrown-1000">{t("questionFormCreate")} {i+1}</label>                                    
-                <input onChange={(e) => addToQuestionList(e.target.value, i)} type="voteQuestionForm" id="question" name="question" class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                <label for="question" class="leading-7 text-md text-logobrown-1000">{t("questionFormCreate")} {i+1}</label>  
+                <div className="flex justify-between">                               
+                    <input onChange={(e) => addToQuestionList(e.target.value, i)} class="w-11/12 bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                    <button onClick={() => editNumberOfQuestions(numberOfQuestions+1)} class="px-4 text-white bg-logored-500 enabled:hover:bg-logored-700 rounded-full text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"><FaPlus /></button>
+                </div>   
                 </>
                 )
         }
-
+        else if (type==="vote" && i>0) {
+            questionsInForm.push(
+                <>
+                <label for="question" class="leading-7 text-md text-logobrown-1000">{t("questionFormCreate")} {i+1}</label>                                    
+                <div className="flex justify-between">
+                    <input value={voteQuestionForm[i]} onChange={(e) => addToQuestionList(e.target.value, i)} class="w-11/12 bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                    <button onClick={() => deleteQuestion(i)} class="px-4 text-white bg-logored-500 enabled:hover:bg-logored-700 rounded-full text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"><FaMinus /></button>
+                </div>   
+                </>
+                )
+        }
     }
+
+    // Make list in HTML EditVoteList
+    for (let i = 0; i < numberOfQuestions; i++){
+        if (type==="election"){
+            questionsInFormEdit.push(
+                <>
+                <label class="leading-7 text-md text-logobrown-1000">{t("partyFormCreate")} {i+1}</label> 
+                <div className="flex justify-between">                               
+                    <input onChange={(e) => addToQuestionList(e.target.value, i)} class="w-2/3 bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                    <button onClick={() => {setOpenModal2(true); setCurrentListPos(i)}} disabled={globalList[i]!==undefined} className="w-1/4 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("createListButoonCreate")}</button>
+                </div>
+                </>
+                )
+        }
+        else if (type==="vote" && i===0) {
+            questionsInFormEdit.push(
+                <>
+                <label class="leading-7 text-md text-logobrown-1000">{t("questionFormCreate")} {i+1}</label>  
+                <div className="flex justify-between">                               
+                    <input value={editQuestions[i]} onChange={(e) => addToQuestionList(e.target.value, i)} class="w-11/12 bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                    <button onClick={() => editNumberOfQuestions(numberOfQuestions+1)} class="px-4 text-white bg-logored-500 enabled:hover:bg-logored-700 rounded-full text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"><FaPlus /></button>
+                </div>   
+                </>
+                )
+        }
+        else if (type==="vote" && i>0) {
+            questionsInFormEdit.push(
+                <>
+                <label class="leading-7 text-md text-logobrown-1000">{t("questionFormCreate")} {i+1}</label>                                    
+                <div className="flex justify-between">
+                    <input value={editQuestions[i]} onChange={(e) => editQuestionValue(e.target.value, i)} class="w-11/12 bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                    <button onClick={() => deleteQuestionEdit(i)} class="px-4 text-white bg-logored-500 enabled:hover:bg-logored-700 rounded-full text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"><FaMinus /></button>
+                </div>   
+                </>
+                )
+        }
+    }
+
 
     // Make selectOptions in HTML
     for (let i = 1; i < 37; i++){
@@ -323,14 +436,14 @@ const CreateVote = () => {
                                         {questionsInList}
                                     </ul>
                                     <div class="flex justify-center pt-2">
-                                        <button onClick={() => deleteVoteFromRedux()} disabled={clickedNextStep} class="w-1/3 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("deleteButtonElectionCreate")}</button>
+                                        <button onClick={() => setOpenModalDelete(true)} disabled={clickedNextStep} class="w-1/3 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("deleteButtonElectionCreate")}</button>
                                     </div>
                                 </div>
                                 ) : 
                                 (<div class="w-2/3 bg-logobrown-300 rounded-lg p-8 flex flex-col">
                                     <div class="relative mb-4">
                                         <label for="vote" class="leading-7 text-md text-logobrown-1000">{t("electionFormCreate")}</label>
-                                        <input onChange={(e) => setVoteNameForm(e.target.value)} type="voteNameForm" id="vote" name="vote" class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                                        <input onChange={(e) => setVoteNameForm(e.target.value)} class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                                     </div>
                                     <div class="flex justify-left relative mb-4">
                                         <div class="">
@@ -344,7 +457,7 @@ const CreateVote = () => {
                                         {questionsInForm}
                                     </div>
                                     <div class="flex justify-between pt-5">
-                                        <button onClick={() => deleteVoteFromRedux()} class="w-1/3 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("deleteButtonElectionCreate")}</button>
+                                        <button onClick={() => setOpenModalDelete(true)} class="w-1/3 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("deleteButtonElectionCreate")}</button>
                                         <div className="flex justify-center w-1/3">
                                             <button onClick={() => editNumberOfQuestions(numberOfQuestions+1)} class="px-4 mr-3 text-white bg-logored-500 enabled:hover:bg-logored-700 rounded-full text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"><FaPlus /></button>
                                             <button onClick={() => editNumberOfQuestions(numberOfQuestions-1)} class="px-4 text-white bg-logored-500 enabled:hover:bg-logored-700 rounded-full text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"><FaMinus /></button>
@@ -358,7 +471,7 @@ const CreateVote = () => {
                             <div class="py-20 w-full">
                                 {clickedNextStep ? (
                                     <div className="flex justify-between">
-                                        <button onClick={() => dispatch(setType(""))} disabled={true} class="w-1/6 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("backButton")}</button>
+                                        <button onClick={() => setOpenModalDelete(true)} disabled={true} class="w-1/6 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("backButton")}</button>
                                         <button disabled type="button" class="w-1/6 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-75 disabled:cursor-not-allowed">
                                             <svg role="status" class="inline w-4 h-4 mr-3 text-white animate-spin" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="#E5E7EB"/>
@@ -370,7 +483,7 @@ const CreateVote = () => {
                                 ) : 
                                 (
                                     <div className="flex justify-between">
-                                        <button onClick={() => dispatch(setType(""))} disabled={vote!==""} class="w-1/6 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-0">{t("backButton")}</button>
+                                        <button onClick={() => setOpenModalDelete(true)} disabled={vote!==""} class="w-1/6 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-0">{t("backButton")}</button>
                                         <button onClick={() => setOpenModal4(true)} disabled={vote==="" || questions.length===0 || questions[0]==="" || questions[0]===undefined || !questions[0].replace(/\s/g, '').length} class="w-1/6 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("createElectionButton")}</button>
                                     </div>
                                 )}
@@ -382,7 +495,7 @@ const CreateVote = () => {
                             <h1 class="text-5xl font-medium text-logobrown-1000 tracking-wider">{t("voteCreationTitleCreate")}</h1>
                             <p class="text-base py-7 text-logobrown-1000">{t("voteCreationTextCreate")}</p>
                             <div class="flex justify-center ">
-                                {vote!=="" ? (
+                                {vote!=="" && clickedEdit===false ? ( // ControlPage
                                 <div class="w-2/3 bg-logobrown-300 rounded-lg p-8 flex flex-col">
                                     <div class="pb-1 text-center">
                                         <p class="text-3xl font-bold text-logobrown-1000 tracking-wider">{vote}</p>                                    
@@ -392,25 +505,39 @@ const CreateVote = () => {
                                     <ul className="text-center">
                                         {questionsInList}
                                     </ul>
-                                    <div class="flex justify-center pt-2">
-                                        <button onClick={() => deleteVoteFromRedux()} disabled={clickedNextStep} class="w-1/4 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("deleteButtonVoteCreate")}</button>
+                                    <div class="flex justify-between pt-5">
+                                        <button onClick={() => setOpenModalDelete(true)} disabled={clickedNextStep} class="w-auto text-white bg-logored-500 py-1 px-3 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"><div className="flex items-center justify-between"><FaTrash /><p>&nbsp;</p>{t("deleteVote")}</div></button>
+                                        <button onClick={() => prepareEdit()} disabled={clickedNextStep} class="w-auto text-white bg-logored-500 py-1 px-3 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"><div className="flex items-center justify-between"><FaEdit /><p>&nbsp;</p>{t("editVote")}</div></button>
                                     </div>
                                 </div>
-                                ) : 
-                                (<div class="w-2/3 bg-logobrown-300 rounded-lg p-8 flex flex-col">
+                                ) 
+                                :
+                                clickedEdit===false ? ( // Create Vote Page
+                                <div class="w-2/3 bg-logobrown-300 rounded-lg p-8 flex flex-col">
                                     <div class="relative mb-4">
                                         <label for="vote" class="leading-7 text-md text-logobrown-1000">{t("voteFormCreate")}</label>
-                                        <input onChange={(e) => setVoteNameForm(e.target.value)} type="voteNameForm" id="vote" name="vote" class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                                        <input onChange={(e) => setVoteNameForm(e.target.value)} placeholder={t("placeholderVote")} class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                                     </div>
                                     <div class="relative mb-4">
                                         {questionsInForm}
                                     </div>
-                                    <div class="flex justify-between">
-                                        <div className="flex justify-start w-1/3">
-                                            <button onClick={() => editNumberOfQuestions(numberOfQuestions+1)} class="px-4 mr-3 text-white bg-logored-500 enabled:hover:bg-logored-700 rounded-full text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"><FaPlus /></button>
-                                            <button onClick={() => editNumberOfQuestions(numberOfQuestions-1)} disabled={numberOfQuestions===1} class="px-4 text-white bg-logored-500 enabled:hover:bg-logored-700 rounded-full text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"><FaMinus /></button>
-                                        </div>
-                                        <button onClick={() => submitVoteToRedux()} disabled={voteNameForm==="" || !voteNameForm[0].replace(/\s/g, '').length} class="w-1/3 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("submitButton")}</button>
+                                    <div class="flex justify-center">
+                                        <button onClick={() => submitVoteToRedux()} disabled={voteNameForm==="" || !voteNameForm[0].replace(/\s/g, '').length || voteQuestionForm.length===0 || !voteQuestionForm[0].replace(/\s/g, '').length} class="w-1/3 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("submitButton")}</button>
+                                    </div>
+                                </div>
+                                )
+                                :
+                                ( // EditVote
+                                <div class="w-2/3 bg-logobrown-300 rounded-lg p-8 flex flex-col">
+                                    <div class="relative mb-4">
+                                        <label class="leading-7 text-md text-logobrown-1000">{t("voteFormCreate")}</label>
+                                        <input value={vote} onChange={(e) => dispatch(setVoteName(e.target.value))} class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                                    </div>
+                                    <div class="relative mb-4">
+                                        {questionsInFormEdit}
+                                    </div>
+                                    <div class="flex justify-center">
+                                        <button onClick={() => submitEditQuestions()} disabled={vote==="" || !voteNameForm[0].replace(/\s/g, '').length || editQuestions.length===0 || !editQuestions[0].replace(/\s/g, '').length} class="w-1/3 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("submitButton")}</button>
                                     </div>
                                 </div>
                                 )}
@@ -431,8 +558,8 @@ const CreateVote = () => {
                                 ) : 
                                 (
                                     <div className="flex justify-between">
-                                        <button onClick={() => dispatch(setType(""))} disabled={vote!==""} class="w-1/6 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-0 ">{t("backButton")}</button>
-                                        <button onClick={() => setOpenModal(true)} disabled={vote==="" || questions.length===0 || questions[0]==="" || questions[0]===undefined || !questions[0].replace(/\s/g, '').length} class="w-1/6 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("createVoteButton")}</button>
+                                        <button onClick={() => setOpenModalDelete(true)} disabled={vote!=="" || clickedEdit} class="w-1/6 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-0 ">{t("backButton")}</button>
+                                        <button onClick={() => {setOpenModal(true)}} disabled={vote==="" || questions.length===0 || questions[0]==="" || questions[0]===undefined || !questions[0].replace(/\s/g, '').length || clickedEdit} class="w-1/6 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("createVoteButton")}</button>
                                     </div>
                                 )}
                             </div>
@@ -441,7 +568,6 @@ const CreateVote = () => {
 
                 </div>
             </div>
-
 
             {openModal ? (
             <div class="fixed top-0 right-0 left-0 bottom-0 z-50 bg-gray-600 bg-opacity-50">
@@ -527,23 +653,21 @@ const CreateVote = () => {
             </div>) 
             : null}
 
-            {openModalEditVoteQuestions ? (
+            {openModalDelete ? (
             <div class="fixed top-0 right-0 left-0 bottom-0 z-50 bg-gray-600 bg-opacity-50">
                 <div class="flex items-center justify-center p-4 w-full h-full ">
-                    <div class="relative w-1/3 bg-white rounded-lg shadow dark:bg-gray-700">
-                        <button onClick={() => setOpenModalEditVoteQuestions(false)} type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white">
+                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                        <button onClick={() => setOpenModalDelete(false)} type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
                         </button>
                         <div class="p-6 text-center">
-                            <div className="flex justify-center pb-4">
-                                <FaEdit size={40} className="text-gray-500"/>
-                            </div>
-                            <div className="pb-2">
-                                <input value={editQuestionValue} onChange={(e) => setEditQuestionValue(e.target.value)} class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
-                            </div>
-                            <button onClick={() => changeVoteInRedux()} class="text-white bg-logored-500 hover:bg-logored-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
-                                {t("editQuestionValue")}
-                            </button>                        
+                            <svg class="mx-auto mb-4 w-14 h-14 text-gray-400 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">{t("modalDeleteTitle")}</h3>
+                            <p class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">{t("modalDeleteSubtitle")}</p>
+                            <button onClick={() => setOpenModalDelete(false)}  type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">{t("modalNo")}</button>
+                            <button onClick={() => deleteVoteFromRedux()} data-modal-toggle="popup-modal" type="button" class="text-white bg-logored-500 hover:bg-logored-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                                {t("modalYesSure")}
+                            </button>
                         </div>
                     </div>
                 </div>
