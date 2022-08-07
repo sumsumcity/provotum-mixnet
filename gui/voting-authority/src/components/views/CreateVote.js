@@ -310,7 +310,7 @@ const CreateVote = () => {
         if (type==="election"){
             questionsInList.push(
                 <li key={index} className="flex justify-center">
-                    <div className="flex justify-around w-11/12 border-solid border-2 border-logobrown-500 p-2 rounded-md mb-1 mt-2">
+                    <div className="flex justify-between w-11/12 border-solid border-2 border-logobrown-500 p-2 rounded-md mb-1 mt-2">
                         <p class="text-lg p-2 font-medium text-logobrown-1000 tracking-wider">{index+1}: {value}</p>
                         <button onClick={() => {setCurrentListPos(index); setOpenModalShowList(true)}} className="w-auto mt-1 text-white bg-logored-500 py-2 px-4 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"><div className="flex items-center"><FaListAlt /><p>&nbsp;</p>{t("seeListButton")}</div></button>
                     </div>
@@ -521,7 +521,7 @@ const CreateVote = () => {
                                     <ul className="text-center">
                                         {questionsInList}
                                     </ul>
-                                    <div class="flex justify-between pt-5">
+                                    <div class="flex justify-between pt-8">
                                         <button onClick={() => setOpenModalDelete(true)} disabled={clickedNextStep} class="w-auto text-white bg-logored-500 py-1 px-3 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"><div className="flex items-center justify-between"><FaTrash /><p>&nbsp;</p>{t("deleteVote")}</div></button>
                                         <button onClick={() => prepareEdit()} disabled={clickedNextStep} class="w-auto text-white bg-logored-500 py-1 px-3 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"><div className="flex items-center justify-between"><FaEdit /><p>&nbsp;</p>{t("editVote")}</div></button>
                                     </div>
