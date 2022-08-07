@@ -22,6 +22,7 @@
     "createVoteButton":"Abstimmung erstellen",
     "createElectionButton":"Wahl erstellen",
     "loadingButton":"Laden...",
+    "seeListButton":"Liste ansehen",
     "deleteVote":"Löschen",
     "editVote":"Abstimmung bearbeiten",
     "placeholderVote":"z.B. Volksabstimmung vom 15. Mai 2022",

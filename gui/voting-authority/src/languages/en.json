@@ -22,6 +22,7 @@
     "createVoteButton":"Create Vote",
     "createElectionButton":"Create Election",
     "loadingButton":"Loading...",
+    "seeListButton":"View List",
     "deleteVote":"Delete",
     "editVote":"Edit",
     "placeholderVote":"e.g. Popular Vote on 15 May 2022",

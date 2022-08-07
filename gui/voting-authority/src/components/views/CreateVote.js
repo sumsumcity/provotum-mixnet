@@ -31,6 +31,7 @@ const CreateVote = () => {
     const [openModal3, setOpenModal3] = useState(false) // Modal are you sure election
     const [openModal4, setOpenModal4] = useState(false) // Next stept for election
     const [openModalDelete, setOpenModalDelete] = useState(false) // Modal are you sure delete
+    const [openModalShowList, setOpenModalShowList] = useState(false)
     const [electionMemberInList, setElectionMemberInList] = useState([]) // List of all Party Lists
     const [currentListPos, setCurrentListPos] = useState(1000) // position of list in redux after submiting list
 
@@ -46,6 +47,7 @@ const CreateVote = () => {
     const questionsInFormEdit = [];
     const selectOptions = [];
     const electionMemberInListHtml = [];
+    const electionMemberInListHtmlShow =[];
 
 
     const nextStep = () => {
@@ -82,8 +84,8 @@ const CreateVote = () => {
     }
 
     const submitListToRedux = () => {
-        let newList = [...globalList]
-        newList[currentListPos]=electionMemberInList
+        let newList = []
+        newList=electionMemberInList
         console.log(electionMemberInList)
         console.log(newList)
         dispatch(setListOfAllElectionListMembers(newList))
@@ -202,9 +204,18 @@ const CreateVote = () => {
     }
     
     const prepareEdit = () => {
-        setEditQuestions(questions)
-        setNumberOfQuestions(questions.length)
-        setClickedEdit(true)
+        if (type==="election"){
+            setVoteNameForm(vote)
+            setVoteQuestionForm(questions)
+            setNumberOfQuestions(questions.length)
+            setElectionMemberInList(globalList)
+            setClickedEdit(true)
+        }
+        else {
+            setEditQuestions(questions)
+            setNumberOfQuestions(questions.length)
+            setClickedEdit(true)
+        }
     }
 
     const editQuestionValue = (newValue, index) => {
@@ -287,7 +298,10 @@ const CreateVote = () => {
         if (type==="election"){
             questionsInList.push(
                 <li key={index} className="flex justify-center">
-                    <p class="text-lg p-2 font-medium text-logobrown-1000 tracking-wider">{index+1}: {value}</p>
+                    <div className="flex justify-around w-11/12 border-solid border-2 border-logobrown-500 p-2 rounded-md mb-1 mt-2">
+                        <p class="text-lg p-2 font-medium text-logobrown-1000 tracking-wider">{index+1}: {value}</p>
+                        <button onClick={() => {setCurrentListPos(index); setOpenModalShowList(true)}} className="w-auto mt-1 text-white bg-logored-500 py-2 px-4 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"><div className="flex items-center"><FaListAlt /><p>&nbsp;</p>{t("seeListButton")}</div></button>
+                    </div>
                 </li>)
         }
         else {
@@ -306,7 +320,7 @@ const CreateVote = () => {
                     <div className="bg-logobrown-300 w-11/12 border-solid border-2 border-logobrown-500 p-2 rounded-md mb-3">
                         <label class="leading-7 text-md text-logobrown-1000">{t("partyFormCreate")} {i+1}</label> 
                         <input value={voteQuestionForm[i]} onChange={(e) => addToQuestionList(e.target.value, i)} class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
-                        <button onClick={() => {setOpenModal2(true); setCurrentListPos(i)}} disabled={globalList[i]!==undefined} className="w-auto mt-2 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"><div className="flex items-center"><FaListAlt /><p>&nbsp;</p>{t("createListButonCreate")}</div></button>
+                        <button onClick={() => {setOpenModal2(true); setCurrentListPos(i)}} className="w-auto mt-2 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"><div className="flex items-center"><FaListAlt /><p>&nbsp;</p>{t("createListButonCreate")}</div></button>
                     </div>
                     <div className="flex items-center">
                         <button onClick={() => editNumberOfQuestions(numberOfQuestions+1)} class="px-4 h-12 text-white bg-logored-500 enabled:hover:bg-logored-700 rounded-full text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"><FaPlus /></button>
@@ -320,7 +334,7 @@ const CreateVote = () => {
                     <div className="w-11/12 border-solid border-2 border-logobrown-500 p-2 rounded-md mb-3">
                         <label class="leading-7 text-md text-logobrown-1000">{t("partyFormCreate")} {i+1}</label> 
                         <input value={voteQuestionForm[i]} onChange={(e) => addToQuestionList(e.target.value, i)} class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
-                        <button onClick={() => {setOpenModal2(true); setCurrentListPos(i)}} disabled={globalList[i]!==undefined} className="w-auto mt-2 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"><div className="flex items-center"><FaListAlt /><p>&nbsp;</p>{t("createListButonCreate")}</div></button>
+                        <button onClick={() => {setOpenModal2(true); setCurrentListPos(i)}} className="w-auto mt-2 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"><div className="flex items-center"><FaListAlt /><p>&nbsp;</p>{t("createListButonCreate")}</div></button>
                     </div>
                     <div className="flex items-center">
                         <button onClick={() => deleteParty(i)} class="px-4 h-12 text-white bg-logored-500 enabled:hover:bg-logored-700 rounded-full text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"><FaMinus /></button>
@@ -447,6 +461,17 @@ const CreateVote = () => {
         }
     }
 
+    if(currentListPos!==1000){
+        for (let i= 0; i<globalList[currentListPos].length;i++){
+            electionMemberInListHtmlShow.push(
+                <div className="py-2">
+                <label class="leading-7 text-md text-logobrown-1000">Person {i+1}</label>                                    
+                <input value={globalList[currentListPos][i]} disabled class="w-full bg-white rounded border border-gray-300 text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out disabled:opacity-75 disabled:cursor-not-allowed" />
+                </div>
+            )
+        }
+    }
+
     return (
         <section>
             <div className="flex flex-col h-screen">
@@ -486,43 +511,20 @@ const CreateVote = () => {
                                     </ul>
                                     <div class="flex justify-between pt-5">
                                         <button onClick={() => setOpenModalDelete(true)} disabled={clickedNextStep} class="w-auto text-white bg-logored-500 py-1 px-3 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"><div className="flex items-center justify-between"><FaTrash /><p>&nbsp;</p>{t("deleteVote")}</div></button>
-                                        <button onClick={() => setClickedEdit(true)} disabled={clickedNextStep} class="w-auto text-white bg-logored-500 py-1 px-3 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"><div className="flex items-center justify-between"><FaEdit /><p>&nbsp;</p>{t("editVote")}</div></button>
+                                        <button onClick={() => prepareEdit()} disabled={clickedNextStep} class="w-auto text-white bg-logored-500 py-1 px-3 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"><div className="flex items-center justify-between"><FaEdit /><p>&nbsp;</p>{t("editVote")}</div></button>
                                     </div>
                                 </div>
                                 ) : 
-                                !clickedEdit ?
                                 ( //Create Election Page
                                 <div class="w-2/3 bg-logobrown-300 rounded-lg p-8 flex flex-col">
                                     <div class="relative mb-4">
                                         <label class="leading-7 text-md text-logobrown-1000">{t("electionFormCreate")}</label>
-                                        <input onChange={(e) => setVoteNameForm(e.target.value)} placeholder={t("placeholderElection")} class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                                        <input value={voteNameForm} onChange={(e) => setVoteNameForm(e.target.value)} placeholder={t("placeholderElection")} class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                                     </div>
                                     <div class="flex justify-left relative mb-4">
                                         <div class="">
                                             <label class="leading-7 w-1/2 text-md text-logobrown-1000">{t("numberOfSeatsSelect")}</label>
-                                            <select onChange={(e) => dispatch(setNumberOfSeats(e.target.value))} disabled={globalList.length!==0} id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  focus:ring-logored-400 focus:broder-logored-400 block w-full p-2.5">
-                                                {selectOptions}
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="relative mb-4">
-                                        {questionsInForm}
-                                    </div>
-                                    <div class="flex justify-center pt-5">
-                                        <button onClick={() => setOpenModal3(true)} disabled={voteNameForm==="" || !voteNameForm[0].replace(/\s/g, '').length || electionMemberInList.length!==numberOfQuestions || checkIfEmptyList()} class="w-1/3 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("submitButton")}</button>
-                                    </div>
-                                </div>
-                                ) :
-                                ( // Edit Election Page
-                                    <div class="w-2/3 bg-logobrown-300 rounded-lg p-8 flex flex-col">
-                                    <div class="relative mb-4">
-                                        <label class="leading-7 text-md text-logobrown-1000">{t("electionFormCreate")}</label>
-                                        <input value={vote} onChange={(e) => setVoteNameForm(e.target.value)} placeholder={t("placeholderElection")} class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
-                                    </div>
-                                    <div class="flex justify-left relative mb-4">
-                                        <div class="">
-                                            <label class="leading-7 w-1/2 text-md text-logobrown-1000">{t("numberOfSeatsSelect")}</label>
-                                            <select onChange={(e) => dispatch(setNumberOfSeats(e.target.value))} disabled={globalList.length!==0} id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  focus:ring-logored-400 focus:broder-logored-400 block w-full p-2.5">
+                                            <select onChange={(e) => dispatch(setNumberOfSeats(e.target.value))} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  focus:ring-logored-400 focus:broder-logored-400 block w-full p-2.5">
                                                 {selectOptions}
                                             </select>
                                         </div>
@@ -692,7 +694,7 @@ const CreateVote = () => {
                             <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">{t("modal3Title")}</h3>
                             <p class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">{t("modal3Subtitle")}</p>
                             <button onClick={() => setOpenModal3(false)}  type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">{t("modalNo")}</button>
-                            <button onClick={() => {submitVoteToRedux();submitListToRedux();setOpenModal3(false)}} data-modal-toggle="popup-modal" type="button" class="text-white bg-logored-500 hover:bg-logored-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                            <button onClick={() => {submitVoteToRedux();submitListToRedux();setOpenModal3(false);setClickedEdit(false)}} data-modal-toggle="popup-modal" type="button" class="text-white bg-logored-500 hover:bg-logored-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
                                 {t("modalYesSure")}
                             </button>
                         </div>
@@ -742,6 +744,27 @@ const CreateVote = () => {
                 </div>
             </div>) 
             : null}
+
+            {openModalShowList ? (
+            <div class="fixed h-screen right-0 left-0 z-50 bg-gray-600 bg-opacity-50">
+                <div className="flex justify-center w-full h-full p-36">
+                    <div className="bg-white rounded-lg p-6 text-center">
+                        <div className="flex justify-center">
+                            <FaListAlt size={70} className="text-gray-400" />
+                        </div>
+                        <div className="h-3/4 overflow-y-auto">
+                            {electionMemberInListHtmlShow}
+                        </div>
+                        <div className="pt-8">
+                            <button onClick={() => setOpenModalShowList(false)} class="text-white bg-logored-500 hover:bg-logored-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                                {t("modalCloseList")}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>) 
+            : null}
+
 
             <Footer />
             </div>
