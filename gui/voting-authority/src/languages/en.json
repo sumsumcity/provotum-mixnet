@@ -29,11 +29,11 @@
     "placeholderElection":"e.g. 2023 Swiss federal election",
 
     "electionCreationTitleCreate":"Election Creation",
-    "electionCreationTextCreate":"Enter the name of the election, the number of seats in the parliament and the parties that can create a list. Use the + and - buttons to add or delete more parties. Each party must submit a list. If you notice an error in the list and it has already been submitted, you can simply delete the election and start over. However, when you are done, click the 'Submit' and 'Create Election' buttons.",
+    "electionCreationTextCreate":"Enter the name of the election, the number of seats in the parliament and the parties that can create a list. Use the + and - buttons to add or delete more parties. Each party must submit a list of participants in the election. When you are done filling out the form, you can submit the election and then check your information. If you find an error, you can still edit it. However, after you click the 'Create Election' button, the entries can no longer be changed.",
     "electionFormCreate":"Election",
     "numberOfSeatsSelect":"Number of Seats",
     "partyFormCreate":"Party",
-    "createListButonCreate":"Create List",
+    "createListButtonCreate":"Create List",
     "deleteButtonElectionCreate":"Delete Election",
 
     "modal1Title":"Are you sure you want to create this vote?",
@@ -42,11 +42,10 @@
     "modalNo":"No, cancel",
     "modalCloseList":"Close List",
     "modalCancel":"Cancel",
-    "modal3Title":"Are you sure you want to create this list?",
-    "modal3Subtitle":"After creation you cannot edit this list and the number of seats.",
+    "modal3Title":"Are you sure you want to submit your form?",
     "modal4Title":"Are you sure you want to create this election?",
     "modal4Subtitle":"After creation you cannot edit this election.",
-    "modalDeleteTitle":"Are you sure you want to go back?",
+    "modalDeleteTitle":"Are you sure you want to execute this action?",
     "modalDeleteSubtitle":"This will delete everything you have created.",
     
 

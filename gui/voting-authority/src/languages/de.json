@@ -29,11 +29,11 @@
     "placeholderElection":"z.b. Schweizer Parlamentswahlen 2023",
 
     "electionCreationTitleCreate":"Erstellung der Wahl",
-    "electionCreationTextCreate":"Geben Sie den Namen der Wahl, die Anzahl Sitze im Parlament und die Parteien, die eine Liste bereit stellen, ein. Mit den + und - Tasten können Sie weitere Parteien hinzufügen oder löschen. Jede Partei muss eine Liste zur Verfügung stellen. Wenn Sie einen Fehler in der Liste bemerken und diese schon eingereicht wurde, können sie die Wahl einfach löschen und neu beginnen. Wenn Sie jedoch fertig sind, klicken Sie auf die 'Senden'- und 'Wahl erstellen'-Taste.",
+    "electionCreationTextCreate":"Geben Sie den Namen der Wahl, die Anzahl der Sitze im Parlament und die Parteien ein, die eine Liste erstellen können. Verwenden Sie die Schaltflächen + und -, um weitere Parteien hinzuzufügen oder zu löschen. Jede Partei muss eine Liste der Teilnehmer an der Wahl einreichen. Wenn Sie mit dem Ausfüllen des Formulars fertig sind, können Sie die Wahl absenden und anschließend Ihre Angaben überprüfen. Falls Sie dabei einen Fehler finden, können Sie diesen immer noch bearbeiten. Nachdem Sie jedoch auf die 'Wahl erstellen'-Taste geklickt haben, können die Eingaben nicht mehr geändert werden.",
     "electionFormCreate":"Wahl",
     "numberOfSeatsSelect":"Anzahl von Sitze",
     "partyFormCreate":"Partei",
-    "createListButonCreate":"Liste erstellen",
+    "createListButtonCreate":"Liste erstellen",
     "deleteButtonElectionCreate":"Wahl löschen",
 
     "modal1Title":"Sind Sie sicher, dass Sie diese Abstimmung erstellen wollen?",
@@ -42,11 +42,10 @@
     "modalNo":"Nein, abbrechen",
     "modalCloseList":"Liste schliessen",
     "modalCancel":"Abbrechen",
-    "modal3Title":"Sind Sie sicher, dass Sie diese Liste erstellen wollen?",
-    "modal3Subtitle":"Nach der Erstellung können Sie diese Liste und die Anzahl von Sitze nicht mehr bearbeiten",
+    "modal3Title":"Sind Sie sicher, dass Sie Ihr Formular so abschicken wollen?",
     "modal4Title":"Sind Sie sicher, dass Sie diese Wahl erstellen wollen?",
     "modal4Subtitle":"Nach der Erstellung können Sie diese Wahl nicht mehr bearbeiten.",
-    "modalDeleteTitle":"Sind Sie sicher, dass Sie zurückgehen wollen?",
+    "modalDeleteTitle":"Sind Sie sicher, dass Sie diese Aktion ausführen wollen?",
     "modalDeleteSubtitle":"Dadurch wird alles gelöscht, was Sie erstellt haben.",
 
     "titleKeyGen":"SCHLÜSSELERZEUGUNG",
