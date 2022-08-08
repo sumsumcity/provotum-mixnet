@@ -133,11 +133,15 @@ const Vote = () => {
                 }
             })
             if(count<2){
-                selectOptionsAllCandidates.push(
-                    <>
-                    <option value={[i,j]}>{vote.questions[i].election_list_members[j]} ({vote.questions[i].questionName})</option>
-                    </>
-                )
+                if (vote.questions[i].election_list_members[j]!==null){ // Show no null as candidate
+                    if (vote.questions[i].election_list_members[j].replace(/\s/g, '').length!==0){ // Show no space strings as candidate
+                        selectOptionsAllCandidates.push(
+                            <>
+                            <option value={[i,j]}>{vote.questions[i].election_list_members[j]} ({vote.questions[i].questionName})</option>
+                            </>
+                        )
+                    }
+                }
             }
             else {
             selectOptionsAllCandidates.push(
