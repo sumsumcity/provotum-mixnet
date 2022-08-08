@@ -24,7 +24,7 @@ const Tallying = () => {
 
     const decryptKey = async(index) => {
         setClickedCreateKey(true)
-        await new Promise(resolve => setTimeout(resolve, 8000));
+        await new Promise(resolve => setTimeout(resolve, 6000));
         console.log("now it starts")
         const response = await requestCreateKey(index)
         if(response.status===0){
@@ -38,6 +38,7 @@ const Tallying = () => {
             return
         }
         else {
+            await new Promise(resolve => setTimeout(resolve, 2100));
             setClickedCreateKey(false)
         }
     }
