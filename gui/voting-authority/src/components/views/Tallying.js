@@ -67,6 +67,7 @@ const Tallying = () => {
             return
         }
         else {
+            await new Promise(resolve => setTimeout(resolve, 2100)); // give little time to update status from api
             setClickedCombineDecryptedKeys(false)
         }
     }
