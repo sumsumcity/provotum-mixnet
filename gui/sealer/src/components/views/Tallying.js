@@ -143,10 +143,6 @@ const Tallying = () => {
                     </div>
                 </div>
 
-                <div class="float-right py-20 w-1/8">
-                    <button onClick={() => window.close()} disabled={sealerDecryptedAll()} class="w-full text-white bg-logodblue-300 py-2 px-8 enabled:hover:bg-logodblue-500 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("closeWindow")}</button>
-                </div>
-
             </div>
 
             <Footer />
