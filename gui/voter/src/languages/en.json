@@ -46,6 +46,10 @@
     "titleSubmition":"Submition",
     "textSubmition":"Check your entries. These can be changed by clicking the 'Back' button. However, if you are satisfied, you can proceed by clicking the 'Submit' button. Your ballot will be cast during this process and cannot be changed later. This may take a while. ",
     "emptyListSubmition":"List: Empty List",
+    "modal1Title":"Are you sure that you want to cast this ballot?",
+    "modal1Subtitle":"Your entries cannot be changed after you have cast your ballot.",
+    "modalNo":"No, cancel",
+    "modalYesSure":"Yes, I'm sure",
 
 
 

@@ -45,6 +45,10 @@
     "titleSubmition":"Einreichung",
     "textSubmition":"Überprüfen Sie ihre Einträge. Diese können durch Klicken auf die 'Zurück'-Taste geändert werden. Wenn Sie jedoch zufrieden sind, können Sie mit dem nächsten Schritt fortfahren indem sie die 'Einreichen'-Taste betätigen. Ihr Stimmzettel wird dabei abgegeben und kann später nicht mehr geändert werden. Dies kann eine Weile dauern. ",
     "emptyListSubmition":"Liste: Leere Liste",
+    "modal1Title":"Sind Sie sicher, dass Sie diesen Stimmzettel abgeben wollen?",
+    "modal1Subtitle":"Ihre Angaben können nicht mehr verändert werden, nachdem Sie Ihre Stimme abgegeben haben.",
+    "modalNo":"Nein, abbrechen",
+    "modalYesSure":"Ja, ich bin sicher",
 
 
     "titleConfirmation":"Bestätigung",
