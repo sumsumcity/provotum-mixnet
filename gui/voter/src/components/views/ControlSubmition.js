@@ -163,8 +163,8 @@ const ControlSubmition = () => {
                     {vote.questions[0].election_list_members.length!==0 ? 
                     ( // Election
                     <div class="w-7/10 p-10 py-6">
-                        <h1 class="text-5xl font-medium title-font text-logobrown-1000 tracking-wider">{t("titleSubmition")}</h1>
-                        <p class="text-base py-7 text-logobrown-1000">{t("textSubmition")}</p>
+                        <h1 class="text-5xl font-medium title-font text-logobrown-1000 tracking-wider">{t("titleSubmission")}</h1>
+                        <p class="text-base py-7 text-logobrown-1000">{t("textSubmission")}</p>
 
                         <div class="flex justify-center w-full">
                             <div class="w-3/4 bg-logolblue-100 rounded-lg p-8 flex flex-col">
@@ -172,7 +172,7 @@ const ControlSubmition = () => {
                                     <h2 className="text-3xl font-medium title-font text-logobrown-1000 text-center mb-10">{vote.vote}</h2>
                                     {listNumber===231 ? 
                                     (
-                                        <h3 className="text-2xl font-medium title-font text-logobrown-1000 text-center underline underline-offset-2">{t("emptyListSubmition")}</h3>
+                                        <h3 className="text-2xl font-medium title-font text-logobrown-1000 text-center underline underline-offset-2">{t("emptyListSubmission")}</h3>
 
                                     ):
                                     (
@@ -205,8 +205,8 @@ const ControlSubmition = () => {
                     :
                     ( // Vote
                     <div class="w-7/10 p-10 py-6">
-                        <h1 class="text-5xl font-medium title-font text-logobrown-1000 tracking-wider">{t("titleSubmition")}</h1>
-                        <p class="text-base py-7 text-logobrown-1000">{t("textSubmition")}</p>
+                        <h1 class="text-5xl font-medium title-font text-logobrown-1000 tracking-wider">{t("titleSubmission")}</h1>
+                        <p class="text-base py-7 text-logobrown-1000">{t("textSubmission")}</p>
 
                         <div class="flex justify-center w-full">
                             <div class="w-3/4 bg-logolblue-100 rounded-lg p-8 flex flex-col">

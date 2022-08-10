@@ -84,7 +84,7 @@ const Vote = () => {
                     <div className="m-auto w-2/3">
                         <p className="text-lg text-logobrown-1000 px-3 py-5">{value.questionName}</p>
                     </div>
-                    <div className="w-1/3">
+                    <div className="m-auto w-1/3">
                         <div class="flex pl-10 py-1">
                             <input onChange={() => handleChange(index, 1)} checked={ballot[index]===1} type="checkbox" className="w-4 h-4 accent-green-700 my-auto"/>
                             <label className="pl-1">{t("yesVote")}</label>

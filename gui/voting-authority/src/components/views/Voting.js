@@ -61,7 +61,7 @@ const Voting = () => {
 
           // Make list in HTML and questions is from redux
           for (const [index, value] of questions.entries()) {
-            questionsInList.push(<li key={index}><p class="text-lg p-2 font-medium text-logobrown-1000 tracking-wider">{index+1}: {value}</p></li>)
+            questionsInList.push(<li key={index} className="py-2 border-b-2"><p class="text-lg p-2 font-medium text-logobrown-1000 tracking-wider">{index+1}: {value}</p></li>)
         }
 
 

@@ -287,7 +287,7 @@ const Result = () => {
     // Make list in HTML and questions is from redux
     for (const [index, value] of questions.entries()) {
         questionsInList.push(
-        <li key={index}>
+        <li key={index} className="py-2 border-b-2">
             <p class="text-lg text-center p-2 font-medium text-logobrown-1000 tracking-wider">{index+1}: {value}</p>
             <div className="flex justify-between ">
                 {yesVotes[index]>noVotes[index] ? (
