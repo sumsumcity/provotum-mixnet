@@ -48,7 +48,7 @@ The three graphical user interfaces with which you can interact with the `api-cl
 When the API is launched for the first time, it directly creates twenty users who are allowed to vote on the voter gui. The `username` and `password` is always "user" with a number between 1 and twenty (for example `user1`).
 
 ### Note
-The version of the docker-compose.yml file is 3.8, which means that you need at least docker-compose version 1.25.5. To install docker-compose version 1.26.0 on Ubuntu, please follow the instructions below:
+The version of the `docker-compose.yml` file is 3.8, which means that you need at least docker-compose version 1.25.5. To install docker-compose version 1.26.0 on Ubuntu, please follow the instructions below:
 
 ```bash
 sudo curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/bin/docker-compose
