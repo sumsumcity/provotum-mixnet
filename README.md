@@ -63,3 +63,8 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-
 
 sudo chmod +x /usr/local/bin/docker-compose
 ```
+You also need a personal access token (PAT) from GitHub. Create a PAT in the developer settings on GitHUb and then run the following command in the terminal:
+
+```bash
+echo '<my_token>' | docker login ghcr.io -u <my_username> --password-stdin
+```
