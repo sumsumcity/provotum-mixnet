@@ -125,31 +125,33 @@ const Vote = () => {
 
     // Make selectOptions for each candidate in HTML
     for (let i = 0; i < vote.questions.length; i++) {
-        for (let j=0; j < vote.questions[i].election_list_members.length; j++){
-            let count = 0;
-            electedPeople.forEach(element => {
-                if (element===i+","+j){
-                    count += 1
-                }
-            })
-            if(count<2){
-                if (vote.questions[i].election_list_members[j]!==null){ // Show no null as candidate
-                    if (vote.questions[i].election_list_members[j].replace(/\s/g, '').length!==0){ // Show no space strings as candidate
-                        selectOptionsAllCandidates.push(
-                            <>
-                            <option value={[i,j]}>{vote.questions[i].election_list_members[j]} ({vote.questions[i].questionName})</option>
-                            </>
-                        )
+        if(vote.questions[i].election_list_members!==undefined){
+            for (let j=0; j < vote.questions[i].election_list_members.length; j++){
+                let count = 0;
+                electedPeople.forEach(element => {
+                    if (element===i+","+j){
+                        count += 1
+                    }
+                })
+                if(count<2){
+                    if (vote.questions[i].election_list_members[j]!==null){ // Show no null as candidate
+                        if (vote.questions[i].election_list_members[j].replace(/\s/g, '').length!==0){ // Show no space strings as candidate
+                            selectOptionsAllCandidates.push(
+                                <>
+                                <option value={[i,j]}>{vote.questions[i].election_list_members[j]} ({vote.questions[i].questionName})</option>
+                                </>
+                            )
+                        }
                     }
                 }
+                else {
+                selectOptionsAllCandidates.push(
+                    <>
+                    <option value={[i,j]} disabled>{vote.questions[i].election_list_members[j]} ({vote.questions[i].questionName})</option>
+                    </>
+                )
             }
-            else {
-            selectOptionsAllCandidates.push(
-                <>
-                <option value={[i,j]} disabled>{vote.questions[i].election_list_members[j]} ({vote.questions[i].questionName})</option>
-                </>
-            )
-        }
+            }
         }
     }
 
@@ -164,7 +166,7 @@ const Vote = () => {
                     
                     <StepsVoting />
 
-                    {vote.questions[0].election_list_members.length!==0 ? 
+                    {vote.questions[0].election_list_members!==undefined ? 
                     ( //Election
                     <div class="w-7/10 p-10 py-6">
                         <h1 class="text-5xl font-medium title-font text-logobrown-1000 tracking-wider">{t("titleElectionVote")}</h1>

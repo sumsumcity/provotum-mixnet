@@ -90,11 +90,11 @@ services:
     stdin_open: true
     tty: true
 
-  voter:
-    container_name: voter_gui
-    image: sumsumcity/gui_voter
-    ports:
-      - "8000:8000"
-    stdin_open: true
-    tty: true
+  #voter:
+  #  container_name: voter_gui
+  #  image: sumsumcity/gui_voter
+  #  ports:
+  #    - "8000:8000"
+  #  stdin_open: true
+  #  tty: true
 

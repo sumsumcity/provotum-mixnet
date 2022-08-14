@@ -20,7 +20,7 @@
 
 
     "titleHome":"Startseite",
-    "textHome":"Warten Sie, bis eine Abstimmung oder Wahl erstellt und geöffnet wurde. Wenn die Umfrage oder Wahl einen offenen Status hat, sollten Sie den Stimmzettel ausfüllen können. Wenn diese Taste jedoch nicht betätigt werden kann, hat dieser Benutzer bereits einmal an der Abstimmung oder Wahl teilgenommen. ",
+    "textHome":"Warten Sie, bis eine Abstimmung oder Wahl erstellt und geöffnet wurde. Wenn die Umfrage oder Wahl einen offenen Status hat, können Sie den Stimmzettel ausfüllen können. Wenn diese Taste jedoch nicht betätigt werden kann, hat dieser Benutzer bereits einmal an der Abstimmung oder Wahl teilgenommen. ",
     "statusHome":"Keine Abstimmungen oder Wahlen sind erstellt...",
     "logoutButtonHome":"Abmelden",
     "numberOfQuestionsHome":"Anzahl Fragen:",
@@ -42,9 +42,9 @@
     "noneVote":"Keine",
 
 
-    "titleSubmition":"Einreichung",
-    "textSubmition":"Überprüfen Sie ihre Einträge. Diese können durch Klicken auf die 'Zurück'-Taste geändert werden. Wenn Sie jedoch zufrieden sind, können Sie mit dem nächsten Schritt fortfahren indem sie die 'Einreichen'-Taste betätigen. Ihr Stimmzettel wird dabei abgegeben und kann später nicht mehr geändert werden. Dies kann eine Weile dauern. ",
-    "emptyListSubmition":"Liste: Leere Liste",
+    "titleSubmission":"Einreichung",
+    "textSubmission":"Überprüfen Sie ihre Einträge. Diese können durch Klicken auf die 'Zurück'-Taste geändert werden. Wenn Sie jedoch zufrieden sind, können Sie mit dem nächsten Schritt fortfahren indem sie die 'Einreichen'-Taste betätigen. Ihr Stimmzettel wird dabei abgegeben und kann später nicht mehr geändert werden. Dies kann eine Weile dauern. ",
+    "emptyListSubmission":"Liste: Leere Liste",
     "modal1Title":"Sind Sie sicher, dass Sie diesen Stimmzettel abgeben wollen?",
     "modal1Subtitle":"Ihre Angaben können nicht mehr verändert werden, nachdem Sie Ihre Stimme abgegeben haben.",
     "modalNo":"Nein, abbrechen",

@@ -63,7 +63,7 @@ const Home = () => {
                                     <div className="">
                                         <h2 className="text-3xl font-medium title-font text-logobrown-1000 text-center mb-10">{vote.vote}</h2>
                                         <div className="flex justify-between px-20">
-                                            {vote.questions[0].election_list_members.length!==0 ? (
+                                            {vote.questions[0].election_list_members!==undefined ? (
                                                 <div className="flex justify-center basis-1/3 m-auto">
                                                     <p className="text-lg text-logobrown-1000">{t("numberOfListsHome")} {vote.questions.length}</p>
                                                 </div>
