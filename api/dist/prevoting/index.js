@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.prevotingRouter = void 0;
 const express_1 = __importDefault(require("express"));
 const prevotingRouter = express_1.default.Router();
 exports.prevotingRouter = prevotingRouter;
@@ -19,6 +20,11 @@ const bodyParser = require("body-parser");
 // Create Vote: reqParam: vote, question
 prevotingRouter.post("/setup", (req, res) => {
     const { exec } = require('child_process');
+    if (req.body.vote === undefined) {
+        res.status(400);
+        res.send("The vote has no vote name");
+        return;
+    }
     exec('cd .. && cd client && rustup run nightly-2022-05-20 cargo run --release -- va setup --vote "' + req.body.vote + '" --question "' + req.body.question + '"', (error, stdout, stderr) => {
         if (error) {
             res.status(400);
@@ -81,31 +87,39 @@ prevotingRouter.post("/storequestion", (req, res) => {
 // Create Keys: reqParam: vote, sk, sealer
 prevotingRouter.post("/keygen", (req, res) => {
     const { exec } = require('child_process');
-    exec('cd .. && cd client && rustup run nightly-2022-05-20 cargo run --release -- sealer keygen --vote "' + req.body.vote + '" --sk "' + req.body.sk + '" --who "' + req.body.sealer + '"', (error, stdout, stderr) => __awaiter(void 0, void 0, void 0, function* () {
-        if (error) {
-            res.status(400);
-            console.error(`exec error: ${error}`);
-            return;
-        }
-        else if (stdout.search("successfully submitted public key share!") > 0) {
-            res.json(req.body);
-            const Vote = require("../mongodb/Vote");
-            // Save Sealer to the Vote
-            yield Vote.findOneAndUpdate({ vote: req.body.vote }, { $push: { sealers: req.body.sealer } });
-        }
-        else if (stdout.search("VoteDoesNotExist") > 0) {
-            res.status(400);
-            res.send("This vote does not exist");
-        }
-        else if (stdout.search("Connection refused") > 0) {
-            res.status(404);
-            res.send("WsHandshake failed. Connection refused");
+    const Vote = require("../mongodb/Vote");
+    Vote.findOne({ vote: req.body.vote }, function (err, obj) {
+        if (!obj.sealers.includes(req.body.sealer)) {
+            exec('cd .. && cd client && rustup run nightly-2022-05-20 cargo run --release -- sealer keygen --vote "' + req.body.vote + '" --sk "' + req.body.sk + '" --who "' + req.body.sealer + '"', (error, stdout, stderr) => __awaiter(this, void 0, void 0, function* () {
+                if (error) {
+                    res.status(400);
+                    console.error(`exec error: ${error}`);
+                    return;
+                }
+                else if (stdout.search("successfully submitted public key share!") > 0) {
+                    res.json(req.body);
+                    // Save Sealer to the Vote
+                    yield Vote.findOneAndUpdate({ vote: req.body.vote }, { $push: { sealers: req.body.sealer } });
+                }
+                else if (stdout.search("VoteDoesNotExist") > 0) {
+                    res.status(400);
+                    res.send("This vote does not exist");
+                }
+                else if (stdout.search("Connection refused") > 0) {
+                    res.status(404);
+                    res.send("WsHandshake failed. Connection refused");
+                }
+                else {
+                    res.status(400);
+                    res.send("Something went wrong!");
+                }
+            }));
         }
         else {
             res.status(400);
-            res.send("Something went wrong!");
+            res.send("This sealer has already created a key");
         }
-    }));
+    });
 });
 // Combine Public Key Shares: reqParam: vote
 prevotingRouter.post("/combineKeyShares", (req, res) => {

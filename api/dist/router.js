@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.loadRoutes = void 0;
 const express_1 = __importDefault(require("express"));
 const example_1 = require("./example");
 const helpers_1 = require("./helpers");
@@ -22,7 +23,7 @@ const initDB_1 = require("./mongodb/initDB");
 const createRoutes = () => {
     const router = express_1.default.Router();
     // Connect to provotum dbs
-    initDB_1.connect("provotum");
+    (0, initDB_1.connect)("provotum");
     //Add all routs here
     router.use("/example", example_1.exampleRouter);
     router.use("/prevoting", prevoting_1.prevotingRouter);

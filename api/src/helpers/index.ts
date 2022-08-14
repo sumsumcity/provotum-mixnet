@@ -67,7 +67,6 @@ helpersRouter.post("/login", async(req, res) => {
     try{
         const password = await User.find({name: req.body.name}).select("password -_id")
         const status = await User.find({name: req.body.name}).select("logged_in -_id")
-        console.log(status[0].logged_in===true)
         if (password.length===0){
             res.status(404)
             res.json({message:"username was not found"})

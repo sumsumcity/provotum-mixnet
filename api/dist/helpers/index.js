@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.helpersRouter = void 0;
 const express_1 = __importDefault(require("express"));
 const helpersRouter = express_1.default.Router();
 exports.helpersRouter = helpersRouter;
@@ -79,7 +80,6 @@ helpersRouter.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, fun
     try {
         const password = yield User.find({ name: req.body.name }).select("password -_id");
         const status = yield User.find({ name: req.body.name }).select("logged_in -_id");
-        console.log(status[0].logged_in === true);
         if (password.length === 0) {
             res.status(404);
             res.json({ message: "username was not found" });
