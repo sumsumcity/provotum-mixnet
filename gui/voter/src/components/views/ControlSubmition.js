@@ -160,7 +160,7 @@ const ControlSubmition = () => {
                     
                     <StepsSubmition />
 
-                    {vote.questions[0].election_list_members!==undefined ? 
+                    {vote.questions[0].election_list_members.length!==0 ? 
                     ( // Election
                     <div class="w-7/10 p-10 py-6">
                         <h1 class="text-5xl font-medium title-font text-logobrown-1000 tracking-wider">{t("titleSubmission")}</h1>
