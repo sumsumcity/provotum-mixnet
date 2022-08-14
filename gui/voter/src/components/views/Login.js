@@ -50,6 +50,8 @@ const Login = () => {
             return response;
           })
           .catch(function (error) {
+            setClickedLogin(false)
+            alert(error)
             console.log(error);
             return error.response;
           });
