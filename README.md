@@ -46,3 +46,25 @@ The three graphical user interfaces with which you can interact with the `api-cl
 ### Identity Provider Mock
 
 When the API is launched for the first time, it directly creates twenty users who are allowed to vote on the voter gui. The `username` and `password` is always "user" with a number between 1 and twenty (for example `user1`).
+
+### Note
+The version of the `docker-compose.yml` file is 3.8, which means that you need at least docker-compose version 1.25.5. To install docker-compose version 1.26.0 on Ubuntu, please follow the instructions below:
+
+```bash
+sudo curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/bin/docker-compose
+
+sudo chmod +x /usr/bin/docker-compose
+```
+or
+
+```bash
+sudo curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+
+sudo chmod +x /usr/local/bin/docker-compose
+```
+You also need a personal access token (PAT) from GitHub. Create a PAT in the developer settings on GitHUb and then run the following command in the terminal:
+
+```bash
+echo '<my_token>' | docker login ghcr.io -u <my_username> --password-stdin
+```
