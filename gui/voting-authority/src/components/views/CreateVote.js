@@ -88,7 +88,7 @@ const CreateVote = () => {
         dispatch(setVoteName(voteNameForm))
         let finalArr = []
         for (let i = 0; i<voteQuestionForm.length;i++){
-            if (voteQuestionForm[i]!=="" && voteQuestionForm[i]!==undefined){
+            if (voteQuestionForm[i]!=="" && voteQuestionForm[i]!==undefined && voteQuestionForm[i].replace(/\s/g, '').length!==0){
                 finalArr.push(voteQuestionForm[i])
             }
         }
@@ -111,7 +111,7 @@ const CreateVote = () => {
     }
 
     const editNumberOfQuestions = (newNumber) => {
-        if (newNumber>=1){
+        if (newNumber>=1 && newNumber<=20){
             setNumberOfQuestions(newNumber)
         }
     }
