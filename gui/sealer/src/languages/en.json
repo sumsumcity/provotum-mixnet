@@ -19,6 +19,7 @@
     "loadingButton": "Loading...",
     "successfullKeyGen":"key creation was successfull",
     "waitingForVAKeyGen":"wait for voting authority to start vote or election",
+    "waitingForVACreateAllQuestions":"wait until all questions or parties are created",
 
 
     "titleVoting":"Voting / Election",

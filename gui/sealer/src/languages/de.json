@@ -19,6 +19,7 @@
     "loadingButton": "Laden...",
     "successfullKeyGen":"Schlüsselerstellung war erfolgreich",
     "waitingForVAKeyGen":"warten auf die Voting Authority bis sie die Abstimmung oder Wahl startet",
+    "waitingForVACreateAllQuestions":"warten Sie, bis alle Fragen oder Parteien erstellt worden sind",
 
 
     "titleVoting":"Abstimmung / Wahl",
