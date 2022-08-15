@@ -82,7 +82,7 @@ const Vote = () => {
             <li key={index} className="my-5 bg-logolblue-50 rounded-lg">
                 <div className="flex justify-between">
                     <div className="m-auto w-2/3">
-                        <p className="text-lg text-logobrown-1000 px-3 py-5">{value.questionName}</p>
+                        <p className="text-sm sm:text-lg text-logobrown-1000 px-3 py-5">{value.questionName}</p>
                     </div>
                     <div className="m-auto w-1/3">
                         <div class="flex pl-10 py-1">
@@ -113,7 +113,7 @@ const Vote = () => {
         peopleInListHTML.push(
             <div className="flex justify-center w-full">
                 <div className="flex justify-around w-auto my-3 bg-logolblue-50 rounded-lg">
-                    <label className="text-lg text-logobrown-1000 px-3">Person {i+1}: </label>
+                    <label className="text-sm sm:text-lg text-logobrown-1000 px-3">Person {i+1}: </label>
                     <select onChange={(e) => makeElectedList(i, e.target.value)} class="h-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  focus:ring-logolblue-400 focus:broder-logolblue-400 block">
                         <option>{t("emptyVote")}</option>
                         {selectOptionsAllCandidates}
@@ -159,19 +159,19 @@ const Vote = () => {
 
             <Header />
 
-            <div class="container px-5 py-10 mx-auto flex">
-                <div class="flex w-full">
+            <div class="container px-5 py-3 sm:py-10 mx-auto flex">
+                <div class="md:flex w-full">
                     
                     <StepsVoting />
 
                     {vote.questions[0].election_list_members.length!==0 ? 
                     ( //Election
-                    <div class="w-7/10 p-10 py-6">
-                        <h1 class="text-5xl font-medium title-font text-logobrown-1000 tracking-wider">{t("titleElectionVote")}</h1>
-                        <p class="text-base py-7 text-logobrown-1000">{t("textElectionVote")}</p>
+                    <div class="w-7/10 sm:p-10 py-6">
+                        <h1 class="text-2xl sm:text-5xl font-medium text-logobrown-1000 tracking-wider">{t("titleElectionVote")}</h1>
+                        <p class="text-sm sm:text-base py-1 sm:py-7 text-logobrown-1000">{t("textElectionVote")}</p>
 
                         <div class="flex justify-center w-full">
-                            <div class="w-3/4 bg-logolblue-100 rounded-lg p-8 flex flex-col">
+                            <div class="w-full xl:w-3/4 bg-logolblue-100 rounded-lg p-2 md:p-8 flex flex-col">
                                 <div className="">
                                     <h2 className="text-3xl font-medium title-font text-logobrown-1000 text-center mb-10">{vote.vote}</h2>
                                     <div className="flex justify-center">
@@ -189,21 +189,21 @@ const Vote = () => {
                                 </div>
                             </div>        
                         </div>
-                        {console.log(electedPeople)}
-                        <button onClick={() => back()} class="w-1/6 mt-20 float-left text-white bg-logolblue-500 py-2 px-8 enabled:hover:bg-logolblue-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("backButton")}</button>
-                        <button onClick={() => nextStepElection()} disabled={candidateChecker()} class="w-1/6 mt-20 float-right text-white bg-logolblue-500 py-2 px-8 enabled:hover:bg-logolblue-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("nextStepButton")}</button>
-
+                        <div className="flex justify-between pb-10 w-full">
+                            <button onClick={() => back()} class="w-1/3 xl:w-1/6 mt-2 md:mt-20 float-left text-white bg-logolblue-500 py-2 lg:px-8 enabled:hover:bg-logolblue-700 rounded-lg text-md lg:text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("backButton")}</button>
+                            <button onClick={() => nextStepElection()} disabled={candidateChecker()} class="w-1/3 xl:w-1/6 mt-2 md:mt-20 float-right text-white bg-logolblue-500 py-2 lg:px-8 enabled:hover:bg-logolblue-700 rounded-lg text-md lg:text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("nextStepButton")}</button>
+                        </div>
                     </div>
 
                     )
                     :
                     ( //Vote
-                    <div class="w-7/10 p-10 py-6">
-                        <h1 class="text-5xl font-medium title-font text-logobrown-1000 tracking-wider">{t("titleVote")}</h1>
-                        <p class="text-base py-7 text-logobrown-1000">{t("textVote")}</p>
+                    <div class="w-7/10 sm:p-10 py-6">
+                        <h1 class="text-2xl sm:text-5xl text-center md:text-left font-medium text-logobrown-1000 tracking-wider">{t("titleVote")}</h1>
+                        <p class="text-sm sm:text-base py-1 sm:py-7 text-logobrown-1000">{t("textVote")}</p>
 
                         <div class="flex justify-center w-full">
-                            <div class="w-3/4 bg-logolblue-100 rounded-lg p-8 flex flex-col">
+                            <div class="w-full xl:w-3/4 bg-logolblue-100 rounded-lg p-2 md:p-8 flex flex-col">
                                 <div className="">
                                     <h2 className="text-3xl font-medium title-font text-logobrown-1000 text-center mb-10">{vote.vote}</h2>
                                     <ul className="">
@@ -213,9 +213,10 @@ const Vote = () => {
                             </div>        
                         </div>
 
-                        <button onClick={() => back()} class="w-1/6 mt-20 float-left text-white bg-logolblue-500 py-2 px-8 enabled:hover:bg-logolblue-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("backButton")}</button>
-                        <button onClick={() => nextStep()} class="w-1/6 mt-20 float-right text-white bg-logolblue-500 py-2 px-8 enabled:hover:bg-logolblue-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("nextStepButton")}</button>
-
+                        <div className="flex justify-between pb-10 w-full">
+                            <button onClick={() => back()} class="w-1/3 xl:w-1/6 mt-2 md:mt-20 float-left text-white bg-logolblue-500 py-2 lg:px-8 enabled:hover:bg-logolblue-700 rounded-lg text-md lg:text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("backButton")}</button>
+                            <button onClick={() => nextStep()} class="w-1/3 xl:w-1/6 mt-2 md:mt-20 float-right text-white bg-logolblue-500 py-2 lg:px-8 enabled:hover:bg-logolblue-700 rounded-lg text-md lg:text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("nextStepButton")}</button>
+                        </div>
                     </div>
                     )}
 

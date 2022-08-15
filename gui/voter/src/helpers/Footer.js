@@ -12,7 +12,7 @@ const Footer = () => {
     return (
         <footer class="bg-logolblue-100 fixed bottom-0 w-full h-14">
             <div className="flex h-full items-center justify-center">
-                <div class="flex px-4">
+                <div class="px-4 hidden sm:flex">
                     <p class="text-base text-logobrown-1000">© 2022 Copyright: Raphael Wäspi</p>
                 </div>
                 <div class="flex px-4">

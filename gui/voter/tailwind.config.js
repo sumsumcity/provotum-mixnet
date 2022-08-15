@@ -43,7 +43,7 @@ module.exports = {
         },
         "logolblue": {
           100:"#d3dde3",
-          200:"#98b0bd",
+          200:"#b7c8d1",
           300:"#89a5b3",
           400:"#7b99aa",
           500:"#6c8ea0",
