@@ -68,7 +68,7 @@ const Header = () => {
             <div class="w-1/3">
                 <a class="flex items-center text-logobrown-1000">
                 <img src={logo} width="60" alt="logo" />
-                <span class="ml-3 font-medium text-2xl hidden sm:block">Provotum Mixnet</span>
+                <span class="ml-3 font-medium text-2xl hidden lg:block">Provotum Mixnet</span>
                 </a>
             </div>
             <div class="w-1/3 text-center">

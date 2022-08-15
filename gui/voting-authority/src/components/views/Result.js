@@ -355,10 +355,10 @@ const Result = () => {
                 <hr class="border-logored-500 border-1"/>
                 <div className="flex justify-evenly">
                     <div className="flex items-center">
-                        <h2 class="text-2xl align-middle p-2 font-medium text-logobrown-1000 tracking-wider">{questions[i]} ({partyVotes}):</h2>
+                        <h2 class="text-base lg:text-2xl align-middle p-2 font-medium text-logobrown-1000 tracking-wider">{questions[i]} ({partyVotes}):</h2>
                     </div>
                     <div className="float-right">
-                        <p class="text-lg text-center p-2 font-medium text-logobrown-1000 tracking-wider">{partyCandidateHTML}</p>
+                        <p class="text-sm lg:text-lg text-center p-2 font-medium text-logobrown-1000 tracking-wider">{partyCandidateHTML}</p>
                     </div>
                 </div>
             </div>
@@ -376,16 +376,16 @@ const Result = () => {
             <Header />
 
             <div class="container px-5 py-10 mx-auto">
-                <div class="sm:flex w-full">
+                <div class="md:flex w-full">
                     <StepsResult />
 
                     {type==="election" ? 
                     (
-                    <div class="w-7/10 p-10 py-6">
-                        <h1 class="text-5xl font-medium title-font text-logobrown-1000 tracking-wider">{t("titleResult")}</h1>
-                        <p class="text-base py-7 text-logobrown-1000">{t("textResultElection")}</p>
+                    <div class="w-7/10 sm:p-10 py-6">
+                        <h1 class="text-2xl sm:text-5xl font-medium text-logobrown-1000 tracking-wider">{t("titleResult")}</h1>
+                        <p class="text-sm sm:text-base py-1 sm:py-7 text-logobrown-1000">{t("textResultElection")}</p>
                         <div class="flex justify-center ">
-                            <div class="w-2/3 bg-logobrown-300 rounded-lg p-8 flex flex-col">
+                            <div class="w-full lg:w-2/3 bg-logobrown-300 rounded-lg p-3 lg:p-8 flex flex-col">
                                 <div class="pb-1 text-center">
                                     <p class="text-3xl font-bold text-logobrown-1000 tracking-wider">{vote}</p>                                    
                                 </div>
@@ -397,11 +397,11 @@ const Result = () => {
                     ) 
                     : 
                     (
-                    <div class="w-7/10 p-10 py-6">
-                        <h1 class="text-5xl font-medium title-font text-logobrown-1000 tracking-wider">{t("titleResult")}</h1>
-                        <p class="text-base py-7 text-logobrown-1000">{t("textResultVote")}</p>
+                    <div class="w-7/10 sm:p-10 py-6">
+                        <h1 class="text-2xl sm:text-5xl font-medium text-logobrown-1000 tracking-wider">{t("titleResult")}</h1>
+                        <p class="text-sm sm:text-base py-1 sm:py-7 text-logobrown-1000">{t("textResultVote")}</p>
                         <div class="flex justify-center ">
-                            <div class="w-2/3 bg-logobrown-300 rounded-lg p-8 flex flex-col">
+                            <div class="w-full lg:w-2/3 bg-logobrown-300 rounded-lg p-3 lg:p-8 flex flex-col">
                                 <div class="pb-1 text-center">
                                     <p class="text-3xl font-bold text-logobrown-1000 tracking-wider">{vote}</p>                                    
                                 </div>

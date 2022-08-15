@@ -71,14 +71,14 @@ const Voting = () => {
             <Header />
 
             <div class="container px-5 py-10 mx-auto flex">
-                <div class="sm:flex w-full">
+                <div class="md:flex w-full">
                     <StepsVoting />
 
-                    <div class="w-7/10 p-10 py-6">
-                        <h1 class="text-5xl font-medium title-font text-logobrown-1000 tracking-wider">{t("titleVoting")}</h1>
-                        <p class="text-base py-7 text-logobrown-1000">{t("textVoting")}</p>
+                    <div class="w-7/10 sm:p-10 py-6">
+                        <h1 class="text-2xl sm:text-5xl font-medium text-logobrown-1000 tracking-wider">{t("titleVoting")}</h1>
+                        <p class="text-sm sm:text-base py-1 sm:py-7 text-logobrown-1000">{t("textVoting")}</p>
                         <div class="flex justify-center ">
-                            <div class="w-2/3 bg-logobrown-300 rounded-lg p-8 flex flex-col">
+                            <div class="w-full lg:w-2/3 bg-logobrown-300 rounded-lg p-3 lg:p-8 flex flex-col">
                                 <div class="pb-1 text-center">
                                     <p class="text-3xl font-bold text-logobrown-1000 tracking-wider">{vote}</p>                                    
                                 </div>
@@ -91,7 +91,7 @@ const Voting = () => {
                         </div>
 
 
-                        <div class="float-right py-20 w-1/8">
+                        <div class="float-right py-5 lg:py-20 w-1/8">
                             {clickedNextStep ? 
                                 (
                                 <button disabled type="button" class="w-full text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-lg transition-all disabled:opacity-75 disabled:cursor-not-allowed">
