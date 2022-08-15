@@ -164,7 +164,7 @@ const Tallying = () => {
             <Header />
 
             <div class="container px-5 py-10 mx-auto flex">
-                <div class="flex w-full">
+                <div class="sm:flex w-full">
                     <StepsTallying />
 
                     <div class="w-7/10 p-10 py-6">

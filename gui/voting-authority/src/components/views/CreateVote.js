@@ -490,7 +490,7 @@ const CreateVote = () => {
             <Header />
 
             <div class="container px-5 py-10 mx-auto flex overflow-y-auto">
-                <div class="flex w-full">
+                <div class="sm:flex w-full">
 
                     <StepsCreateVote />
 

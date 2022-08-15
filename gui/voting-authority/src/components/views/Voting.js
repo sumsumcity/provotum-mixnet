@@ -71,7 +71,7 @@ const Voting = () => {
             <Header />
 
             <div class="container px-5 py-10 mx-auto flex">
-                <div class="flex w-full">
+                <div class="sm:flex w-full">
                     <StepsVoting />
 
                     <div class="w-7/10 p-10 py-6">

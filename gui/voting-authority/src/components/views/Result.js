@@ -376,7 +376,7 @@ const Result = () => {
             <Header />
 
             <div class="container px-5 py-10 mx-auto">
-                <div class="flex w-full">
+                <div class="sm:flex w-full">
                     <StepsResult />
 
                     {type==="election" ? 

@@ -11,8 +11,8 @@ const Footer = () => {
     return (
         <footer class="bg-logobrown-300 fixed bottom-0 w-full h-14">
             <div className="flex h-full items-center justify-center">
-                <div class="flex px-4">
-                    <p class="text-base text-logobrown-1000">© 2022 Copyright: Raphael Wäspi</p>
+                <div class="px-4 hidden sm:block">
+                    <p class="text-md text-logobrown-1000">© 2022 Copyright: Raphael Wäspi</p>
                 </div>
                 <div class="flex px-4">
                     {i18next.language==="en" ? 
