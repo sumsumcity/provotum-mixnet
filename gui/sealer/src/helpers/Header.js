@@ -70,20 +70,20 @@ const Header = () => {
             <div class="w-1/3">
                 <a class="flex items-center text-logobrown-1000">
                 <img src={logo} width="60" alt="logo" />
-                <span class="ml-3 font-medium text-2xl">Provotum Mixnet</span>
+                <span class="ml-3 font-medium text-2xl hidden lg:block">Provotum Mixnet</span>
                 </a>
             </div>
             <div class="w-1/3 text-center">
-                <h2 class="text-logobrown-1000 font-medium text-2xl">Sealer {window._env_.SEALER}</h2>
+                <h2 class="text-logobrown-1000 font-medium sm:text-2xl">Sealer {window._env_.SEALER}</h2>
             </div>
             <div class="w-1/3 flex justify-end">
                 {chainStatus==="ON CHAIN" ? (
-                    <h3 className=" text-green-700 font-medium text-xl pr-4">{t("connectionON")}</h3>
+                    <h3 className=" text-green-700 font-medium sm:text-xl sm:pr-4">{t("connectionON")}</h3>
                 ) : (
-                    <h3 className="text-red-700 font-medium text-xl pr-4">{t("connectionOFF")}</h3>
+                    <h3 className="text-red-700 font-medium sm:text-xl sm:pr-4">{t("connectionOFF")}</h3>
                 )}
                 <a href="https://github.com/provotum">
-                    <img src={github_logo} width="35" alt="github logo" class="float-right hover:scale-150 duration-150" />
+                    <img src={github_logo} width="35" alt="github logo" class="float-right hover:scale-150 duration-150 hidden sm:block" />
                 </a>
             </div>
         </div>

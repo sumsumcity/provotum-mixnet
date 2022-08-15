@@ -82,16 +82,16 @@ const KeyGeneration = () => {
             <Header />
 
             <div class="container px-5 py-10 mx-auto flex">
-                <div class="flex w-full">
+                <div class="md:flex w-full">
                     
                     <StepsKeyGen />
 
-                    <div class="w-7/10 p-10 py-6">
-                        <h1 class="text-5xl font-medium title-font text-logobrown-1000 tracking-wider">{t("titleKeyGen")}</h1>
-                        <p class="text-base py-7 text-logobrown-1000">{t("textKeyGen")}</p>
+                    <div class="w-7/10 sm:p-10 py-6">
+                        <h1 class="text-2xl sm:text-5xl font-medium text-logobrown-1000 tracking-wider">{t("titleKeyGen")}</h1>
+                        <p class="text-sm sm:text-base py-1 sm:py-7 text-logobrown-1000">{t("textKeyGen")}</p>
                         
                         <div class="container px-5 py-7 mx-auto">
-                            <div class="w-1/2 mx-auto text-center">
+                            <div class="w-full lg:w-1/2 mx-auto text-center">
 
                                 {(vote.sealers.indexOf(window._env_.SEALER) > -1) ? 
                                 (
@@ -152,7 +152,7 @@ const KeyGeneration = () => {
                                     ) 
                                     : 
                                     (
-                                    <button onClick={() => createKey()} disabled={vote.sealers.indexOf(window._env_.SEALER) > -1 || !createdAllQuestions} class="w-1/3 text-white bg-logodblue-300 py-2 px-8 enabled:hover:bg-logodblue-500 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("buttonKeyGen")}</button>
+                                    <button onClick={() => createKey()} disabled={vote.sealers.indexOf(window._env_.SEALER) > -1 || !createdAllQuestions} class="w-1/2 sm:w-1/3 text-white bg-logodblue-300 py-2 xl:px-8 enabled:hover:bg-logodblue-500 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("buttonKeyGen")}</button>
                                     )}
                                 </div>
                             </div>
