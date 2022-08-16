@@ -387,7 +387,7 @@ const Result = () => {
                         <div class="flex justify-center ">
                             <div class="w-full lg:w-2/3 bg-logobrown-300 rounded-lg p-3 lg:p-8 flex flex-col">
                                 <div class="pb-1 text-center">
-                                    <p class="text-3xl font-bold text-logobrown-1000 tracking-wider">{vote}</p>                                    
+                                    <p class="text-xl lg:text-3xl font-bold text-logobrown-1000 tracking-wider">{vote}</p>                                    
                                 </div>
                                 <hr className="border-logored-500 border-1" />
                                 {electionResultHTML}
