@@ -64,8 +64,8 @@ const Confirmation = () => {
                         </div>
 
                         <div className="flex justify-between pb-10 w-full">
-                            <button onClick={() => logout()} class="w-1/3 xl:w-1/6 mt-2 md:mt-20 float-left text-white bg-logolblue-500 py-2 lg:px-8 enabled:hover:bg-logolblue-700 rounded-lg text-md lg:text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("logoutButton")}</button>
-                            <button onClick={() => home()} class="w-1/3 xl:w-1/6 mt-2 md:mt-20 float-right text-white bg-logolblue-500 py-2 lg:px-8 enabled:hover:bg-logolblue-700 rounded-lg text-md lg:text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("buttonConfirmation")}</button>
+                            <button onClick={() => logout()} class="w-1/3 xl:w-1/6 mt-2 md:mt-20 float-left text-white bg-logolblue-500 py-2 lg:px-8 enabled:hover:bg-logolblue-700 rounded-lg text-sm lg:text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("logoutButton")}</button>
+                            <button onClick={() => home()} class="w-1/3 xl:w-1/6 mt-2 md:mt-20 float-right text-white bg-logolblue-500 py-2 lg:px-8 enabled:hover:bg-logolblue-700 rounded-lg text-sm lg:text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("buttonConfirmation")}</button>
                         </div>
                     </div>
                 </div>

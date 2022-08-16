@@ -61,7 +61,7 @@ const Home = () => {
                             <div class="flex justify-center w-full">
                                 <div class="w-full sm:w-3/4 bg-logolblue-100 rounded-lg p-2 lg:p-8 mt-2 sm:mt-20 flex flex-col">
                                     <div className="">
-                                        <h2 className="text-2xl sm:text-3xl font-medium title-font text-logobrown-1000 text-center mb-4 lg:mb-10">{vote.vote}</h2>
+                                        <h2 className="text-xl sm:text-3xl font-medium title-font text-logobrown-1000 text-center mb-4 lg:mb-10">{vote.vote}</h2>
                                         <div className="flex justify-around ">
                                             {vote.questions[0].election_list_members.length!==0 ? (
                                                 <div className="hidden lg:flex justify-center basis-1/3 m-auto">
@@ -75,7 +75,7 @@ const Home = () => {
                                                 </div>
                                             )}
                                             <div className="flex justify-center lg:basis-1/3 ">
-                                                <button onClick={() => fillOutBallot()} disabled={vote.phase!=="Voting" || user.data[0].votedQuestions.length!==0} class="w-full p-2 lg:w-3/4 text-md lg:text-lg text-white bg-logolblue-500 py-2 mx-auto lg:px-8 enabled:hover:bg-logolblue-700 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("buttonHome")}</button>
+                                                <button onClick={() => fillOutBallot()} disabled={vote.phase!=="Voting" || user.data[0].votedQuestions.length!==0} class="w-full p-2 lg:w-3/4 text-sm lg:text-lg text-white bg-logolblue-500 py-2 mx-auto lg:px-8 enabled:hover:bg-logolblue-700 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("buttonHome")}</button>
                                             </div>
                                                 <div className="flex justify-center lg:basis-1/3">
                                                 {vote.phase==="Voting" ? 
@@ -115,7 +115,7 @@ const Home = () => {
                             </div>
                         )}
 
-                        <button onClick={() => logout()} class="lg:w-1/6 mt-5 lg:mt-20 float-right text-white bg-logolblue-500 py-2 px-1 lg:px-8 enabled:hover:bg-logolblue-700 rounded-lg text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("logoutButtonHome")}</button>
+                        <button onClick={() => logout()} class="lg:w-1/6 mt-5 lg:mt-20 float-right text-white bg-logolblue-500 py-2 px-1 lg:px-8 enabled:hover:bg-logolblue-700 rounded-lg text-sm lg:text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("logoutButtonHome")}</button>
 
 
                     </div>

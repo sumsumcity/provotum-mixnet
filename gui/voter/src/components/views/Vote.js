@@ -173,7 +173,7 @@ const Vote = () => {
                         <div class="flex justify-center w-full">
                             <div class="w-full xl:w-3/4 bg-logolblue-100 rounded-lg p-2 md:p-8 flex flex-col">
                                 <div className="">
-                                    <h2 className="text-3xl font-medium title-font text-logobrown-1000 text-center mb-10">{vote.vote}</h2>
+                                    <h2 className="text-xl sm:text-3xl font-medium title-font text-logobrown-1000 text-center mb-10">{vote.vote}</h2>
                                     <div className="flex justify-center">
                                         <div className="flex justify-center bg-logolblue-50 rounded-lg w-auto p-2">
                                             <label className="h-full text-lg text-logobrown-1000 px-3">{t("listVote")} </label>
@@ -190,8 +190,8 @@ const Vote = () => {
                             </div>        
                         </div>
                         <div className="flex justify-between pb-10 w-full">
-                            <button onClick={() => back()} class="w-1/3 xl:w-1/6 mt-2 md:mt-20 float-left text-white bg-logolblue-500 py-2 lg:px-8 enabled:hover:bg-logolblue-700 rounded-lg text-md lg:text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("backButton")}</button>
-                            <button onClick={() => nextStepElection()} disabled={candidateChecker()} class="w-1/3 xl:w-1/6 mt-2 md:mt-20 float-right text-white bg-logolblue-500 py-2 lg:px-8 enabled:hover:bg-logolblue-700 rounded-lg text-md lg:text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("nextStepButton")}</button>
+                            <button onClick={() => back()} class="w-1/3 xl:w-1/6 mt-2 md:mt-20 float-left text-white bg-logolblue-500 py-2 lg:px-8 enabled:hover:bg-logolblue-700 rounded-lg text-sm lg:text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("backButton")}</button>
+                            <button onClick={() => nextStepElection()} disabled={candidateChecker()} class="w-1/3 xl:w-1/6 mt-2 md:mt-20 float-right text-white bg-logolblue-500 py-2 lg:px-8 enabled:hover:bg-logolblue-700 rounded-lg text-sm lg:text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("nextStepButton")}</button>
                         </div>
                     </div>
 
@@ -205,7 +205,7 @@ const Vote = () => {
                         <div class="flex justify-center w-full">
                             <div class="w-full xl:w-3/4 bg-logolblue-100 rounded-lg p-2 md:p-8 flex flex-col">
                                 <div className="">
-                                    <h2 className="text-3xl font-medium title-font text-logobrown-1000 text-center mb-10">{vote.vote}</h2>
+                                    <h2 className="text-xl sm:text-3xl font-medium title-font text-logobrown-1000 text-center mb-10">{vote.vote}</h2>
                                     <ul className="">
                                     {questionsInList}
                                     </ul>
@@ -214,8 +214,8 @@ const Vote = () => {
                         </div>
 
                         <div className="flex justify-between pb-10 w-full">
-                            <button onClick={() => back()} class="w-1/3 xl:w-1/6 mt-2 md:mt-20 float-left text-white bg-logolblue-500 py-2 lg:px-8 enabled:hover:bg-logolblue-700 rounded-lg text-md lg:text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("backButton")}</button>
-                            <button onClick={() => nextStep()} class="w-1/3 xl:w-1/6 mt-2 md:mt-20 float-right text-white bg-logolblue-500 py-2 lg:px-8 enabled:hover:bg-logolblue-700 rounded-lg text-md lg:text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("nextStepButton")}</button>
+                            <button onClick={() => back()} class="w-1/3 xl:w-1/6 mt-2 md:mt-20 float-left text-white bg-logolblue-500 py-2 lg:px-8 enabled:hover:bg-logolblue-700 rounded-lg text-sm lg:text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("backButton")}</button>
+                            <button onClick={() => nextStep()} class="w-1/3 xl:w-1/6 mt-2 md:mt-20 float-right text-white bg-logolblue-500 py-2 lg:px-8 enabled:hover:bg-logolblue-700 rounded-lg text-sm lg:text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("nextStepButton")}</button>
                         </div>
                     </div>
                     )}
