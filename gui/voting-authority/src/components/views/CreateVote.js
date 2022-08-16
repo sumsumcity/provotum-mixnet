@@ -59,7 +59,7 @@ const CreateVote = () => {
         let arr = [...voteQuestionForm]
         arr[index] = value
         setVoteQuestionForm(arr)
-
+        setEditQuestions(arr)
     }
 
     const addToElectionMemberInList = (value, index) => {
@@ -239,7 +239,7 @@ const CreateVote = () => {
     const submitEditQuestions = () => {
         let finalArr = []
         for (let i = 0; i<editQuestions.length;i++){
-            if (editQuestions[i]!=="" && editQuestions[i]!==undefined){
+            if (editQuestions[i]!=="" && editQuestions[i]!==undefined && editQuestions[i].replace(/\s/g, '').length!==0){
                 finalArr.push(editQuestions[i])
             }
         }
