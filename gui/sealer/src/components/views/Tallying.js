@@ -131,7 +131,7 @@ const Tallying = () => {
 
                     <div class="w-7/10 sm:p-10 py-6">
                         <h1 class="text-2xl sm:text-5xl font-medium text-logobrown-1000 tracking-wider">{t("titleTallying")}</h1>
-                        <p class="textext-sm sm:text-base py-1 sm:py-7 text-logobrown-1000">{t("textTallying")}</p>
+                        <p class="text-sm sm:text-base py-1 sm:py-7 text-logobrown-1000">{t("textTallying")}</p>
                         
                         <div class="container px-1 sm:px-5 py-7 mx-auto">
                             <div class="w-full sm:w-3/4 mx-auto text-center">
