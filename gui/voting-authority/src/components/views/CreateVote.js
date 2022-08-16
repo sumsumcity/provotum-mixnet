@@ -230,6 +230,20 @@ const CreateVote = () => {
         }
     }
 
+    const editNumberOfSeats = (number) => {
+        dispatch(setNumberOfSeats(number))
+        let fullArr = []
+
+        for (let i=0;i<electionMemberInList.length;i++){
+            let arr = [...electionMemberInList[i]]
+            while (arr.length>number){
+                arr.pop()
+            }
+            fullArr.push(arr)
+        }
+        setElectionMemberInList(fullArr)
+    }
+
     const editQuestionValue = (newValue, index) => {
         let arr = [...editQuestions]
         arr[index] = newValue
@@ -474,13 +488,17 @@ const CreateVote = () => {
     }
 
     if(currentListPos!==1000 && vote!==""){
-        for (let i= 0; i<globalList[currentListPos].length;i++){
-            electionMemberInListHtmlShow.push(
-                <div className="py-2">
-                <label class="leading-7 text-md text-logobrown-1000">Person {i+1}</label>                                    
-                <input value={globalList[currentListPos][i]} disabled class="w-full bg-white rounded border border-gray-300 text-sm md:text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out disabled:opacity-75 disabled:cursor-not-allowed" />
-                </div>
-            )
+        console.log(currentListPos)
+        console.log(globalList)
+        if (globalList[currentListPos]!==undefined){
+            for (let i= 0; i<globalList[currentListPos].length;i++){
+                electionMemberInListHtmlShow.push(
+                    <div className="py-2">
+                    <label class="leading-7 text-md text-logobrown-1000">Person {i+1}</label>                                    
+                    <input value={globalList[currentListPos][i]} disabled class="w-full bg-white rounded border border-gray-300 text-sm md:text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out disabled:opacity-75 disabled:cursor-not-allowed" />
+                    </div>
+                )
+            }
         }
     }
 
@@ -536,7 +554,7 @@ const CreateVote = () => {
                                     <div class="flex justify-left relative mb-4">
                                         <div class="">
                                             <label class="leading-7 w-1/2 text-md text-logobrown-1000">{t("numberOfSeatsSelect")}</label>
-                                            <select onChange={(e) => dispatch(setNumberOfSeats(e.target.value))} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  focus:ring-logored-400 focus:broder-logored-400 block w-full p-2.5">
+                                            <select onChange={(e) => editNumberOfSeats(e.target.value)} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  focus:ring-logored-400 focus:broder-logored-400 block w-full p-2.5">
                                                 {selectOptions}
                                             </select>
                                         </div>
