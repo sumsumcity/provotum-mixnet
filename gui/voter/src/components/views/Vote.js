@@ -86,12 +86,12 @@ const Vote = () => {
                     </div>
                     <div className="m-auto w-1/3">
                         <div class="flex pl-10 py-1">
-                            <input onChange={() => handleChange(index, 1)} checked={ballot[index]===1} type="checkbox" className="w-4 h-4 accent-green-700 my-auto"/>
-                            <label className="pl-1">{t("yesVote")}</label>
+                            <input onChange={() => handleChange(index, 1)} checked={ballot[index]===1} type="checkbox" className="w-4 h-4 accent-green-700 my-auto" id="yes"/>
+                            <label className="pl-1" for="yes">{t("yesVote")}</label>
                         </div>
                         <div class="flex pl-10 py-1">
-                            <input onChange={() => handleChange(index, 3)} checked={ballot[index]===3} type="checkbox" className="w-4 h-4 accent-red-700 my-auto"/>
-                            <label className="pl-1">{t("noVote")}</label>
+                            <input onChange={() => handleChange(index, 3)} checked={ballot[index]===3} type="checkbox" className="w-4 h-4 accent-red-700 my-auto" id="no"/>
+                            <label className="pl-1" for="no">{t("noVote")}</label>
                         </div>
                     </div>
                 </div>
@@ -113,8 +113,8 @@ const Vote = () => {
         peopleInListHTML.push(
             <div className="flex justify-center w-full">
                 <div className="flex justify-around w-auto my-3 bg-logolblue-50 rounded-lg">
-                    <label className="text-sm sm:text-lg text-logobrown-1000 px-3">Person {i+1}: </label>
-                    <select onChange={(e) => makeElectedList(i, e.target.value)} class="h-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  focus:ring-logolblue-400 focus:broder-logolblue-400 block">
+                    <label className="text-sm sm:text-lg text-logobrown-1000 px-3" for={"person"+i}>Person {i+1}: </label>
+                    <select onChange={(e) => makeElectedList(i, e.target.value)} class="h-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  focus:ring-logolblue-400 focus:broder-logolblue-400 block" id={"person"+i}>
                         <option>{t("emptyVote")}</option>
                         {selectOptionsAllCandidates}
                     </select>
@@ -176,8 +176,8 @@ const Vote = () => {
                                     <h2 className="text-xl sm:text-3xl font-medium title-font text-logobrown-1000 text-center mb-10">{vote.vote}</h2>
                                     <div className="flex justify-center">
                                         <div className="flex justify-center bg-logolblue-50 rounded-lg w-auto p-2">
-                                            <label className="h-full text-lg text-logobrown-1000 px-3">{t("listVote")} </label>
-                                            <select onChange={(e) => setListNumber(e.target.value)} class="h-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  focus:ring-logolblue-400 focus:broder-logolblue-400 block">
+                                            <label className="h-full text-lg text-logobrown-1000 px-3" for={"list"+i}>{t("listVote")} </label>
+                                            <select onChange={(e) => setListNumber(e.target.value)} class="h-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  focus:ring-logolblue-400 focus:broder-logolblue-400 block" id={"list"+i}>
                                                 <option value={231}>{t("noneVote")}</option>
                                                 {selectOptionsLists}
                                             </select>

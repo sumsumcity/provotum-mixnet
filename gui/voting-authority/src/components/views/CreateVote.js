@@ -344,8 +344,8 @@ const CreateVote = () => {
             questionsInForm.push(
                 <div className="flex justify-between">
                     <div className="bg-logobrown-300 w-11/12 border-solid border-2 border-logobrown-500 p-2 rounded-md mb-3">
-                        <label class="leading-7 text-md text-logobrown-1000">{t("partyFormCreate")} {i+1}</label> 
-                        <input value={voteQuestionForm[i]} onChange={(e) => addToQuestionList(e.target.value, i)} class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-sm md:text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                        <label for="party0" class="leading-7 text-md text-logobrown-1000" >{t("partyFormCreate")} {i+1}</label> 
+                        <input id="party0" value={voteQuestionForm[i]} onChange={(e) => addToQuestionList(e.target.value, i)} class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-sm md:text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                         <button onClick={() => {setOpenModal2(true); setCurrentListPos(i)}} className="w-auto mt-2 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-sm md:text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"><div className="flex items-center"><FaListAlt /><p>&nbsp;</p>{t("createListButtonCreate")}</div></button>
                     </div>
                     <div className="flex items-center">
@@ -358,8 +358,8 @@ const CreateVote = () => {
             questionsInForm.push(
                 <div className="flex justify-between">
                     <div className="w-11/12 border-solid border-2 border-logobrown-500 p-2 rounded-md mb-3">
-                        <label class="leading-7 text-md text-logobrown-1000">{t("partyFormCreate")} {i+1}</label> 
-                        <input value={voteQuestionForm[i]} onChange={(e) => addToQuestionList(e.target.value, i)} class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-sm md:text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                        <label for={"party"+i}  class="leading-7 text-md text-logobrown-1000">{t("partyFormCreate")} {i+1}</label> 
+                        <input id={"party"+i} value={voteQuestionForm[i]} onChange={(e) => addToQuestionList(e.target.value, i)} class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-sm md:text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                         <button onClick={() => {setOpenModal2(true); setCurrentListPos(i)}} className="w-auto mt-2 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-sm md:text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"><div className="flex items-center"><FaListAlt /><p>&nbsp;</p>{t("createListButtonCreate")}</div></button>
                     </div>
                     <div className="flex items-center">
@@ -371,9 +371,9 @@ const CreateVote = () => {
         else if (type==="vote" && i===0) {
             questionsInForm.push(
                 <>
-                <label class="leading-7 text-md text-logobrown-1000">{t("questionFormCreate")} {i+1}</label>  
+                <label class="leading-7 text-md text-logobrown-1000" for="question0">{t("questionFormCreate")} {i+1}</label>  
                 <div className="flex justify-between">                               
-                    <input onChange={(e) => addToQuestionList(e.target.value, i)} class="w-11/12 bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-sm md:text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                    <input onChange={(e) => addToQuestionList(e.target.value, i)} class="w-11/12 bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-sm md:text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" id="question0" />
                     <button onClick={() => editNumberOfQuestions(numberOfQuestions+1)} class="px-4 text-white bg-logored-500 enabled:hover:bg-logored-700 rounded-full text-sm md:text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"><FaPlus /></button>
                 </div>   
                 </>
@@ -382,9 +382,9 @@ const CreateVote = () => {
         else if (type==="vote" && i>0) {
             questionsInForm.push(
                 <>
-                <label class="leading-7 text-md text-logobrown-1000">{t("questionFormCreate")} {i+1}</label>                                    
+                <label class="leading-7 text-md text-logobrown-1000" for={"question"+i}>{t("questionFormCreate")} {i+1}</label>                                    
                 <div className="flex justify-between">
-                    <input value={voteQuestionForm[i]} onChange={(e) => addToQuestionList(e.target.value, i)} class="w-11/12 bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-sm md:text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                    <input value={voteQuestionForm[i]} onChange={(e) => addToQuestionList(e.target.value, i)} class="w-11/12 bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-sm md:text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" id={"question"+i} />
                     <button onClick={() => deleteQuestion(i)} class="px-4 text-white bg-logored-500 enabled:hover:bg-logored-700 rounded-full text-sm md:text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"><FaMinus /></button>
                 </div>   
                 </>
@@ -397,9 +397,9 @@ const CreateVote = () => {
         if (type==="election"){
             questionsInFormEdit.push(
                 <>
-                <label class="leading-7 text-md text-logobrown-1000">{t("partyFormCreate")} {i+1}</label> 
+                <label class="leading-7 text-md text-logobrown-1000" for={"partyEdit"+i}>{t("partyFormCreate")} {i+1}</label> 
                 <div className="flex justify-between">                               
-                    <input onChange={(e) => addToQuestionList(e.target.value, i)} class="w-2/3 bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-sm md:text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                    <input onChange={(e) => addToQuestionList(e.target.value, i)} class="w-2/3 bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-sm md:text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" id={"partyEdit"+i}/>
                     <button onClick={() => {setOpenModal2(true); setCurrentListPos(i)}} disabled={globalList[i]!==undefined} className="w-1/4 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-sm md:text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("createListButtonCreate")}</button>
                 </div>
                 </>
@@ -408,9 +408,9 @@ const CreateVote = () => {
         else if (type==="vote" && i===0) {
             questionsInFormEdit.push(
                 <>
-                <label class="leading-7 text-md text-logobrown-1000">{t("questionFormCreate")} {i+1}</label>  
+                <label class="leading-7 text-md text-logobrown-1000" for={"questionEdit"+i}>{t("questionFormCreate")} {i+1}</label>  
                 <div className="flex justify-between">                               
-                    <input value={editQuestions[i]} onChange={(e) => addToQuestionList(e.target.value, i)} class="w-11/12 bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-sm md:text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                    <input value={editQuestions[i]} onChange={(e) => addToQuestionList(e.target.value, i)} class="w-11/12 bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-sm md:text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" id={"questionEdit"+i}/>
                     <button onClick={() => editNumberOfQuestions(numberOfQuestions+1)} class="px-4 text-white bg-logored-500 enabled:hover:bg-logored-700 rounded-full text-sm md:text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"><FaPlus /></button>
                 </div>   
                 </>
@@ -419,9 +419,9 @@ const CreateVote = () => {
         else if (type==="vote" && i>0) {
             questionsInFormEdit.push(
                 <>
-                <label class="leading-7 text-md text-logobrown-1000">{t("questionFormCreate")} {i+1}</label>                                    
+                <label class="leading-7 text-md text-logobrown-1000" for={"questionEdit"+i}>{t("questionFormCreate")} {i+1}</label>                                    
                 <div className="flex justify-between">
-                    <input value={editQuestions[i]} onChange={(e) => editQuestionValue(e.target.value, i)} class="w-11/12 bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-sm md:text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                    <input value={editQuestions[i]} onChange={(e) => editQuestionValue(e.target.value, i)} class="w-11/12 bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-sm md:text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" id={"questionEdit"+i} />
                     <button onClick={() => deleteQuestionEdit(i)} class="px-4 text-white bg-logored-500 enabled:hover:bg-logored-700 rounded-full text-sm md:text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"><FaMinus /></button>
                 </div>   
                 </>
@@ -455,24 +455,24 @@ const CreateVote = () => {
             if (electionMemberInList[currentListPos]===undefined){
                 electionMemberInListHtml.push(
                     <div className="py-2">
-                    <label class="leading-7 text-md text-logobrown-1000">Person {i+1}</label>                                    
-                    <input onChange={(e) => addToElectionMemberInList(e.target.value, i)} class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-1 focus:ring-logored-400 text-sm md:text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                    <label class="leading-7 text-md text-logobrown-1000" for={"personIfUndefined"+i}>Person {i+1}</label>                                    
+                    <input onChange={(e) => addToElectionMemberInList(e.target.value, i)} class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-1 focus:ring-logored-400 text-sm md:text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" id={"personIfUndefined"+i} />
                     </div>
                     )
             }
             else if (electionMemberInList[currentListPos].length>0){
                 electionMemberInListHtml.push(
                     <div className="py-2">
-                    <label class="leading-7 text-md text-logobrown-1000">Person {i+1}</label>                                    
-                    <input value={electionMemberInList[currentListPos][i]} onChange={(e) => addToElectionMemberInList(e.target.value, i)} class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-1 focus:ring-logored-400 text-sm md:text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                    <label class="leading-7 text-md text-logobrown-1000" for={"person"+i}>Person {i+1}</label>                                    
+                    <input value={electionMemberInList[currentListPos][i]} onChange={(e) => addToElectionMemberInList(e.target.value, i)} class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-1 focus:ring-logored-400 text-sm md:text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" id={"person"+i} />
                     </div>
                     )
             }
             else {
                 electionMemberInListHtml.push(
                     <div className="py-2">
-                    <label class="leading-7 text-md text-logobrown-1000">Person {i+1}</label>                                    
-                    <input onChange={(e) => addToElectionMemberInList(e.target.value, i)} class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-1 focus:ring-logored-400 text-sm md:text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                    <label class="leading-7 text-md text-logobrown-1000" for={"personElse"+i}>Person {i+1}</label>                                    
+                    <input onChange={(e) => addToElectionMemberInList(e.target.value, i)} class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-1 focus:ring-logored-400 text-sm md:text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" id={"personElse"+i}/>
                     </div>
                     )
             }
@@ -480,8 +480,8 @@ const CreateVote = () => {
         else {
             electionMemberInListHtml.push(
                 <div className="py-2">
-                <label class="leading-7 text-md text-logobrown-1000">Person {i+1}</label>                                    
-                <input onChange={(e) => addToElectionMemberInList(e.target.value, i)} class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-1 focus:ring-logored-400 text-sm md:text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                <label class="leading-7 text-md text-logobrown-1000" for={"personLength"+i}>Person {i+1}</label>                                    
+                <input onChange={(e) => addToElectionMemberInList(e.target.value, i)} class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-1 focus:ring-logored-400 text-sm md:text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" id={"personLength"+i}/>
                 </div>
                 )
         }
@@ -494,8 +494,8 @@ const CreateVote = () => {
             for (let i= 0; i<globalList[currentListPos].length;i++){
                 electionMemberInListHtmlShow.push(
                     <div className="py-2">
-                    <label class="leading-7 text-md text-logobrown-1000">Person {i+1}</label>                                    
-                    <input value={globalList[currentListPos][i]} disabled class="w-full bg-white rounded border border-gray-300 text-sm md:text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out disabled:opacity-75 disabled:cursor-not-allowed" />
+                    <label class="leading-7 text-md text-logobrown-1000" for={"existingPerson"+i}>Person {i+1}</label>                                    
+                    <input value={globalList[currentListPos][i]} disabled class="w-full bg-white rounded border border-gray-300 text-sm md:text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out disabled:opacity-75 disabled:cursor-not-allowed" id={"existingPerson"+i}/>
                     </div>
                 )
             }
@@ -548,13 +548,13 @@ const CreateVote = () => {
                                 ( //Create Election Page
                                 <div class="w-full lg:w-2/3 bg-logobrown-300 rounded-lg p-3 lg:p-8 flex flex-col">
                                     <div class="relative mb-4">
-                                        <label class="leading-7 text-md text-logobrown-1000">{t("electionFormCreate")}</label>
-                                        <input value={voteNameForm} onChange={(e) => setVoteNameForm(e.target.value)} placeholder={t("placeholderElection")} class="w-full text-sm md:text-base bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                                        <label class="leading-7 text-md text-logobrown-1000" for="electionName">{t("electionFormCreate")}</label>
+                                        <input value={voteNameForm} onChange={(e) => setVoteNameForm(e.target.value)} placeholder={t("placeholderElection")} class="w-full text-sm md:text-base bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" id="electionName"/>
                                     </div>
                                     <div class="flex justify-left relative mb-4">
                                         <div class="">
-                                            <label class="leading-7 w-1/2 text-md text-logobrown-1000">{t("numberOfSeatsSelect")}</label>
-                                            <select onChange={(e) => editNumberOfSeats(e.target.value)} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  focus:ring-logored-400 focus:broder-logored-400 block w-full p-2.5">
+                                            <label class="leading-7 w-1/2 text-md text-logobrown-1000" for="select">{t("numberOfSeatsSelect")}</label>
+                                            <select onChange={(e) => editNumberOfSeats(e.target.value)} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  focus:ring-logored-400 focus:broder-logored-400 block w-full p-2.5" id="select">
                                                 {selectOptions}
                                             </select>
                                         </div>
@@ -618,7 +618,7 @@ const CreateVote = () => {
                                 <div class="w-full lg:w-2/3 bg-logobrown-300 rounded-lg p-3 lg:p-8 flex flex-col">
                                     <div class="relative mb-4">
                                         <label for="vote" class="leading-7 text-md text-logobrown-1000">{t("voteFormCreate")}</label>
-                                        <input onChange={(e) => setVoteNameForm(e.target.value)} placeholder={t("placeholderVote")} class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-sm md:text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                                        <input onChange={(e) => setVoteNameForm(e.target.value)} placeholder={t("placeholderVote")} class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-sm md:text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" id="vote" />
                                     </div>
                                     <div class="relative mb-4">
                                         {questionsInForm}
@@ -632,8 +632,8 @@ const CreateVote = () => {
                                 ( // EditVote
                                 <div class="w-full lg:w-2/3 bg-logobrown-300 rounded-lg p-3 lg:p-8 flex flex-col">
                                     <div class="relative mb-4">
-                                        <label class="leading-7 text-md text-logobrown-1000">{t("voteFormCreate")}</label>
-                                        <input value={vote} onChange={(e) => dispatch(setVoteName(e.target.value))} class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-sm md:text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                                        <label class="leading-7 text-md text-logobrown-1000" for="voteEdit">{t("voteFormCreate")}</label>
+                                        <input value={vote} onChange={(e) => dispatch(setVoteName(e.target.value))} class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-sm md:text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" id="voteEdit" />
                                     </div>
                                     <div class="relative mb-4">
                                         {questionsInFormEdit}

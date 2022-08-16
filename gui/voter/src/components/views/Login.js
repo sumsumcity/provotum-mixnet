@@ -84,13 +84,13 @@ const Login = () => {
                         <div class="flex justify-center w-full">
                             <div class="w-full lg:w-1/2 bg-logolblue-100 rounded-lg p-8 flex flex-col">
                                 <div class="relative mb-4">
-                                    <label for="vote" class="leading-7 text-sm md:text-md text-logobrown-1000">{t("usernameLogin")}</label>
-                                    <input onChange={(e) => setUsernameForm(e.target.value)} type="voteNameForm" id="vote" name="vote" class="w-full bg-white rounded border border-gray-300 focus:border-logolblue-500 focus:ring-2 focus:ring-logolblue-400 text-sm md: outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                                    <label for="username" class="leading-7 text-sm md:text-md text-logobrown-1000">{t("usernameLogin")}</label>
+                                    <input onChange={(e) => setUsernameForm(e.target.value)} type="voteNameForm" id="username" name="username" class="w-full bg-white rounded border border-gray-300 focus:border-logolblue-500 focus:ring-2 focus:ring-logolblue-400 text-sm md: outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                                 </div>
                                 <div class="relative mb-4">
-                                    <label for="vote" class="leading-7 text-sm md:text-md text-logobrown-1000">{t("passwordLogin")}</label>
+                                    <label for="password" class="leading-7 text-sm md:text-md text-logobrown-1000">{t("passwordLogin")}</label>
                                     <div className="relative">
-                                        <input onChange={(e) => setPasswordForm(e.target.value)} type={passwordShown ? "text" : "password"} id="vote" name="vote" class="w-full bg-white rounded border border-gray-300 focus:border-logolblue-500 focus:ring-2 focus:ring-logolblue-400 text-sm md:text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                                        <input onChange={(e) => setPasswordForm(e.target.value)} type={passwordShown ? "text" : "password"} id="password" name="password" class="w-full bg-white rounded border border-gray-300 focus:border-logolblue-500 focus:ring-2 focus:ring-logolblue-400 text-sm md:text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                                         {passwordShown ? 
                                         (
                                             <button className="absolute right-0 h-full p-2" onClick={togglePassword}><BsEyeSlash class="h-7 w-7" /></button>

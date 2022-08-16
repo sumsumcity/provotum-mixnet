@@ -83,7 +83,7 @@ const Header = () => {
                     <h3 className="text-red-700 font-medium sm:text-xl sm:pr-4">{t("connectionOFF")}</h3>
                 )}
                 <a href="https://github.com/provotum">
-                    <img src={github_logo} width="35" alt="github logo" class="float-right hover:scale-150 duration-150 hidden sm:block" />
+                    <img src={github_logo} width="35" alt="Provotum Logo" class="float-right hover:scale-150 duration-150 hidden sm:block" />
                 </a>
             </div>
         </div>
