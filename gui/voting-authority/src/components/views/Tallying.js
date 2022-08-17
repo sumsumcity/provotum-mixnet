@@ -21,6 +21,7 @@ const Tallying = () => {
     const [apiQuestions, setApiQuestions] = useState([{decrypted_sealers: []},{decrypted_sealers: []},{decrypted_sealers:[]},{decrypted_sealers:[]},{decrypted_sealers:[]},{decrypted_sealers:[]},{decrypted_sealers:[]},{decrypted_sealers:[]},{decrypted_sealers:[]},{decrypted_sealers:[]},{decrypted_sealers:[]},{decrypted_sealers:[]},{decrypted_sealers:[]},{decrypted_sealers:[]},{decrypted_sealers:[]},{decrypted_sealers:[]},{decrypted_sealers:[]},{decrypted_sealers:[]},{decrypted_sealers:[]},{decrypted_sealers:[]}])
     const [clickedNextStep, setClickedNextStep] = useState(false)
     const [clickedCombineDecryptedKeys, setClickedCombineDecryptedKeys] = useState(false)
+    const [keyIndex, setKeyIndex] = useState(1000)
 
     const {t, i18n} = useTranslation()
 
@@ -54,14 +55,17 @@ const Tallying = () => {
 
     const combineDecryptedKeys = async(index) => {
         setClickedCombineDecryptedKeys(true)
+        setKeyIndex(index)
         const response = await requestCombineDecryptedShares(index)
         if(response.status===0){
             setClickedCombineDecryptedKeys(false)
+            setKeyIndex(1000)
             alert("There is no connection to the API or Blockchain. Please start the docker containers")
             return
         }
         else if (response.status!==200){
             setClickedCombineDecryptedKeys(false)
+            setKeyIndex(1000)
             (false);
             alert("Something went wrong while combining decrypted shares! See the console for details.")
             return
@@ -69,6 +73,7 @@ const Tallying = () => {
         else {
             await new Promise(resolve => setTimeout(resolve, 2100)); // give little time to update status from api
             setClickedCombineDecryptedKeys(false)
+            setKeyIndex(1000)
         }
     }
 
@@ -134,7 +139,7 @@ const Tallying = () => {
                         <p className="text-sm lg:text-base text-left">{apiQuestions[index].decrypted_sealers.length}/{maxNumberOfSealers} {t("waitingForSealersTallying")}</p>
                     </div>
                     <div className="flex items-center">
-                    {clickedCombineDecryptedKeys ? 
+                    {clickedCombineDecryptedKeys&&index===keyIndex ? 
                         (
                         <button disabled class="w-full h-3/4 text-white bg-logored-500 pb-4 pt-1 px-3 enabled:hover:bg-logored-700 rounded-lg text-sm lg:text-base transition-all disabled:opacity-75 disabled:cursor-not-allowed">
                         <svg role="status" class="inline w-4 h-4 mr-3 text-white animate-spin" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -147,7 +152,7 @@ const Tallying = () => {
                         : 
                         !apiQuestions[index].combined_decrypted_shares ?
                         (
-                        <button onClick={() => combineDecryptedKeys(index)} disabled={apiQuestions[index].decrypted_sealers.length!==maxNumberOfSealers} class="w-full h-3/4 text-white bg-logored-500 pb-3 pt-1 px-1 lg:px-3 enabled:hover:bg-logored-700 rounded-lg text-sm lg:text-base transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("combineDecryptionButtonTallying")}</button>
+                        <button onClick={() => combineDecryptedKeys(index)} disabled={apiQuestions[index].decrypted_sealers.length!==maxNumberOfSealers || clickedCombineDecryptedKeys} class="w-full h-3/4 text-white bg-logored-500 pb-3 pt-1 px-1 lg:px-3 enabled:hover:bg-logored-700 rounded-lg text-sm lg:text-base transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("combineDecryptionButtonTallying")}</button>
                         )
                         :
                         (<div className="flex items-center"><FaCheck className=" text-green-800 mr-3 w-5 h-5" /><p className="text-sm lg:text-base text-left">{t("decryptionSuccessful")}</p></div>)
