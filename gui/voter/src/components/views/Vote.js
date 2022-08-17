@@ -176,8 +176,8 @@ const Vote = () => {
                                     <h2 className="text-xl sm:text-3xl font-medium title-font text-logobrown-1000 text-center mb-10">{vote.vote}</h2>
                                     <div className="flex justify-center">
                                         <div className="flex justify-center bg-logolblue-50 rounded-lg w-auto p-2">
-                                            <label className="h-full text-lg text-logobrown-1000 px-3" for={"list"+i}>{t("listVote")} </label>
-                                            <select onChange={(e) => setListNumber(e.target.value)} class="h-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  focus:ring-logolblue-400 focus:broder-logolblue-400 block" id={"list"+i}>
+                                            <label className="h-full text-lg text-logobrown-1000 px-3" for="select">{t("listVote")} </label>
+                                            <select onChange={(e) => setListNumber(e.target.value)} class="h-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  focus:ring-logolblue-400 focus:broder-logolblue-400 block" id="select">
                                                 <option value={231}>{t("noneVote")}</option>
                                                 {selectOptionsLists}
                                             </select>
