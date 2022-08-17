@@ -19,6 +19,12 @@ const Login = () => {
     const [passwordForm, setPasswordForm] = useState("")
     const [clickedLogin, setClickedLogin] = useState(false)
 
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            login()
+        }
+    }
+
     const togglePassword = () => {
         setPasswordShown(!passwordShown);
       };
@@ -90,7 +96,7 @@ const Login = () => {
                                 <div class="relative mb-4">
                                     <label for="password" class="leading-7 text-sm md:text-md text-logobrown-1000">{t("passwordLogin")}</label>
                                     <div className="relative">
-                                        <input onChange={(e) => setPasswordForm(e.target.value)} type={passwordShown ? "text" : "password"} id="password" name="password" class="w-full bg-white rounded border border-gray-300 focus:border-logolblue-500 focus:ring-2 focus:ring-logolblue-400 text-sm md: outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                                        <input onChange={(e) => setPasswordForm(e.target.value)} onKeyDown={handleKeyDown} type={passwordShown ? "text" : "password"} id="password" name="password" class="w-full bg-white rounded border border-gray-300 focus:border-logolblue-500 focus:ring-2 focus:ring-logolblue-400 text-sm md: outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                                         {passwordShown ? 
                                         (
                                             <button className="absolute right-0 h-full p-2" onClick={togglePassword}><BsEyeSlash class="h-7 w-7" /></button>
