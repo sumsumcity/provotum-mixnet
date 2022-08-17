@@ -19,27 +19,32 @@ const Tallying = () => {
     const vote = useSelector(state => state.vote.obj)
 
     const [clickedCreateKey, setClickedCreateKey] = useState(false)
+    const [keyIndex, setKeyIndex] = useState(1000)
 
     const questionsInList = [];
 
     const decryptKey = async(index) => {
         setClickedCreateKey(true)
+        setKeyIndex(index)
         await new Promise(resolve => setTimeout(resolve, 6000));
         console.log("now it starts")
         const response = await requestCreateKey(index)
         if(response.status===0){
             setClickedCreateKey(false);
+            setKeyIndex(1000)
             alert("There is no connection to the API or Blockchain. Please start the docker containers")
             return
         }
         else if (response.status!==200){
             setClickedCreateKey(false);
+            setKeyIndex(1000)
             alert("Something went wrong while decrypting the key! Please try again!")
             return
         }
         else {
             await new Promise(resolve => setTimeout(resolve, 2100));
             setClickedCreateKey(false)
+            setKeyIndex(1000)
         }
     }
 
@@ -98,7 +103,7 @@ const Tallying = () => {
                         </div>
                         <div class="flex justify-end">
                         
-                        {clickedCreateKey ? 
+                        {clickedCreateKey&&index===keyIndex ? 
                         (
                         <button disabled type="button" class="w-full text-white bg-logodblue-300 py-2 px-1 lg:px-8 enabled:hover:bg-logodblue-500 rounded-lg text-sm lg:text-lg transition-all disabled:opacity-75 disabled:cursor-not-allowed">
                         <svg role="status" class="inline w-4 h-4 mr-3 text-white animate-spin" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -110,7 +115,7 @@ const Tallying = () => {
                         ) 
                         : 
                         (
-                        <button onClick={() => decryptKey(index)} disabled={!vote.questions[index].decrypted_sealers.indexOf(window._env_.SEALER)} class="w-full text-white bg-logodblue-300 py-2 px-1 lg:px-8 enabled:hover:bg-logodblue-500 rounded-lg text-sm lg:text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("buttonTallying")}</button>
+                        <button onClick={() => decryptKey(index)} disabled={!vote.questions[index].decrypted_sealers.indexOf(window._env_.SEALER) || clickedCreateKey} class="w-full text-white bg-logodblue-300 py-2 px-1 lg:px-8 enabled:hover:bg-logodblue-500 rounded-lg text-sm lg:text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed">{t("buttonTallying")}</button>
                         )}
                         </div>
                     </div>
