@@ -7,337 +7,1242 @@
 	},
 	"item": [
 		{
-			"name": "Pre-Voting Phase",
+			"name": "Election",
 			"item": [
 				{
-					"name": "Create voting",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"vote\":\"Popular vote on the 01 August 2022\",\n    \"question\":\"Do you like pizza?\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+					"name": "Pre-Voting Phase",
+					"item": [
+						{
+							"name": "Create vote",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"vote\":\"Swiss Federal Election 2023\",\n    \"question\":\"SVP\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/prevoting/setup",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"prevoting",
+										"setup"
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "http://localhost:4000/prevoting/setup",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"prevoting",
-								"setup"
-							]
+						{
+							"name": "AddElectionListMemersToParty",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"vote\":\"Swiss Federal Election 2023\",\n    \"question\":\"SVP\",\n    \"election_list_members\":[\"Adam Adams\", \"Berta Barns\", \"Claudia Crown\"],\n    \"number_of_seats\":3\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/helpers/addListToParty",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"helpers",
+										"addListToParty"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create question",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"vote\":\"Swiss Federal Election 2023\",\n    \"question\":\"SP\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/prevoting/storequestion",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"prevoting",
+										"storequestion"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create key (sealer 1)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"vote\": \"Swiss Federal Election 2023\",\n    \"sk\": \"E5EAF02AC60ACC93ED874422A52EC\",\n    \"sealer\": \"bob\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/prevoting/keygen",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"prevoting",
+										"keygen"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create key (sealer 2)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"vote\": \"Swiss Federal Election 2023\",\n    \"sk\": \"E5EAF02AC60ACC93ED874422A54EC\",\n    \"sealer\": \"charlie\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/prevoting/keygen",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"prevoting",
+										"keygen"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Combine key shares",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"vote\":\"Swiss Federal Election 2023\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/prevoting/combineKeyShares",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"prevoting",
+										"combineKeyShares"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Change Phase",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"vote\":\"Swiss Federal Election 2023\",\n    \"phase\":\"Voting\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/phase",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"phase"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "Create key (sealer 1)",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"vote\": \"Popular vote on the 01 August 2022\",\n    \"sk\": \"E5EAF02AC60ACC93ED874422A52EC\",\n    \"sealer\": \"bob\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+					"name": "Voting Phase",
+					"item": [
+						{
+							"name": "Vote",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"vote\":\"Swiss Federal Election 2023\",\n    \"question\":\"SVP\",\n    \"nr_of_votes\":\"1\",\n    \"votes\":\"1\",\n    \"username\":\"user1\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/voting/vote",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"voting",
+										"vote"
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "http://localhost:4000/prevoting/keygen",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"prevoting",
-								"keygen"
-							]
+						{
+							"name": "Change Phase",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"vote\":\"Swiss Federal Election 2023\",\n    \"phase\":\"Tallying\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/phase",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"phase"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "Create key (sealer 2)",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"vote\": \"Popular vote on the 01 August 2022\",\n    \"sk\": \"E5EAF02AC60ACC93ED874422A54EC\",\n    \"sealer\": \"charlie\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+					"name": "Post-Voting Phase",
+					"item": [
+						{
+							"name": "Make decryption (sealer 2)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"vote\": \"Swiss Federal Election 2023\",\n    \"question\": \"SVP\",\n    \"sk\": \"E5EAF02AC60ACC93ED874422A54EC\",\n    \"sealer\": \"charlie\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/postvoting/decrypt",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"postvoting",
+										"decrypt"
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "http://localhost:4000/prevoting/keygen",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"prevoting",
-								"keygen"
-							]
+						{
+							"name": "Make decryption (sealer 1)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"vote\": \"Swiss Federal Election 2023\",\n    \"question\": \"SVP\",\n    \"sk\": \"E5EAF02AC60ACC93ED874422A52EC\",\n    \"sealer\": \"bob\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/postvoting/decrypt",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"postvoting",
+										"decrypt"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Combine decrypted share key",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"vote\":\"Swiss Federal Election 2023\",\n    \"question\":\"SVP\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/postvoting/combine",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"postvoting",
+										"combine"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Result",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"question\":\"SVP\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/postvoting/result",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"postvoting",
+										"result"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "Combine key shares",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"vote\":\"Popular vote on the 01 August 2022\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+					"name": "helpers",
+					"item": [
+						{
+							"name": "GetAllVotes",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:4000/helpers/allVote",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"helpers",
+										"allVote"
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "http://localhost:4000/prevoting/combineKeyShares",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"prevoting",
-								"combineKeyShares"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Change Phase",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"vote\":\"Popular vote on the 01 August 2022\",\n    \"phase\":\"Voting\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+						{
+							"name": "GetQuestions",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"vote\":\"Popular Vote on the 01. August 2022\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/helpers/questions",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"helpers",
+										"questions"
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "http://localhost:4000/phase",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"phase"
-							]
+						{
+							"name": "GetPhase",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"vote\":\"Popular Vote on the 01. August 2022\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/helpers/phase",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"helpers",
+										"phase"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAllUsers",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:4000/helpers/allUsers",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"helpers",
+										"allUsers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\":\"user1\",\n    \"password\":\"user1\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/helpers/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"helpers",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetUserWithUsername",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\":\"user1\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/helpers/userWithUsername",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"helpers",
+										"userWithUsername"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "logout",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\":\"user1\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/helpers/logout",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"helpers",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AddElectionListMemersToParty",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"vote\":\"Swiss Federal Election 2023\",\n    \"question\":\"SVP\",\n    \"election_list_members\":[\"Adam Adams\", \"Berta Barns\", \"Claudia Crown\"],\n    \"number_of_seats\":20\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/helpers/addListToParty",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"helpers",
+										"addListToParty"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AddElectionListMemersToPartyLong",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"vote\":\"Swiss Federal Election 2023\",\n    \"question\":\"SVP\",\n    \"election_list_members\":[\"Adam Adams\", \"Berta Barns\", \"Claudia Crown\",\"Daniel Dach\", \"Eic Erbs\", \"Fabienne Flor\", \"Gerhard Grist\", \"Hannah Hohl\", \"Isabell Iris\", \"Jan Jakob\", \"Kristina Kohl\", \"Lewis Lehmann\", \"Magnus Magnusson\", \"Nicole Napf\",\"Otto Os\",\"Paul Peters\"],\n    \"number_of_seats\":20\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/helpers/addListToParty",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"helpers",
+										"addListToParty"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Change Participation in Election",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\":\"user1\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/helpers/electionParticipation",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"helpers",
+										"electionParticipation"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				}
 			]
 		},
 		{
-			"name": "Voting Phase",
+			"name": "Vote",
 			"item": [
 				{
-					"name": "Vote",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"vote\":\"Popular vote on the 01 August 2022\",\n    \"question\":\"Do you like pizza?\",\n    \"nr_of_votes\":\"1\",\n    \"votes\":\"1\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+					"name": "Pre-Voting Phase",
+					"item": [
+						{
+							"name": "Create vote",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"vote\":\"Popular Vote on 28 November 2021\",\n    \"question\":\"Do you wish to accept the popular Justice Initiative?\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/prevoting/setup",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"prevoting",
+										"setup"
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "http://localhost:4000/voting/vote",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"voting",
-								"vote"
-							]
+						{
+							"name": "Create question",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"vote\":\"Popular Vote on 28 November 2021\",\n    \"question\":\"Do you want to accept the popular Nursing Care Initiative?\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/prevoting/storequestion",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"prevoting",
+										"storequestion"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create key (sealer 1)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"vote\": \"Popular Vote on 28 November 2021\",\n    \"sk\": \"E5EAF02AC60ACC93ED874422A52EC\",\n    \"sealer\": \"bob\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/prevoting/keygen",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"prevoting",
+										"keygen"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create key (sealer 2)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"vote\": \"Popular Vote on 28 November 2021\",\n    \"sk\": \"E5EAF02AC60ACC93ED874422A54EC\",\n    \"sealer\": \"charlie\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/prevoting/keygen",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"prevoting",
+										"keygen"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Combine key shares",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"vote\":\"Popular Vote on 28 November 2021\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/prevoting/combineKeyShares",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"prevoting",
+										"combineKeyShares"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Change Phase",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"vote\":\"Popular Vote on 28 November 2021\",\n    \"phase\":\"Voting\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/phase",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"phase"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "Change Phase",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"vote\":\"Popular vote on the 01 August 2022\",\n    \"phase\":\"Tallying\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+					"name": "Voting Phase",
+					"item": [
+						{
+							"name": "Vote",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"vote\":\"Popular Vote on 28 November 2021\",\n    \"question\":\"Do you wish to accept the popular Justice Initiative?\",\n    \"nr_of_votes\":\"1\",\n    \"votes\":\"1\",\n    \"username\":\"user1\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/voting/vote",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"voting",
+										"vote"
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "http://localhost:4000/phase",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"phase"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Post-Voting Phase",
-			"item": [
-				{
-					"name": "Make decryption (sealer 2)",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"vote\": \"Popular vote on the 01 August 2022\",\n    \"question\": \"Do you like pizza?\",\n    \"sk\": \"E5EAF02AC60ACC93ED874422A54EC\",\n    \"sealer\": \"charlie\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+						{
+							"name": "Change Phase",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"vote\":\"Popular Vote on 28 November 2021\",\n    \"phase\":\"Tallying\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/phase",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"phase"
+									]
 								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:4000/postvoting/decrypt",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"postvoting",
-								"decrypt"
-							]
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "Make decryption (sealer 1)",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"vote\": \"Popular vote on the 01 August 2022\",\n    \"question\": \"Do you like pizza?\",\n    \"sk\": \"E5EAF02AC60ACC93ED874422A52EC\",\n    \"sealer\": \"bob\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+					"name": "Post-Voting Phase",
+					"item": [
+						{
+							"name": "Make decryption (sealer 2)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"vote\": \"Popular Vote on 28 November 2021\",\n    \"question\": \"Do you wish to accept the popular Justice Initiative?\",\n    \"sk\": \"E5EAF02AC60ACC93ED874422A54EC\",\n    \"sealer\": \"charlie\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/postvoting/decrypt",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"postvoting",
+										"decrypt"
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "http://localhost:4000/postvoting/decrypt",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"postvoting",
-								"decrypt"
-							]
+						{
+							"name": "Make decryption (sealer 1)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"vote\": \"Popular Vote on 28 November 2021\",\n    \"question\": \"Do you wish to accept the popular Justice Initiative?\",\n    \"sk\": \"E5EAF02AC60ACC93ED874422A52EC\",\n    \"sealer\": \"bob\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/postvoting/decrypt",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"postvoting",
+										"decrypt"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Combine decrypted share key",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"vote\":\"Popular Vote on 28 November 2021\",\n    \"question\":\"Do you wish to accept the popular Justice Initiative?\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/postvoting/combine",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"postvoting",
+										"combine"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Result",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"question\":\"Do you wish to accept the popular Justice Initiative?\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/postvoting/result",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"postvoting",
+										"result"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "Combine decryoted share key",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"vote\":\"Popular vote on the 01 August 2022\",\n    \"question\":\"Do you like pizza?\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+					"name": "helpers",
+					"item": [
+						{
+							"name": "GetAllVotes",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:4000/helpers/allVote",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"helpers",
+										"allVote"
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "http://localhost:4000/postvoting/combine",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"postvoting",
-								"combine"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Result",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"question\":\"Do you like pizza?\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+						{
+							"name": "GetQuestions",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"vote\":\"Popular Vote on the 01. August 2022\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/helpers/questions",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"helpers",
+										"questions"
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "http://localhost:4000/postvoting/result",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"postvoting",
-								"result"
-							]
+						{
+							"name": "GetPhase",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"vote\":\"Popular Vote on the 01. August 2022\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/helpers/phase",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"helpers",
+										"phase"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAllUsers",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:4000/helpers/allUsers",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"helpers",
+										"allUsers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\":\"user1\",\n    \"password\":\"user1\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/helpers/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"helpers",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetUserWithUsername",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\":\"user1\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/helpers/userWithUsername",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"helpers",
+										"userWithUsername"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "logout",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\":\"user1\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/helpers/logout",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"helpers",
+										"logout"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				}
 			]
 		}
