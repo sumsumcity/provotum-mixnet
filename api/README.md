@@ -1,4 +1,4 @@
-# api-mixnet
+# API
 
 This project enables interaction with the Provotum mixnet via HTTP requests. 
 The API communicates with the CLI of the mixnet, which is defined in the client. 
@@ -69,3 +69,7 @@ So you can also use the API if you use the docker-compose.yml file in the provot
 cd ..
 docker-compose up
 ```
+
+## Note
+
+To use the API locally, it must run on Linux. To ensure compatibility, it is recommended to use Ubuntu version 20.04.

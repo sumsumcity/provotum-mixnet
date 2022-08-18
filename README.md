@@ -33,7 +33,7 @@ A randomizer service for ballot re-encryption:
 A CLI sevice where you can make `client` CLI commands with "docker exec -it sumsumciy/cli-mixnet:latest [command]". A simple API which enable to make `client` CLI commands via HTTP requests. (You can also find some predefined requests which you can test with Postman):
 - **API-CLI**
 
-A MongoDB, which is necessary to store some data that is needed in the Guis but cannot be taken out of the blockchain:
+A MongoDB, which is necessary to store some data that is needed in the GUIs but cannot be taken out of the blockchain:
 - **MongoDB**
 
 The three graphical user interfaces with which you can interact with the `api-cli`:
@@ -63,7 +63,7 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-
 
 sudo chmod +x /usr/local/bin/docker-compose
 ```
-You also need a personal access token (PAT) from GitHub. Create a PAT in the developer settings on GitHUb and then run the following command in the terminal:
+You also need a personal access token (PAT) from GitHub. Create a PAT in the developer settings on GitHub and then run the following command in the terminal:
 
 ```bash
 echo '<my_token>' | docker login ghcr.io -u <my_username> --password-stdin
