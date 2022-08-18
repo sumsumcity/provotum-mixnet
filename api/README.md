@@ -1,4 +1,4 @@
-# api-mixnet
+# API
 
 This project enables interaction with the Provotum mixnet via HTTP requests. 
 The API communicates with the CLI of the mixnet, which is defined in the client. 
