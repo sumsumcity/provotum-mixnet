@@ -202,13 +202,18 @@ const CreateVote = () => {
     }
 
     const checkIfEmptyList = () => {
-        if (electionMemberInList.length>0){
-            for (let i=0;i<electionMemberInList[0].length;i++){
-                if (electionMemberInList[0][i]!==""){
-                    return false
-                }
-            } 
+        if (voteQuestionForm[0]===undefined || voteQuestionForm[0]==="" || !voteQuestionForm[0].replace(/\s/g, '').length){
             return true
+        }
+        if (electionMemberInList.length>0){
+            for (let index=0;index<electionMemberInList.length;index++){
+                for (let i=0;i<electionMemberInList[index].length;i++){
+                    if (electionMemberInList[index][0]===undefined || electionMemberInList[index][0]==="" || !electionMemberInList[index][0].replace(/\s/g, '').length ){
+                        return true
+                    }
+                }  
+            }
+    
         }
         else {
             return true
@@ -346,7 +351,7 @@ const CreateVote = () => {
                     <div className="bg-logobrown-300 w-11/12 border-solid border-2 border-logobrown-500 p-2 rounded-md mb-3">
                         <label for="party0" class="leading-7 text-md text-logobrown-1000" >{t("partyFormCreate")} {i+1}</label> 
                         <input id="party0" value={voteQuestionForm[i]} onChange={(e) => addToQuestionList(e.target.value, i)} class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-sm md:text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
-                        <button onClick={() => {setOpenModal2(true); setCurrentListPos(i)}} className="w-auto mt-2 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-sm md:text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"><div className="flex items-center"><FaListAlt /><p>&nbsp;</p>{t("createListButtonCreate")}</div></button>
+                        <button onClick={() => {setOpenModal2(true); setCurrentListPos(i)}} disabled={voteQuestionForm[i]===undefined || voteQuestionForm[i]==="" || !voteQuestionForm[i].replace(/\s/g, '').length} className="w-auto mt-2 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-sm md:text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"><div className="flex items-center"><FaListAlt /><p>&nbsp;</p>{t("createListButtonCreate")}</div></button>
                     </div>
                     <div className="flex items-center">
                         <button onClick={() => editNumberOfQuestions(numberOfQuestions+1)} class="px-4 h-12 text-white bg-logored-500 enabled:hover:bg-logored-700 rounded-full text-sm md:text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"><FaPlus /></button>
@@ -360,7 +365,7 @@ const CreateVote = () => {
                     <div className="w-11/12 border-solid border-2 border-logobrown-500 p-2 rounded-md mb-3">
                         <label for={"party"+i}  class="leading-7 text-md text-logobrown-1000">{t("partyFormCreate")} {i+1}</label> 
                         <input id={"party"+i} value={voteQuestionForm[i]} onChange={(e) => addToQuestionList(e.target.value, i)} class="w-full bg-white rounded border border-gray-300 focus:border-logored-500 focus:ring-2 focus:ring-logored-400 text-sm md:text-base outline-none text-logobrown-1000 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
-                        <button onClick={() => {setOpenModal2(true); setCurrentListPos(i)}} className="w-auto mt-2 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-sm md:text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"><div className="flex items-center"><FaListAlt /><p>&nbsp;</p>{t("createListButtonCreate")}</div></button>
+                        <button onClick={() => {setOpenModal2(true); setCurrentListPos(i)}} disabled={voteQuestionForm[i]===undefined || voteQuestionForm[i]==="" || !voteQuestionForm[i].replace(/\s/g, '').length} className="w-auto mt-2 text-white bg-logored-500 py-2 px-8 enabled:hover:bg-logored-700 rounded-lg text-sm md:text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"><div className="flex items-center"><FaListAlt /><p>&nbsp;</p>{t("createListButtonCreate")}</div></button>
                     </div>
                     <div className="flex items-center">
                         <button onClick={() => deleteParty(i)} class="px-4 h-12 text-white bg-logored-500 enabled:hover:bg-logored-700 rounded-full text-sm md:text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"><FaMinus /></button>
