@@ -194,10 +194,15 @@ const CreateVote = () => {
     }
 
     const deleteParty = (index) => {
+        console.log(voteQuestionForm)
         if (electionMemberInList[index]!== undefined){
-            electionMemberInList.splice(index,1)
+            let arr = [...electionMemberInList]
+            arr.splice(index,1)
+            setElectionMemberInList(arr)
         }
-        voteQuestionForm.splice(index,1)
+        let arr = [...voteQuestionForm]
+        arr.splice(index,1)
+        setVoteQuestionForm(arr)
         editNumberOfQuestions(numberOfQuestions-1)
     }
 
