@@ -212,11 +212,16 @@ const CreateVote = () => {
         }
         if (electionMemberInList.length>0){
             for (let index=0;index<electionMemberInList.length;index++){
-                for (let i=0;i<electionMemberInList[index].length;i++){
-                    if (electionMemberInList[index][0]===undefined || electionMemberInList[index][0]==="" || !electionMemberInList[index][0].replace(/\s/g, '').length ){
-                        return true
-                    }
-                }  
+                if (electionMemberInList[index] !== undefined){
+                    for (let i=0;i<electionMemberInList[index].length;i++){
+                        if (electionMemberInList[index][0]===undefined || electionMemberInList[index][0]==="" || !electionMemberInList[index][0].replace(/\s/g, '').length ){
+                            return true
+                        }
+                    }  
+                }
+                else {
+                    return true
+                }
             }
     
         }
