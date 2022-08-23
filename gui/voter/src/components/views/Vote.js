@@ -86,12 +86,12 @@ const Vote = () => {
                     </div>
                     <div className="m-auto w-1/3">
                         <div class="flex pl-10 py-1">
-                            <input onChange={() => handleChange(index, 1)} checked={ballot[index]===1} type="checkbox" className="w-4 h-4 accent-green-700 my-auto" id="yes"/>
-                            <label className="pl-1" for="yes">{t("yesVote")}</label>
+                            <input onChange={() => handleChange(index, 1)} checked={ballot[index]===1} type="checkbox" className="w-4 h-4 accent-green-700 my-auto" id={"yes"+index}/>
+                            <label className="pl-1" for={"yes"+index}>{t("yesVote")}</label>
                         </div>
                         <div class="flex pl-10 py-1">
-                            <input onChange={() => handleChange(index, 3)} checked={ballot[index]===3} type="checkbox" className="w-4 h-4 accent-red-700 my-auto" id="no"/>
-                            <label className="pl-1" for="no">{t("noVote")}</label>
+                            <input onChange={() => handleChange(index, 3)} checked={ballot[index]===3} type="checkbox" className="w-4 h-4 accent-red-700 my-auto" id={"no"+index}/>
+                            <label className="pl-1" for={"no"+index}>{t("noVote")}</label>
                         </div>
                     </div>
                 </div>
