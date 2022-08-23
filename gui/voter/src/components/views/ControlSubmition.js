@@ -55,7 +55,7 @@ const ControlSubmition = () => {
         setOpenModalElection(false)
         for (let i=0; i<vote.number_of_seats;i++) {
             let response 
-            if(electedPeople[i]!==undefined){
+            if(electedPeople[i]!==undefined && electedPeople[i]!=="Empty"){
                 response = await requestVote(vote.questions[electedPeople[i].charAt(0)].questionName, arrayVoteNumbers[electedPeople[i].charAt(2)])
                 if (response.status === 400){
                     setClickedSubmit(false)
@@ -67,7 +67,7 @@ const ControlSubmition = () => {
                 }
             }
             else{
-                if(listNumber!==231){
+                if(vote.questions[listNumber]!==undefined){
                     response = await requestVote(vote.questions[listNumber].questionName, 231)
                     if (response.status === 400){
                         setClickedSubmit(false)
@@ -138,7 +138,7 @@ const ControlSubmition = () => {
 
     // List all elected people
     for (let i = 0; i < electedPeople.length; i++) {
-        if (electedPeople[i]!==undefined){
+        if (electedPeople[i]!==undefined && electedPeople[i]!=="Empty"){
             electedPeopleHTML.push(
                 <div className="flex justify-center w-full">
                     <div className="flex justify-around w-auto my-3 bg-logolblue-50 rounded-lg">
@@ -170,7 +170,7 @@ const ControlSubmition = () => {
                             <div class="w-full xl:w-3/4 bg-logolblue-100 rounded-lg p-2 md:p-8 flex flex-col">
                                 <div className="">
                                     <h2 className="text-xl sm:text-3xl font-medium title-font text-logobrown-1000 text-center mb-10">{vote.vote}</h2>
-                                    {listNumber===231 ? 
+                                    {vote.questions[listNumber]===undefined ? 
                                     (
                                         <h3 className="text-2xl font-medium title-font text-logobrown-1000 text-center underline underline-offset-2">{t("emptyListSubmission")}</h3>
 
